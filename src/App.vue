@@ -1,25 +1,45 @@
 <template>
   <div id="app" :class="$i18n.locale">
     <div class="container">
-      <Header :type="headerType" />
+      <Header :type="headerType" :datas="navList" />
       <router-view>
       </router-view>
       <Footer />
     </div>
+
+    <el-dialog
+        :visible.sync="centerDialogVisible"
+        width="30%"
+        center
+        :modal="false"
+        :close-on-click-modal="false"
+    >
+        <div class="text-center">{{errMsg}}</div>
+        <span slot="footer" class="dialog-footer">
+          <Button @click="centerDialogVisible = false">确定</Button>
+        </span>
+    </el-dialog>
+
   </div>
 </template>
 
 <script>
 import Header from './components/common/header.vue';
 import Footer from './components/common/footer';
+import Button from './components/common/Button';
+
 export default {
   name: 'App',
   components: {
     Header,
     Footer,
+    Button
   },
   data () {
     return {
+      navList: [],
+      errMsg: '',
+      centerDialogVisible: false,
       // headerType: this.$route.fullPath.startsWith('/robbbbuy') ? 'shop' : '',
     }
   },
@@ -29,11 +49,21 @@ export default {
     },
   },
   mounted () {
-    console.log(this.$route.fullPath, this.headerType, 'app.route.fullpath');
-    this.$nextTick(() => {
-      this.$route.fullPath
+    console.log(this, 'this');
+    this.getNavs();
+    this.$Event.$on('ERROR', (val) => {
+      console.log(val, 'val');
+      this.centerDialogVisible = true;
+      this.errMsg = val;
     })
-
+  },
+  methods: {
+    getNavs(){
+        this.ajaxPost('api/index/getNavList', {}).then(res => {
+          this.navList = res.data;
+          console.log(res, 'navList')
+        })
+    }
   }
 }
 </script>

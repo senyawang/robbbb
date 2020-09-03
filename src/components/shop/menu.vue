@@ -39,18 +39,21 @@ export default {
       subtitle: '',
       showMainNav: false,
       showSubNav: false,
-      isLogin: true,
-      userName: 'Trex中南海'
+      isLogin: false,
+      userName: ''
     }
   },
   mounted () {
-    console.log( this.$i18n, '18n')
+    this.init();
   },
   methods: {
-    // handleChangeLang() {
-    //   const loc = $i18n.locale;
-    //   $i18n.locale = loc === 'zh' ? 'en' : 'zh';
-    // },
+    init(){
+      this.ajaxPost('api/shop/getUserDetail', {
+      }).then(res => {
+        this.userName = res.data.username;
+        this.isLogin = true;
+      }).catch(err => this.showMsg(err))
+    },
     handleShowMainNav() {
       this.showMainNav = this.showSubNav ? false : !this.showMainNav;
       this.showSubNav = false;

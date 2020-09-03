@@ -2,9 +2,9 @@
     <div class="art-box">
       <div class="art-list">
           <div class="rob-photo" v-for="(item, index) in artList" :key="index">
-              <router-link :to="{ name: detailName, params: { id: 123 }}">
+              <router-link :to="{ name: detailName, params: { id: item.id }}">
                   <div class="img-wrapper"><img src="../../assets/1.jpg" alt=""></div>
-                  <h3 class="text-right">你是我的小苹果</h3>
+                  <h3 class="text-right">{{langValue(item, 'title')}}</h3>
               </router-link>
           </div>
       </div>
@@ -14,7 +14,7 @@
 <script>
 export default {
     name: 'Art',
-    props: ['detailName'],
+    props: ['detailName', 'actionUrl'],
     data () {
       return {
         artList: [
@@ -27,6 +27,19 @@ export default {
             title: "这是一个标题"
           }
         ]
+      }
+    },
+    mounted () {
+      this.init();
+    },
+    methods: {
+      init(){
+        this.ajaxPost(this.actionUrl || 'api/index/getProductList', {
+          pid: 50,
+        }).then(res => {
+          this.artList = res.data;
+          console.log(res.data)
+        })
       }
     }
 }

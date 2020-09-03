@@ -4,8 +4,8 @@
       <div :class='["pro-list", "ui-flex-item", {"full-screen": !showDesc}]'>
         <el-carousel :interval="5000" :height="showDesc ? '430px' : '700px'" v-on:change="slideChange" arrow="always">
             <el-carousel-item class="pro-item" v-for="(item, index) in imgList" :key="index">
-              <h1>{{item.title}}</h1>
-              <img @click="handleZoom" :src="item.imgSrc" alt="item.title">
+              <h1>{{langValue(item, 'title')}}</h1>
+              <img @click="handleZoom" :src="`http://robbb.gx/${item}`" :alt="langValue(item, 'title')">
             </el-carousel-item>
           </el-carousel>
           <div class="pro-total-num">{{`${current}/${imgList.length}`}}</div>
@@ -73,7 +73,22 @@ export default {
     Title,
     Button
   },
+  created () {
+    this.init();
+  },
   methods: {
+     init(){
+      this.ajaxPost('api/shop/getShopDetail', {
+        id: this.$route.params.id,
+      }).then(res => {
+        this.imgList = res.data.pic_list;
+        this.resData = res.data
+        console.log(res.data)
+      })
+    },
+    handleChange(){
+
+    },
     slideChange(val){
         this.current = val + 1;
     },

@@ -27,15 +27,15 @@
           <div class="form-style">
               <div class="form-item">
                   <div class="label">收件人姓名</div>
-                  <input type="text" class="form-input">
+                  <input type="text" class="form-input" v-model="real_name">
               </div>
               <div class="form-item">
                   <div class="label">收件人电话</div>
-                  <input type="tel" class="form-input">
+                  <input type="tel" class="form-input" v-model="mobile">
               </div>
               <div class="form-item">
                   <div class="label">收件人地址</div>
-                  <input type="text" class="form-input">
+                  <input type="text" class="form-input" v-model="address">
               </div>
               <p class="mbp font-12"><span class="c-red">*</span>您的资料会受到保护</p>
               <p class="mbp font-12"><span class="c-red">*</span>可发往中国境外</p>
@@ -43,7 +43,7 @@
 
           <template v-slot:footer>
             <div class="dialog-footer">
-              <Button @click="showMyProfile = false">确定</Button>
+              <Button @click="saveProfile">确定</Button>
             </div>
           </template>
       </el-dialog>
@@ -61,22 +61,22 @@
           <div class="form-style">
               <div class="form-item">
                   <div class="label">当前密码</div>
-                  <input type="password" class="form-input">
+                  <input type="password" class="form-input" v-model="oldPwd">
               </div>
               <div class="form-item">
                   <div class="label">新密码</div>
-                  <input type="password" class="form-input">
+                  <input type="password" class="form-input" v-model="pwd">
               </div>
               <div class="form-item">
                   <div class="label">确认密码</div>
-                  <input type="password" class="form-input">
+                  <input type="password" class="form-input" v-model="repwd">
               </div>
               <p class="mbp font-12"><span class="c-red">*</span>可发往中国境外</p>
           </div>
 
           <template v-slot:footer>
             <div class="dialog-footer">
-              <Button @click="showModifyPwd = false">确定</Button>
+              <Button @click="modifyPwd">确定</Button>
             </div>
           </template>
       </el-dialog>
@@ -92,15 +92,56 @@ export default {
       return {
         showMyProfile: false,
         showModifyPwd: false,
+        real_name: '',
+        mobile: '',
+        address: '',
+        oldPwd: '',
+        pwd: '',
+        repwd: ''
       }
     },
     components: {
       Button,
     },
+    created () {
+      this.getProfiles();
+    },
     methods: {
       goHistory(){
         this.$router.push('/robbbbuy/history')
-      }
+      },
+      getProfiles(){
+        this.ajaxPost('api/shop/getUserAddress', {
+          // id: this.$route.params.id,
+        }).then(res => {
+          const {real_name, mobile, address} = res.data;
+          this.real_name = real_name;
+          this.mobile = mobile;
+          this.address = address;
+          console.log(res.data)
+        })
+      },
+      saveProfile(){
+        this.ajaxPost('api/shop/editUserAddress', {
+          real_name: this.real_name,
+          mobile: this.mobile,
+          address: this.address,
+          id: 0,
+        }).then(res => {
+          this.showMyProfile = false;
+          console.log(res.data)
+        })
+      },
+      modifyPwd(){
+        this.ajaxPost('api/shop/modifyPwd', {
+          oldPwd: this.oldPwd,
+          pwd: this.pwd,
+          repwd: this.repwd,
+        }).then(res => {
+          this.showModifyPwd = false;
+          console.log(res.data)
+        })
+      },
     }
 }
 </script>

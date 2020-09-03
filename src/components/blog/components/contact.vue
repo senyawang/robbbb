@@ -7,15 +7,15 @@
           <div class="ui-flex-box form-box">
               <div class="ui-flex-item">
                   <h5>您的名字</h5>
-                  <input type="text" class=" mb-4">
+                  <input type="text" class=" mb-4" v-model="user_name">
                   <h5>您的电子邮箱地址</h5>
-                  <input type="email" class=" mb-4">
+                  <input type="email" class=" mb-4" v-model="email">
                   <h5>主题</h5>
-                  <input type="text" class=" mb-4">
+                  <input type="text" class=" mb-4" v-model="title">
               </div>
               <div class="ui-flex-item">
                   <h5>内容</h5>
-                  <textarea name="liuyan" id="liuyan" class="w-100"></textarea>
+                  <textarea name="liuyan" id="liuyan" class="w-100" v-model="content"></textarea>
               </div>
           </div>
           <div class="text-right mt-2">
@@ -23,18 +23,18 @@
           </div>
     </div>
 
-    <el-dialog
+    <!-- <el-dialog
         :visible.sync="centerDialogVisible"
         width="30%"
         center
         :modal="false"
-        close-on-click-modal="false"
+        :close-on-click-modal="false"
     >
-        <div class="text-center">需要注意的是内容是默认不居中的</div>
+        <div class="text-center">{{errMsg}}</div>
         <span slot="footer" class="dialog-footer">
           <Button @click="centerDialogVisible = false">确定</Button>
         </span>
-    </el-dialog>
+    </el-dialog> -->
 
 </div>
 </template>
@@ -46,7 +46,12 @@ export default {
   data () {
     return {
       centerDialogVisible: false,
-      showTitle: this.$route.name === "contact"
+      showTitle: this.$route.name === "contact",
+      user_name: '',
+      email: '',
+      title: '',
+      content: '',
+      errMsg: '',
     }
   },
   components: {
@@ -55,7 +60,19 @@ export default {
   },
   methods: {
     handleSubmit(){
-      this.centerDialogVisible = true;
+      this.ajaxPost('api/index/addMessage', {
+        user_name: this.user_name,
+        title: this.title,
+        email: this.email,
+        content: this.content,
+      }).then(res => {
+        console.log(res, 'res');
+        this.errMsg = res.msg
+        this.centerDialogVisible = true;
+      }).catch(err => {
+        this.errMsg = err
+        this.centerDialogVisible = true;
+      })
     }
   }
 }

@@ -11,11 +11,16 @@
         <transition name="slide-fade">
           <div class="main-nav" ref="mainNav" v-if="showMainNav" :style="{opacity: mainNavOpacity, transition: `all ${mainNavOpacity/2}s`}">
             <ul class="nav-left" >
-              <li @click="handleShowSubNav"><router-link to="" :style="{opacity: showSubNav ? '.5' : null}">{{$t('mainNav')[0]}}</router-link></li>
+              <li v-for="(item, index) in datas" :key="item.id" @click='index === 0 ? handleShowSubNav() : null' v-show="!(showSubNav && index > 0)">
+                <router-link v-if="index === 0" to="" :style="{opacity: showSubNav ? '.5' : null}">{{langValue(item, 'title')}}</router-link>
+                <router-link v-else-if="index === 2" :to="item.link_url" class="red">{{langValue(item, 'title')}}</router-link>
+                <router-link v-else :to="`/about?id=${item.id}`" >{{langValue(item, 'title')}}</router-link>
+              </li>
+              <!-- <li @click="handleShowSubNav"><router-link to="" :style="{opacity: showSubNav ? '.5' : null}">{{datas[0].title}}</router-link></li>
               <li v-show="!showSubNav"><router-link to="/exhibition" >{{$t('mainNav')[1]}}</router-link></li>
               <li v-show="!showSubNav"><router-link to="/robbbbuy/shop" class="red">{{$t('mainNav')[2]}}</router-link></li>
               <li v-show="!showSubNav"><router-link to="/about" >{{$t('mainNav')[3]}}</router-link></li>
-              <li v-show="!showSubNav"><router-link to="/contact" >{{$t('mainNav')[4]}}</router-link></li>
+              <li v-show="!showSubNav"><router-link to="/contact" >{{$t('mainNav')[4]}}</router-link></li> -->
             </ul>
             <div class="xxx">
               <img @click="handleCloseNav" src="../../assets/x.png" class="float-right shoushi" id="xxx" >
@@ -46,7 +51,7 @@
 <script>
 export default {
   name: 'Header',
-  props: ["type"],
+  props: ["type", "datas"],
   data () {
     return {
       showMainNav: false,
@@ -55,7 +60,7 @@ export default {
     }
   },
   mounted () {
-    console.log( this.$i18n, this.type, this.flag, '18n')
+    console.log( this.$i18n, this.type, this.$i18n.locale , '18n')
   },
   computed: {
     flag(val){
@@ -63,9 +68,9 @@ export default {
     }
   },
   methods: {
-    // handleChangeLang() {
-    //   const loc = $i18n.locale;
-    //   $i18n.locale = loc === 'zh' ? 'en' : 'zh';
+    // langValue(item) {
+    //   const loc = this.$i18n.locale;
+    //   return loc === 'zh' ? item['title'] : item[`en_title`]
     // },
     handleShowMainNav() {
       this.showSubNav = false;
@@ -86,6 +91,7 @@ export default {
 
     },
     handleShowSubNav() {
+      console.log('show sub nav')
       this.showSubNav = true;
       // this.showMainNav = false;
     }

@@ -11,17 +11,17 @@
         <div class="form-style">
             <div class="form-item">
                 <div class="label">用户名或电子邮箱</div>
-                <input type="text" class="form-input">
+                <input type="text" class="form-input" v-model="user_name">
             </div>
              <div class="form-item">
                 <div class="label">密码</div>
-                <input type="password" class="form-input">
+                <input type="password" class="form-input" v-model="pwd">
             </div>
         </div>
 
         <template v-slot:footer>
           <div class="dialog-footer">
-            <Button @click="handleShowLogin">确定</Button>
+            <Button @click="handleLogin">确定</Button>
           </div>
         </template>
     </el-dialog>
@@ -42,12 +42,25 @@ export default {
 
     data () {
       return {
-
+          user_name: '',
+          pwd: '',
       }
     },
 
-    methods: {
+    mounted () {
 
+    },
+
+    methods: {
+        handleLogin(){
+            this.ajaxPost('api/shop/login', {
+              user_name: this.user_name,
+              pwd: this.pwd,
+            }).then(res => {
+              console.log(111)
+              this.handleShowLogin();
+            })
+        }
     }
 }
 </script>

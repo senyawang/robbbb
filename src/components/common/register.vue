@@ -11,25 +11,25 @@
         <div class="form-style">
             <div class="form-item">
                 <div class="label">用户名</div>
-                <input type="text" class="form-input">
+                <input type="text" class="form-input" v-model="user_name">
             </div>
             <div class="form-item">
                 <div class="label">电子邮箱</div>
-                <input type="text" class="form-input">
+                <input type="text" class="form-input" v-model="email">
             </div>
              <div class="form-item">
                 <div class="label">密码</div>
-                <input type="password" class="form-input">
+                <input type="password" class="form-input" v-model="pwd">
             </div>
             <div class="form-item">
                 <div class="label">确认密码</div>
-                <input type="password" class="form-input">
+                <input type="password" class="form-input" v-model="repwd">
             </div>
         </div>
 
         <template v-slot:footer>
           <div class="dialog-footer">
-            <Button @click="handleShowRegister">注册</Button>
+            <Button @click="handleRegister">注册</Button>
           </div>
         </template>
     </el-dialog>
@@ -54,13 +54,25 @@ export default {
       return {
         login: false,
         dialogVisible: true,
+        user_name: '',
+        pwd: '',
+        repwd: '',
+        email: '',
       }
     },
 
     methods: {
-      handleLogin(){
-        console.log(222);
-      }
+      handleRegister(){
+          this.ajaxPost('api/shop/register', {
+            user_name: this.user_name,
+            pwd: this.pwd,
+            repwd: this.repwd,
+            email: this.email,
+          }).then(res => {
+            console.log(111)
+            this.handleShowRegister();
+          })
+      },
     }
 }
 </script>

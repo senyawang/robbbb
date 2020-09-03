@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import axios from 'axios'
 import VueI18n from 'vue-i18n'
 import ElementUI from 'element-ui';
+import qs from 'qs';
 import $ from 'jquery';
 import routes from './router.js'
 import store from './vuex/store.js'
@@ -14,7 +15,7 @@ import 'element-ui/lib/theme-chalk/index.css';
 Vue.use(ElementUI);
 Vue.use(VueRouter)
 Vue.use(store)
-// Vue.use(axios)
+Vue.use(axios)
 Vue.use(VueI18n)
 
 // 通过选项创建 VueI18n 实例
@@ -24,19 +25,12 @@ const i18n = new VueI18n({
 })
 
 
-// axios.defaults.baseURL = 'https://api.example.com';
+axios.defaults.baseURL = '/apis';
 // axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
 let route = new VueRouter({ mode: 'hash', routes: routes })
 
-/* eslint-disable no-new */
-let apps = new Vue({
-  el: '#app',
-  i18n,
-  router: route,
-  render: h => h(App)
-})
-
+Vue.prototype.$Event = new Vue();
 
 // 全局配置
 Vue.mixin({
@@ -61,6 +55,10 @@ Vue.mixin({
         value = value.replace(re, "$1,$2");
       value = value.replace(/,(\d\d)$/, ".$1");
       return value;
+    },
+    lang (value) {
+      const loc = i18n.locale;
+      return loc === 'zh' ? value : `en_${value}`;
     }
   },
   // provide: () => {
@@ -79,12 +77,42 @@ Vue.mixin({
       const loc = i18n.locale;
       i18n.locale = loc === 'zh' ? 'en' : 'zh';
     },
+    ajaxPost(url, params){
+      console.log(this, 'this');
+      const vm = this;
+      return axios.post(url, qs.stringify(params))
+                          .then(res => res.data)
+                          .then(data => {
+                            if(data.code !== 0) {
+                              const loc = i18n.locale;
+                              return Promise.reject(loc === 'zh' ? data.msg : data.en_msg)
+                            }
+                            return Promise.resolve(data)
+                          }).catch(err => {
+                              console.error(err);
+                              vm.$Event.$emit('ERROR', err)
+                              return Promise.reject(err);
+                          });
+    },
     // handleShowLogin(){
     //   console.log(1111);
     //   this.globalData.showLogin = true;
     // },
 
+    langValue(obj, key){
+      const loc = this.$i18n.locale;
+      return loc === 'zh' ? obj[key] : obj[`en_${key}`];
+    }
+
   }
+})
+
+/* eslint-disable no-new */
+let apps = new Vue({
+  el: '#app',
+  i18n,
+  router: route,
+  render: h => h(App)
 })
 
 

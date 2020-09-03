@@ -12,3 +12,23 @@ export const number_format = (val) => {
   var ret = intSum + dot;
   return ret;
 }
+
+
+/**
+ * 获得地址栏传递参数
+ * @returns {null}
+ */
+export const getLocationParams = (loc = location) => {
+  let { search } = loc;
+  if (search && search.length > 1) {
+    const params = {};
+    search = search.substring(1);
+    search.split('&').forEach(item => {
+      const tempParam = item.split('=');
+      params[tempParam[0]] =
+        tempParam[1] === '' ? null : decodeURIComponent(tempParam[1]);
+    });
+    return params;
+  }
+  return null;
+};

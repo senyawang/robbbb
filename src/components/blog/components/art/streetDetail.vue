@@ -4,15 +4,16 @@
       <div :class='["pro-list", "ui-flex-item", {"full-screen": !showDesc}]'>
         <el-carousel :interval="5000" :height="showDesc ? '430px' : '700px'" v-on:change="slideChange" arrow="always">
             <el-carousel-item v-for="(item, index) in imgList" :key="index">
-              <img @click="handleZoom" :src="item.imgSrc" alt="itme.title">
+              <img @click="handleZoom" :src="item.imgSrc">
             </el-carousel-item>
           </el-carousel>
           <div class="pro-total-num">{{`${current}/${imgList.length}`}}</div>
       </div>
 
       <div class="rob-text-area" v-show="showDesc">
-          <Title title="你是我的小苹果" />
+          <Title :title="langValue(resData, 'title')" />
           <div class="side-content">
+              {{langValue(resData, 'content')}}
               <div :style="{fontSize: '16px', lineHeight: '2', textAlign: 'center'}">
                 <p>世界上最远的距离，不是生与死的距离， 而是我站在你面前，你不知道我爱你</p>
                 <p>不是我站在你面前，你不知道我爱你，<br>而是爱到痴迷却不能说我爱你</p>
@@ -55,11 +56,16 @@ export default {
             imgSrc: '/static/img/1.607ddd7.jpg',
             title: '你是我的小苹果'
           }
-        ]
+        ],
+        content: '',
+        resData: {},
     }
   },
   components: {
     Title,
+  },
+  mounted () {
+    this.init();
   },
   methods: {
     slideChange(val){
@@ -67,6 +73,15 @@ export default {
     },
     handleZoom(){
       this.showDesc = !this.showDesc;
+    },
+    init(){
+      this.ajaxPost('api/index/getProductDetail', {
+        id: this.$route.params.id,
+      }).then(res => {
+        // this.imgList = res.data.pic_list;
+        this.resData = res.data
+        console.log(res.data)
+      })
     }
   }
 }

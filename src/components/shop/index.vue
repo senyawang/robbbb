@@ -20,7 +20,6 @@ import Register from '../common/register.vue';
 export default {
   data () {
     return {
-      actionUrl: '',
       subTitle: this.$route.name,
     }
   },

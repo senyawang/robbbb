@@ -11,6 +11,11 @@ export default {
     buttons: {
       buy: "购买v",
       addToCart: "加入购物车v",
+    },
+    account: {
+      myProfile: '我的资料',
+      modifyPwd: '修改密码',
+      shopHistory: '购买记录'
     }
   },
   zh: {
@@ -28,11 +33,21 @@ export default {
     buttons: {
       buy: "购买",
       addToCart: "加入购物车",
+      sendMessage: '发送消息',
+      modalConfirm: '确定',
     },
     account: {
       myProfile: '我的资料',
       modifyPwd: '修改密码',
       shopHistory: '购买记录'
+    },
+    contact: {
+      text1: '请留言，我们会尽快回复您。',
+      text2: '请填写全部信息以便我们能够满足您的需要，谢谢。',
+      name: '您的名字',
+      email: '您的电子邮箱地址',
+      theme: '主题',
+      content: '内容',
     }
   }
 }

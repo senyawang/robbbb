@@ -36,7 +36,7 @@ export default {
   mounted () {
 
       let num = 0;
-      const timer = setInterval(() => {
+      this.timer = setInterval(() => {
         num ++ ;
         const nl = String(num).length;
         const st = ['0', '00']
@@ -54,6 +54,7 @@ export default {
   },
 
   destroyed () {
+    console.log(this.timer, 'this.timer')
     clearInterval(this.timer);
   },
 

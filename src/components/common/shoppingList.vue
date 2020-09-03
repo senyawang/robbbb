@@ -53,7 +53,8 @@
 <script>
 export default {
   props: {
-    type: String
+    type: String,
+    handleChange: Function,
   },
   name: 'ShoppingList',
   data () {
