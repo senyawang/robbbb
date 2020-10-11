@@ -59,6 +59,7 @@ export default {
             }).then(res => {
               console.log(111)
               this.handleShowLogin();
+              location.reload();
             })
         }
     }

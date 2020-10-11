@@ -7,9 +7,9 @@
           <div class="main-nav" v-if="showMainNav">
             <ul class="nav-left" >
               <li ><router-link to="/robbbbuy/account">{{$t('shopNav')[0]}}</router-link></li>
-              <li ><router-link to="/robbbbuy/shop/cart" >{{$t('shopNav')[1]}}  <span class="cart-num">3</span></router-link></li>
+              <li ><router-link to="/robbbbuy/shop/cart" >{{$t('shopNav')[1]}}  <span class="cart-num">{{cartNum}}</span></router-link></li>
               <li ><router-link to="/robbbbuy/service">{{$t('shopNav')[2]}}</router-link></li>
-              <li ><router-link to="/robbbbuy/logout" >{{$t('shopNav')[3]}}</router-link></li>
+              <li  @click="handleLogout">{{$t('shopNav')[3]}}</li>
             </ul>
             <div class="xxx">
               <img @click="handleShowMainNav" src="../../assets/x.png" class="float-right shoushi" id="xxx" >
@@ -33,18 +33,22 @@
 <script>
 export default {
   name: 'Menu',
-  props: ["title", "handleShowLogin", "handleShowRegister"],
+  props: ["title", "handleShowLogin", "handleShowRegister", "setLoginHandle"],
   data () {
     return {
       subtitle: '',
       showMainNav: false,
       showSubNav: false,
       isLogin: false,
-      userName: ''
+      userName: '',
+      cartNum: 0,
     }
   },
   mounted () {
     this.init();
+    console.log(localStorage.getItem("CART"));
+    const localCart = JSON.parse(localStorage.getItem("CART")) || []
+    this.cartNum = localCart.length
   },
   methods: {
     init(){
@@ -52,6 +56,7 @@ export default {
       }).then(res => {
         this.userName = res.data.username;
         this.isLogin = true;
+        this.setLoginHandle(true)
       }).catch(err => this.showMsg(err))
     },
     handleShowMainNav() {
@@ -64,6 +69,12 @@ export default {
     },
     loginHandle(){
       this.handleShowLogin();
+    },
+    handleLogout(){
+      this.ajaxPost('api/shop/logout', {
+      }).then(res => {
+        window.location.href = '/'
+      }).catch(err => this.showMsg(err))
     }
   }
 }
@@ -123,7 +134,7 @@ export default {
 .nav-right {
   position: relative;
   z-index: 1;
-  width: 200px;
+  width: 300px;
   text-align: right;
   padding-left: 40px;
   background: #fff;
@@ -162,6 +173,7 @@ export default {
 .en {
   .nav-left {
     li {
+      cursor: pointer;
       font-size: 20px;
     }
   }

@@ -2,6 +2,7 @@
   <div style="padding-top: 40px;">
     <Menu
         :title="subTitle"
+        :setLoginHandle="handleSetLogin"
         :handleShowLogin="handleShowLogin"
         :handleShowRegister="handleShowRegister"
     />
@@ -17,6 +18,7 @@ import Vue from 'vue';
 import Menu from './menu.vue';
 import Login from '../common/login.vue';
 import Register from '../common/register.vue';
+import  EventBus from "../../utils/eventBus";
 export default {
   data () {
     return {
@@ -39,9 +41,13 @@ export default {
     this.globalData = new Vue({
       data () {
         return {
+          isLogin: false,
           showLogin: false,
           showRegister: false,
         }
+      },
+      methods: {
+        handleShowLogin: this.handleShowLogin
       }
     })
     return {
@@ -49,8 +55,9 @@ export default {
     }
   },
   mounted () {
-    console.log(this.$route.fullPath, 'router.fullpath');
-
+     EventBus.$on('showLogin', () => {
+       this.handleShowLogin();
+     })
   },
   updated () {
     // console.log(this._provided.globalData.showLogin, 'this._provided.globalData.showLogin')
@@ -64,6 +71,10 @@ export default {
       console.log(1111);
       this._provided.globalData.showRegister = !this._provided.globalData.showRegister;
     },
+    handleSetLogin(isLogin){
+      console.log(isLogin, 'isLogin')
+      this._provided.globalData.isLogin=isLogin
+    }
   }
 }
 </script>

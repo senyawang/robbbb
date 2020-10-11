@@ -34,13 +34,13 @@ Vue.prototype.$Event = new Vue();
 
 // 全局配置
 Vue.mixin({
-  data () {
-    return {
-      cartNum: 0 ,
-      showLogin: false,
-      showRegister: false,
-    }
-  },
+  // data () {
+  //   return {
+  //     cartNum: 0 ,
+  //     showLogin: false,
+  //     showRegister: false,
+  //   }
+  // },
   filters: {
     money (value) {
       if (/[^0-9\.]/.test(value))
@@ -59,6 +59,9 @@ Vue.mixin({
     lang (value) {
       const loc = i18n.locale;
       return loc === 'zh' ? value : `en_${value}`;
+    },
+    formatImg(val) {
+      return `http://www.trex000.com${val}`;
     }
   },
   // provide: () => {
@@ -83,6 +86,13 @@ Vue.mixin({
       return axios.post(url, qs.stringify(params))
                           .then(res => res.data)
                           .then(data => {
+                            if (data.code === -2) {
+                              const loc = i18n.locale;
+                              setTimeout(() => {
+                                window.location.href = '/#/robbbbuy/shop';
+                              }, 3000);
+                              return Promise.reject(loc === 'zh' ? data.msg : data.en_msg)
+                            }
                             if(data.code !== 0) {
                               const loc = i18n.locale;
                               return Promise.reject(loc === 'zh' ? data.msg : data.en_msg)

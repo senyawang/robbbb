@@ -95,7 +95,7 @@ export default[
         },
       },
       {
-        path: 'shop/detail',
+        path: 'shop/detail/:id',
         name: 'proDetail',
         component: () => import('./components/shop/proDetail'),
         meta: {

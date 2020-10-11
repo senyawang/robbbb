@@ -36,6 +36,12 @@ export default {
     }
   }
 
+  &.sp {
+    &:hover {
+      background: $themeColor;
+    }
+  }
+
   &.ghost {
     background: #fff;
     color: $black;

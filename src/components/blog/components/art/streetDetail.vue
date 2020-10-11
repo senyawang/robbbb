@@ -2,7 +2,17 @@
     <div class="detail ui-flex-box">
 
       <div :class='["pro-list", "ui-flex-item", {"full-screen": !showDesc}]'>
-        <el-carousel :interval="5000" :height="showDesc ? '430px' : '700px'" v-on:change="slideChange" arrow="always">
+        <Title :title="langValue(resData, 'title')" align="center" v-if="!showDesc" />
+        <button @click="$refs.carouse.prev()" type="button" class="el-carousel__arrow el-carousel__arrow--left"><i class="el-icon-arrow-left"></i></button>
+        <button @click="$refs.carouse.next()" type="button" class="el-carousel__arrow el-carousel__arrow--right"><i class="el-icon-arrow-right"></i></button>
+        <el-carousel
+            ref="carouse"
+            :interval="5000"
+            :height="showDesc ? '390px' : '556px'"
+            v-on:change="slideChange"
+            arrow="never"
+            indicator-position="none"
+        >
             <el-carousel-item v-for="(item, index) in imgList" :key="index">
               <img @click="handleZoom" :src="item.imgSrc">
             </el-carousel-item>
@@ -88,26 +98,30 @@ export default {
 </script>
 <style lang='scss'>
 .pro-list {
+  position: relative;
   width: 800px;
-  padding: 80px 0 20px;
+  padding: 80px 100px 20px;
   text-align: center;
   img {
-    width: 600px;
     &:hover {
       cursor: zoom-in;
     }
   }
   .pro-total-num {
-    padding-left: 100px;
     text-align: left;
     font-size: 20px;
   }
 }
 .full-screen {
-  margin-top: 0;
-  padding-top: 0;
+  margin: 0;
+  padding: 30px 160px 0;
+  position: fixed;
+  z-index: 9999;
+  top: 0;
+  width: 1100px;
+  background: #fff;
   img {
-    width: 1000px;
+    width: 900px;
     height: auto;
     &:hover {
       cursor: zoom-out;
@@ -117,14 +131,21 @@ export default {
     text-align: center;
     padding-left: 0;
   }
+  .el-carousel__arrow--right {
+    right: 50px;
+  }
+  .el-carousel__arrow--left {
+    left: 50px;
+  }
 }
 .rob-text-area {
     width: 370px;
     margin-left: 37px;
 }
 .side-content {
-    height: 500px;
+    height: 460px;
     overflow: scroll;
+    border: 1px solid #000;
 }
 
 .el-carousel__arrow--right,

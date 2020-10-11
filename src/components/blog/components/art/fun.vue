@@ -1,7 +1,7 @@
 <template>
   <div>
     <Title :title="title" />
-    <Art actionUrl='actionUrl' />
+    <Art :actionUrl='actionUrl' detailName="streetDetail"/>
   </div>
 </template>
 

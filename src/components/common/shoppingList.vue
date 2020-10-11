@@ -14,14 +14,20 @@
             <td class="text-center mx-auto">
                 <div v-if="type !== 'cart'">{{index+1}}</div>
                 <div v-else class="mycheck text-center d-inline-block">
-                    <input type="checkbox" :checked.sync="item.checked" value="1" :id="item.id" name="">
+                    <input type="checkbox" v-model="selected" :value="item.id" :id="item.id" name="">
                     <label :for="item.id"> </label>
                 </div>
             </td>
             <td class="shoushi">
-                <img width="160" :src="item.imgsrc" alt="">
+              <router-link :to="{ name: 'proDetail', params: { id: item.id }}">
+                  <img width="160" :src="item.pic | formatImg" alt="">
+              </router-link>
             </td>
-            <td class="shoushi">{{item.title}}</td>
+            <td class="shoushi">
+              <router-link :to="{ name: 'proDetail', params: { id: item.id }}">
+                  {{langValue(item, 'title')}}
+              </router-link>
+              </td>
             <td id="price_id" align="center">
               <div v-if="type === 'cart'">￥{{item.price | money}}</div>
               <div v-else style="text-align: center">
@@ -29,7 +35,7 @@
               </div>
             </td>
             <td class="num text-center" style="width: 90px;height: 30px;">
-                <el-input-number step-strictly :disabled="type !== 'cart'" v-model="item.number" @change="handleChange" :min="1" :max="3" ></el-input-number>
+                <el-input-number step-strictly :disabled="type !== 'cart'" v-model="item.number" @change="(val) => handleChange(item.id, val)" :min="1" :max="3" ></el-input-number>
             </td>
             <td>
               <div v-if="type === 'cart'">
@@ -43,7 +49,7 @@
               </td>
             <td class="text-center">
               <span v-if="type !== 'cart'" style="font-size: 14px;">{{item.orderDate}}</span>
-              <img v-else src="../../assets/wr.png" width="14" height="14" alt="">
+              <img @click="delProduct(item.id)" v-else src="../../assets/wr.png" width="14" height="14" alt="">
             </td>
         </tr>
     </table>
@@ -55,40 +61,82 @@ export default {
   props: {
     type: String,
     handleChange: Function,
-  },
+    delHandle: Function,
+    updatePrice: Function,
+},
   name: 'ShoppingList',
   data () {
     return {
+      selected: [],
       proList: [
           {
             id: 12341234,
             checked: true,
             title: "这是一个标题",
-            number: 2,
+            point: 2,
             price: 1999,
             total: 1999,
-            imgsrc: '/static/1.jpg',
+            pic: '/static/1.jpg',
             orderDate: '2020-02-22'
           },
            {
             id: 64536536,
             checked: true,
             title: "这是二个标题",
-            number: 3,
+            point: 3,
             price: 1999,
             total: 1999,
-            imgsrc: '/static/1.jpg',
+            pic: '/static/1.jpg',
             orderDate: '2020-02-22'
           }
       ]
     }
   },
+  created () {
+    this.init();
+  },
+  watch: {
+      selected(val){
+        this.updatePrice(val);
+        // const cartList = JSON.parse(localStorage.getItem("CART")) || [];
+        // const checkedCart = cartList.filter(item => val.includes(item.id))
+      }
+  },
   methods: {
+    init(){
+      if(this.type === "cart"){
+        const cartList = JSON.parse(localStorage.getItem("CART")) || [];
+        this.proList = cartList;
+        cartList.filter(item => item.checked).map(ck => this.selected.push(ck.id))
+      } else {
+        this.ajaxPost('api/shop/getOrderList', {
+          id: this.$route.params.id,
+        }).then(res => {
+          // this.imgList = res.data.pic_list;
+          res.data.forEach(item => {
+            this.getOrderDetail(item.id);
+          })
+          console.log(res.data)
+        })
+      }
+    },
+    delProduct(id){
+      if(this.delHandle){
+        this.delHandle(id);
+      }
+      const cartList = JSON.parse(localStorage.getItem("CART")) || [];
+      console.log(cartList);
+        this.proList = cartList;
+    },
+    getOrderDetail(id){
+       this.ajaxPost('api/shop/getOrderDetail', {
+          id,
+        }).then(res => {
+          this.proList.push(res.data[0]);
+        })
+    },
     format(num){
       return () => number_format(num);
-    },
-    handleChange(){
-
     },
   },
   filters: {

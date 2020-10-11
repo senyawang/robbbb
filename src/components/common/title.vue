@@ -1,11 +1,12 @@
-<template functional>
-  <h1 class="detail-title" style="{textAlign: 'right}">{{props.title}}</h1>
+<template>
+  <h1 class="detail-title" :style="{textAlign: align || 'right'}">{{title}}</h1>
 </template>
 
 <script>
 export default {
   props: {
-    title: String
+    title: String,
+    align: String,
   }
 }
 </script>

@@ -2,48 +2,55 @@
     <div class="detail ui-flex-box">
 
       <div :class='["pro-list", "ui-flex-item", {"full-screen": !showDesc}]'>
-        <el-carousel :interval="5000" :height="showDesc ? '430px' : '700px'" v-on:change="slideChange" arrow="always">
-            <el-carousel-item class="pro-item" v-for="(item, index) in imgList" :key="index">
-              <h1>{{langValue(item, 'title')}}</h1>
-              <img @click="handleZoom" :src="`http://robbb.gx/${item}`" :alt="langValue(item, 'title')">
+        <Title :title="langValue(resData, 'title')" align="center" v-if="!showDesc" />
+        <button @click="$refs.carouse.prev()" type="button" class="el-carousel__arrow el-carousel__arrow--left"><i class="el-icon-arrow-left"></i></button>
+        <button @click="$refs.carouse.next()" type="button" class="el-carousel__arrow el-carousel__arrow--right"><i class="el-icon-arrow-right"></i></button>
+        <el-carousel
+            ref="carouse"
+            :interval="5000"
+            :height="showDesc ? '390px' : '556px'"
+            v-on:change="slideChange"
+            arrow="never"
+            indicator-position="none"
+        >
+            <el-carousel-item class="pro-item" v-for="(item, index) in resData.pic_list" :key="index">
+              <h1 v-if="showDesc">{{langValue(resData, 'title')}}</h1>
+              <img @click="handleZoom" :src="item | formatImg" :alt="langValue(item, 'title')">
             </el-carousel-item>
           </el-carousel>
           <div class="pro-total-num">{{`${current}/${imgList.length}`}}</div>
       </div>
 
       <div class="rob-text-area" v-show="showDesc">
-          <div class="side-content">
-              <div :style="{fontSize: '16px', lineHeight: '2', textAlign: 'center'}">
-                <p>世界上最远的距离，不是生与死的距离， 而是我站在你面前，你不知道我爱你</p>
-                <p>不是我站在你面前，你不知道我爱你，<br>而是爱到痴迷却不能说我爱你</p>
-              </div>
-              <div :style="{fontSize: '16px', lineHeight: '2', textAlign: 'center'}">
-                <p>世界上最远的距离，不是生与死的距离，而是我站在你面前，你不知道我爱你</p>
-                <p>你不知道我爱你，而是爱到痴迷却不能说我爱你</p>
-              </div>
-              <div :style="{fontSize: '16px', lineHeight: '2', textAlign: 'center'}">
-                <p>世界上最远的距离，不是生与死的距离，而是我站在你面前，你不知道我爱你</p>
-                <p>世界上最远的距离，而是爱到痴迷却不能说我爱你</p>
-              </div>
-              <div :style="{fontSize: '16px', lineHeight: '2', textAlign: 'center'}">
-                <p>世界上最远的距离，不是生与死的距离，而是我站在你面前，你不知道我爱你</p>
-                <p>你不知道我爱你，而是爱到痴迷却不能说我爱你</p>
-              </div>
-              <div :style="{fontSize: '16px', lineHeight: '2', textAlign: 'center'}">
-                <p>世界上最远的距离，不是生与死的距离，而是我站在你面前，你不知道我爱你</p>
-                <p>世界上最远的距离，而是爱到痴迷却不能说我爱你</p>
-              </div>
+          <div class="side-content" v-html="langValue(resData, 'content')">
           </div>
           <div class="text-right">
                 <el-input-number v-model="num" @change="handleChange" :min="1" :max="3" label="描述文字"></el-input-number>
           </div>
 
           <div class="ui-flex-box btn-area">
-            <div class="ui-flex-item"> <Button type="ghost" @click="addToCart">加入购物车</Button></div>
-            <div class="ui-flex-item"> <Button>购买</Button></div>
+            <div class="ui-flex-item"> <Button type="ghost" @click="addToCart">{{$t('buttons').addToCart}}</Button></div>
+            <div class="ui-flex-item"> <Button class="sp" @click="handleBuy">{{$t('buttons').buy}}</Button></div>
           </div>
 
       </div>
+
+      <el-dialog
+            :visible.sync="centerDialogVisible"
+            width="260px"
+            center
+            :show-close="false"
+            :modal="false"
+            :close-on-click-modal="false"
+        >
+            <div class="text-center">{{$t('shoppingCart').text1}}</div>
+            <span slot="footer" class="dialog-footer">
+              <Button @click="centerDialogVisible = false" class="red">{{$t('buttons').continueBuy}}</Button>
+              <p style="margin-top: 10px;">
+                <Button type="ghost" @click="$router.push(`/robbbbuy/shop/cart`)">{{$t('buttons').goCart}}</Button>
+              </p>
+            </span>
+        </el-dialog>
 
     </div>
 </template>
@@ -51,12 +58,15 @@
 <script>
 import Title from '../common/title';
 import Button from '../common/Button.vue';
+import EventBus from "../../utils/eventBus";
 export default {
   data () {
     return {
         current: 1,
         showDesc: true,
         num: 1,
+        resData: {},
+        centerDialogVisible: false,
         imgList: [
           {
             imgSrc: '/static/img/1.607ddd7.jpg',
@@ -69,6 +79,7 @@ export default {
         ]
     }
   },
+  inject: ["globalData"],
   components: {
     Title,
     Button
@@ -95,16 +106,48 @@ export default {
     handleZoom(){
       this.showDesc = !this.showDesc;
     },
-    addToCart(){
-      this.$router.push('/robbbbuy/shop/cart')
+    addToCart(id){
+      const {isLogin} = this.globalData;
+      console.log(isLogin, this.globalData)
+      if(!isLogin){
+        EventBus.$emit('showLogin');
+        return
+      }
+
+      console.log(this.resData)
+        const { resData } = this;
+        const product = {
+          checked: true,
+          id: resData.id,
+          title: resData.title,
+          pic: resData.pic,
+          en_title: resData.en_title,
+          price: resData.price,
+          number: this.num,
+        }
+        const localCart = JSON.parse(localStorage.getItem('CART')) || [];
+        const newLocalCart = localCart.filter(item => item.id !== resData.id);
+        newLocalCart.push(product)
+        localStorage.setItem('CART', JSON.stringify(newLocalCart))
+        this.centerDialogVisible = true;
+    },
+    handleBuy(){
+      const {isLogin} = this.globalData;
+      console.log(isLogin, this.globalData)
+      if(!isLogin){
+        EventBus.$emit('showLogin');
+        return
+      }
+        this.$router.push(`/robbbbuy/payDetail?id=${this.resData.id}&num=${this.num}`)
     }
   }
 }
 </script>
 <style lang='scss'>
 .pro-list {
+  position: relative;
   width: 800px;
-  padding: 0 0 20px;
+  padding: 0 50px 20px;
   text-align: center;
   .pro-item {
     box-sizing: border-box;
@@ -129,17 +172,33 @@ export default {
   }
 }
 .full-screen {
-  margin-top: 0;
-  padding-top: 0;
+  margin: 0;
+  padding: 20px 160px 0;
+  position: fixed;
+  z-index: 9999;
+  top: 0;
+  width: 1100px;
+  background: #fff;
   img {
+    width: 900px;
     height: auto;
     &:hover {
       cursor: zoom-out;
     }
   }
+  .pro-item {
+    box-sizing: border-box;
+    padding: 0;
+  }
   .pro-total-num {
     text-align: center;
     padding-left: 0;
+  }
+  .el-carousel__arrow--right {
+    right: 50px;
+  }
+  .el-carousel__arrow--left {
+    left: 50px;
   }
 }
 
@@ -147,8 +206,6 @@ export default {
   padding-top: 20px;
   .ui-flex-item{
     flex: 1 1 50%;
-    &:first-child {
-    }
     &:last-child {
       text-align: right;
     }

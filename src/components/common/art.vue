@@ -35,7 +35,7 @@ export default {
     methods: {
       init(){
         this.ajaxPost(this.actionUrl || 'api/index/getProductList', {
-          pid: 50,
+          pid: this.$route.query.id,
         }).then(res => {
           this.artList = res.data;
           console.log(res.data)

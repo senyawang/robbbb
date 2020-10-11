@@ -49,10 +49,8 @@
         <div class="kuang left" id="left">
                 鸣谢
             </div>
-        <div style="width: 1000px;height: 855px;display: flex;justify-content: space-between;overflow: hidden;">
-            <div class="videobox">
-                <video src="../../assets/video/ch.mp4" id="video"></video>
-            </div>
+        <div style="width: 1000px;height: 100%;display: flex; align-items: center;">
+              <video src="../../assets/video/ch.mp4" id="video"></video>
         </div>
         <div class="kuang right" id="right">
             阿斯顿撒旦撒
