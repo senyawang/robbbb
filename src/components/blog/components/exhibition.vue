@@ -9,7 +9,8 @@
         :modal="false"
     >
         <div class="img-body">
-            <img ref="img" :src="fullUrl" alt="">
+            <!-- <img ref="img" :src="fullUrl" alt=""> -->
+            <video ref="video" src="/static/exhibition.mp4"  class="rob-video-detail" id="videoDetail"></video>
         </div>
     </el-dialog>
 
@@ -35,22 +36,40 @@ export default {
   },
   mounted () {
 
-      let num = 0;
-      this.timer = setInterval(() => {
-        num ++ ;
-        const nl = String(num).length;
-        const st = ['0', '00']
-        const number = nl > 2 ? num : st[3-nl] + num;
-        console.log(number, 'number');
 
-        this.number = num;
-        // const url = `/static/exhibition/立体Tag 序列_00${number}.png`
-        // this.imgs.push(new Image(url))
-        // this.$refs.img.src = url;
-        if (num === 124) {
-            clearInterval(this.timer)
-        }
-      }, 66);
+    this.$nextTick(() => {
+      const video = this.$refs.video;
+      video.play();
+
+      video.addEventListener('ended', () => {
+          video.style.opacity = 0;
+
+          setTimeout(() => {
+            location.href = '/'
+          }, 600);
+      }, false)
+
+    })
+
+
+
+
+      // let num = 0;
+      // this.timer = setInterval(() => {
+      //   num ++ ;
+      //   const nl = String(num).length;
+      //   const st = ['0', '00']
+      //   const number = nl > 2 ? num : st[3-nl] + num;
+      //   console.log(number, 'number');
+
+      //   this.number = num;
+      //   // const url = `/static/exhibition/立体Tag 序列_00${number}.png`
+      //   // this.imgs.push(new Image(url))
+      //   // this.$refs.img.src = url;
+      //   if (num === 124) {
+      //       clearInterval(this.timer)
+      //   }
+      // }, 66);
   },
 
   destroyed () {
@@ -71,10 +90,9 @@ export default {
 </script>
 <style lang='scss' scoped>
 .img-body {
-  width: 1200px;
-  margin: 0 auto;
-  img {
+  video {
     width: 100%;
+    transition:  all .5s;
   }
 }
 </style>
