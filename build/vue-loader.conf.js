@@ -9,7 +9,8 @@ const sourceMapEnabled = isProduction
 module.exports = {
   loaders: Object.assign({}, utils.cssLoaders({
     sourceMap: sourceMapEnabled,
-    extract: isProduction
+    extract: isProduction,
+    usePostCSS: true,
   }),
   {
     i18n: '@kazupon/vue-i18n-loader'
