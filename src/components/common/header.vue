@@ -246,6 +246,9 @@ export default {
   font-size: 24px;
   a {
     display: block;
+    &:hover {
+      opacity: .5;
+    }
   }
 }
 

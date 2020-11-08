@@ -23,7 +23,7 @@
                   <img width="160" :src="item.pic | formatImg" alt="">
               </router-link>
             </td>
-            <td class="shoushi">
+            <td class="shoush title">
               <router-link :to="{ name: 'proDetail', params: { id: item.id }}">
                   {{langValue(item, 'title')}}
               </router-link>
@@ -69,26 +69,26 @@ export default {
     return {
       selected: [],
       proList: [
-          {
-            id: 12341234,
-            checked: true,
-            title: "这是一个标题",
-            point: 2,
-            price: 1999,
-            total: 1999,
-            pic: '/static/1.jpg',
-            orderDate: '2020-02-22'
-          },
-           {
-            id: 64536536,
-            checked: true,
-            title: "这是二个标题",
-            point: 3,
-            price: 1999,
-            total: 1999,
-            pic: '/static/1.jpg',
-            orderDate: '2020-02-22'
-          }
+          // {
+          //   id: 12341234,
+          //   checked: true,
+          //   title: "这是一个标题",
+          //   point: 2,
+          //   price: 1999,
+          //   total: 1999,
+          //   pic: '/static/1.jpg',
+          //   orderDate: '2020-02-22'
+          // },
+          //  {
+          //   id: 64536536,
+          //   checked: true,
+          //   title: "这是二个标题",
+          //   point: 3,
+          //   price: 1999,
+          //   total: 1999,
+          //   pic: '/static/1.jpg',
+          //   orderDate: '2020-02-22'
+          // }
       ]
     }
   },
@@ -175,6 +175,11 @@ export default {
     img:hover {
       opacity: .5;
     }
+  .title {
+    &:hover {
+      opacity: .5;
+    }
+  }
 }
 
 .shoppingCar input {

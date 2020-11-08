@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="main-body">
     <Title :title="title" />
     <Art :actionUrl='actionUrl' detailName="streetDetail" />
   </div>

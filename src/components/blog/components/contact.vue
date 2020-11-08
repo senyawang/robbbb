@@ -1,5 +1,5 @@
 <template>
-<div class="main-body">
+<div :class="showTitle ? 'main-body' : ''">
     <Title v-if="showTitle" title="联系" />
     <div class="contact">
           <h5>请留言，我们会尽快回复您。</h5>
@@ -23,7 +23,7 @@
           </div>
     </div>
 
-    <!-- <el-dialog
+    <el-dialog
         :visible.sync="centerDialogVisible"
         width="30%"
         center
@@ -32,9 +32,9 @@
     >
         <div class="text-center">{{errMsg}}</div>
         <span slot="footer" class="dialog-footer">
-          <Button @click="centerDialogVisible = false">确定</Button>
+          <Button color="red" @click="centerDialogVisible = false">确定</Button>
         </span>
-    </el-dialog> -->
+    </el-dialog>
 
 </div>
 </template>
@@ -79,9 +79,8 @@ export default {
 </script>
 <style lang='scss' scoped>
 .contact {
-    font-size: 20px;
+    font-size: 18px;
     line-height: 1.8;
-    font-weight: 500;
 
     .submit {
           width: 200px;

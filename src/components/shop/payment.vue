@@ -41,7 +41,7 @@
         </div>
     </div>
     <div class="text-right zf">
-        <Button class="ssssss" @click="bofang" id="zhifu">支付</Button>
+        <Button class="sp" @click="bofang" id="zhifu">支付</Button>
     </div>
 
 

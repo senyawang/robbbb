@@ -8,7 +8,7 @@
         detailName="proDetail" />
     <div class="text-right pay-button">
       <p>价格总计：￥{{totalPrice | money}}</p>
-      <p><Button size="large" color="red" @click="totalPrice > 0 ? goToPay() : ''">立即支付</Button></p>
+      <p><Button size="large" class="sp" @click="totalPrice > 0 ? goToPay() : ''">进入支付</Button></p>
     </div>
   </div>
 </template>
@@ -77,11 +77,11 @@ export default {
   }
 }
 </script>
-<style lang='scss' scoped>
+<style lang='scss'>
 .pay-button {
   padding-top: 30px;
   font-size: 18px;
-  & /deep/ p {
+  p {
     margin-bottom: 15px;
   }
 }

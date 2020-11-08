@@ -2,7 +2,9 @@
 @import './sass/var.scss';
 @import './sass/base.scss';
 
-.main-body { }
+.main-body {
+  padding-top: 40px;
+}
 .text-right {
   text-align: right;
 }
@@ -50,6 +52,9 @@ button:focus {
   border-radius: 0;
   &.no-border {
     border: 0 none;
+    .el-dialog__body {
+      height: 100%;
+    }
   }
   .el-icon-close:before {
     content: '';
@@ -58,9 +63,13 @@ button:focus {
     height: 10px;
     background: url("~@/assets/x.png");
     background-size: 100% 100%;
+    &:hover {
+      opacity: .5;
+    }
   }
   .el-dialog__body {
     font-size: 18px;
+    color: #000;
   }
 }
 
@@ -125,6 +134,9 @@ button:focus {
     line-height: 28px;
     font-size: 18px;
     font-weight: 900;
+    &:hover {
+      opacity: .5;
+    }
   }
 
   .el-input-number__decrease:hover:not(.is-disabled)~.el-input .el-input__inner:not(.is-disabled),

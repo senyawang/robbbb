@@ -17,7 +17,7 @@
             </div>
             <h5 class="text-right mt-33">{{$t('payDetail').totalPrice}}&nbsp;&nbsp;&nbsp;&nbsp; ￥{{totalPrice | money}}</h5>
         </div>
-        <div class="ui-flex-item" style="margin-left: 120px;padding-top: 60px;">
+        <div class="ui-flex-item" style="margin-left: 120px;padding-top: 38px;">
             <div class="form-style">
               <h5 style="margin-bottom: 20px;">{{$t('payDetail').userInfo}}</h5>
               <div class="form-item">
@@ -56,7 +56,7 @@
       >
         <div class="text-center">{{langValue(resData, 'msg')}}</div>
         <span slot="footer" class="dialog-footer">
-          <Button @click="centerDialogVisible = false">{{$t('buttons').modalConfirm}}</Button>
+          <Button color="red" @click="centerDialogVisible = false">{{$t('buttons').modalConfirm}}</Button>
         </span>
       </el-dialog>
 

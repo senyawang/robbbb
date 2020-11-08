@@ -5,38 +5,37 @@
 </template>
 
 <script>
-import ShoppingList from '../common/shoppingList.vue';
-import Button from "../common/Button.vue";
+import ShoppingList from '../common/shoppingList.vue'
+import Button from '../common/Button.vue'
 export default {
   data () {
     return {
-      actionUrl: '',
+      actionUrl: ''
     }
   },
   components: {
     ShoppingList,
-    Button,
+    Button
   },
   methods: {
-    changeHandle(){
+    changeHandle () {
 
     },
-    init(){
+    init () {
       this.ajaxPost('api/shop/getOrderList', {
         // id: this.$route.params.id,
       }).then(res => {
-
         console.log(res.data)
       })
-    },
+    }
   }
 }
 </script>
-<style lang='scss' scoped>
+<style lang='scss'>
 .pay-button {
   padding-top: 30px;
   font-size: 18px;
-  & /deep/ p {
+  p {
     margin-bottom: 15px;
   }
 }

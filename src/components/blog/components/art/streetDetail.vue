@@ -1,5 +1,5 @@
 <template>
-    <div class="detail ui-flex-box">
+    <div class="detail main-body ui-flex-box">
 
       <div :class='["pro-list", "ui-flex-item", {"full-screen": !showDesc}]'>
         <Title :title="langValue(resData, 'title')" align="center" v-if="!showDesc" />
@@ -97,6 +97,10 @@ export default {
 }
 </script>
 <style lang='scss'>
+
+.detail {
+  /*padding-top: 40px;*/
+}
 .pro-list {
   position: relative;
   width: 800px;

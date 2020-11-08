@@ -26,24 +26,24 @@
 
           <div class="form-style">
               <div class="form-item">
-                  <div class="label">收件人姓名</div>
+                  <div class="label">{{$t('account').userName}}</div>
                   <input type="text" class="form-input" v-model="real_name">
               </div>
               <div class="form-item">
-                  <div class="label">收件人电话</div>
+                  <div class="label">{{$t('account').userMobile}}</div>
                   <input type="tel" class="form-input" v-model="mobile">
               </div>
               <div class="form-item">
-                  <div class="label">收件人地址</div>
+                  <div class="label">{{$t('account').userAddress}}</div>
                   <input type="text" class="form-input" v-model="address">
               </div>
-              <p class="mbp font-12"><span class="c-red">*</span>您的资料会受到保护</p>
-              <p class="mbp font-12"><span class="c-red">*</span>可发往中国境外</p>
+              <p class="mbp font-12"><span class="c-red">*</span>{{$t('payDetail').text1}}</p>
+              <p class="mbp font-12"><span class="c-red">*</span>{{$t('payDetail').text2}}</p>
           </div>
 
           <template v-slot:footer>
             <div class="dialog-footer">
-              <Button @click="saveProfile">确定</Button>
+              <Button @click="saveProfile">{{$t('account').btn}}</Button>
             </div>
           </template>
       </el-dialog>
@@ -60,23 +60,22 @@
 
           <div class="form-style">
               <div class="form-item">
-                  <div class="label">当前密码</div>
+                  <div class="label">{{$t('account').pwd}}</div>
                   <input type="password" class="form-input" v-model="oldPwd">
               </div>
               <div class="form-item">
-                  <div class="label">新密码</div>
+                  <div class="label">{{$t('account').newpwd}}</div>
                   <input type="password" class="form-input" v-model="pwd">
               </div>
               <div class="form-item">
-                  <div class="label">确认密码</div>
+                  <div class="label">{{$t('account').repwd}}</div>
                   <input type="password" class="form-input" v-model="repwd">
               </div>
-              <p class="mbp font-12"><span class="c-red">*</span>可发往中国境外</p>
           </div>
 
           <template v-slot:footer>
             <div class="dialog-footer">
-              <Button @click="modifyPwd">确定</Button>
+              <Button @click="modifyPwd">{{$t('account').btn}}</Button>
             </div>
           </template>
       </el-dialog>

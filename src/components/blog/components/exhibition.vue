@@ -43,7 +43,6 @@ export default {
 
       video.addEventListener('ended', () => {
           video.style.opacity = 0;
-
           setTimeout(() => {
             location.href = '/'
           }, 600);
@@ -90,8 +89,14 @@ export default {
 </script>
 <style lang='scss' scoped>
 .img-body {
+  position: relative;
+  height: 100%;
+  text-align: center;
+  display: flex;
+  align-items: center;
   video {
-    width: 100%;
+    margin: 0 auto;
+    width: 60%;
     transition:  all .5s;
   }
 }

@@ -1,5 +1,5 @@
 <template>
-    <div class="detail ui-flex-box">
+    <div class="detail main-body ui-flex-box">
 
       <div :class='["pro-list", "ui-flex-item"]'>
         <video ref="video" :src="video_url || '../../../../assets/video.mp4'" loop @click="videoPlay" class="rob-video-detail" id="videoDetail"></video>
