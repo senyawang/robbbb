@@ -90,7 +90,7 @@ button:focus {
       .el-input-number__decrease,
       .el-input-number__increase,
       .el-input__inner {
-        border-color: $black;
+        border-color: #b2b2b2;
       }
   }
 
@@ -102,7 +102,7 @@ button:focus {
     width: 48px;
     height: 56px;
     line-height: 56px;
-    border-color: $black;
+    border-color: #b2b2b2;
     background: #fff;
     font-weight: 900;
     color: $black;
@@ -114,8 +114,7 @@ button:focus {
     width: 180px;
     height: 60px;
     padding: 0;
-    background: #f0f0f0;
-    border: 1px solid $black;
+    border: 1px solid #b2b2b2;
     border-radius: 0;
     font-size: 36px;
 
@@ -130,7 +129,7 @@ button:focus {
 
   .el-input-number__decrease:hover:not(.is-disabled)~.el-input .el-input__inner:not(.is-disabled),
   .el-input-number__increase:hover:not(.is-disabled)~.el-input .el-input__inner:not(.is-disabled) {
-    border-color: $black;
+    border-color: #b2b2b2;
   }
 
 }

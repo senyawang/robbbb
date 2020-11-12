@@ -15,23 +15,22 @@
               </router-link>
             </div>
 
-            <div class="shoushi ui-flex-item">
-              <router-link :to="{ name: 'proDetail', params: { id: item.id }}">
-                  {{langValue(item, 'title')}}
-              </router-link>
-
-              <div id="price_id" align="center">
-                <div v-if="type === 'cart'">￥{{item.price | money}}</div>
-                <div v-else style="text-align: center">
-                  <img src="../../assets/logo-index.png" width="60" alt="">
-                </div>
+            <div class="shoushi ui-flex-item pro-des">
+              <div class="title">
+                <router-link :to="{ name: 'proDetail', params: { id: item.id }}">
+                    {{langValue(item, 'title')}}
+                </router-link>
               </div>
 
-              <span v-if="type !== 'cart'" style="font-size: 14px;">{{item.orderDate}}</span>
 
-              <span class="num text-center" style="width: 90px;height: 30px;">
-                  <el-input-number step-strictly :disabled="type !== 'cart'" v-model="item.number" @change="(val) => handleChange(item.id, val)" :min="1" :max="3" ></el-input-number>
-              </span>
+              <div id="price_id"  class="ui-flex-box price">
+                <div v-if="type === 'cart'" class="red">￥{{item.price | money}}</div>
+                <span v-else>{{item.orderDate}}</span>
+
+                <div class="ui-flex-item text-right">
+                    <el-input-number step-strictly :disabled="type !== 'cart'" v-model="item.number" @change="(val) => handleChange(item.id, val)" :min="1" :max="3" ></el-input-number>
+                </div>
+              </div>
 
             </div>
 
@@ -157,38 +156,49 @@ export default {
 }
 </script>
 <style lang='scss'>
+@import '../sass/var.scss';
 .shoppingCar {
     width: 100%;
     margin-top: 11px;
     text-align: center;
     .cart-item {
-        font-size: 32px;
         padding: 25px 15px;
         border: 1px solid #ccc;
+    }
+    .mx-auto {
+      margin-right: 20px;
     }
     img:hover {
       opacity: .5;
     }
+    /deep/ .el-input-number {
+      transform: scale(.7);
+      transform-origin: right top;
+    }
+    .pro-des {
+      text-align: left;
+      line-height: 30px;
+    }
+    .title {
+      height: 100px;
+    }
+    .price {
+      color: $themeColor;
+      line-height: 30px;
+      height: 30px;
+    }
+    .red {
+      line-height: 40px;
+    }
     .img-box {
       width: 246px;
       height: 146px;
+      margin-right: 32px;
       overflow: hidden;
       img {
         width: 100%;
       }
     }
-}
-
-.shoppingCar input {
-    width: auto;
-}
-
-.shoppingCar tr td:first-child {
-    width: 56px;
-}
-
-.shoppingCar tr td:nth-child(3) {
-    width: 350px;
 }
 
 .shoppingCar .choose {
