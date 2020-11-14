@@ -10,18 +10,18 @@
 
         <div class="form-style">
             <div class="form-item">
-                <div class="label">用户名或电子邮箱</div>
+                <div class="label">{{$t('login').userName}}</div>
                 <input type="text" class="form-input" v-model="user_name">
             </div>
              <div class="form-item">
-                <div class="label">密码</div>
+                <div class="label">{{$t('login').password}}</div>
                 <input type="password" class="form-input" v-model="pwd">
             </div>
         </div>
 
         <template v-slot:footer>
           <div class="dialog-footer">
-            <Button @click="handleLogin">确定</Button>
+            <Button @click="handleLogin">{{$t('login').confirm}}</Button>
           </div>
         </template>
     </el-dialog>

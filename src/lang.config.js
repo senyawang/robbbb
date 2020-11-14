@@ -11,6 +11,18 @@ export default {
       account: '我的账户',
       cart: '购物车'
     },
+    login: {
+      userName: '用户名或者邮箱_en',
+      password: '密码_en',
+      confirm: '确定en',
+    },
+    register: {
+      userName: '用户名en',
+      email: '电子邮箱en',
+      pwd: '密码en',
+      repwd: '确认密码en',
+      register: '注册en'
+    },
     buttons: {
       buy: '购买v',
       addToCart: '加入购物车v',
@@ -43,7 +55,8 @@ export default {
       price: '单价_en',
       number: '数量_en',
       total: '总价_en',
-      text1: '已添加到购物车_en'
+      text1: '已添加到购物车_en',
+      totalPrice: '价格总计_en',
     },
     payDetail: {
       userInfo: '收件人信息_en',
@@ -70,7 +83,15 @@ export default {
     },
     login: {
       userName: '用户名或者邮箱',
-      password: '密码'
+      password: '密码',
+      confirm: '确定',
+    },
+    register: {
+      userName: '用户名',
+      email: '电子邮箱',
+      pwd: '密码',
+      repwd: '确认密码',
+      register: '注册'
     },
     buttons: {
       buy: '购买',
@@ -98,7 +119,9 @@ export default {
       price: '单价',
       number: '数量',
       total: '总价',
-      text1: '已添加到购物车'
+      text1: '已添加到购物车',
+      totalPrice: '价格总计',
+      goPay: '进入支付',
     },
     contact: {
       text1: '请留言，我们会尽快回复您。',
