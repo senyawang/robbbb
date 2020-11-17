@@ -34,7 +34,7 @@
               </div>
 
               <div class="d-flex">
-                <Button class="shoushi fs-16" @click="saveProfile">{{$t('buttons').modalConfirm}}</Button>
+                <Button class="shoushi fs-16" @click="centerDialogVisible = true">{{$t('buttons').modalConfirm}}</Button>
                 <div class="text">
                     <p class="m-0"><span class="c-red">*</span>{{$t('payDetail').text1}}</p>
                     <p><span class="c-red">*</span>{{$t('payDetail').text2}}</p>
@@ -49,14 +49,28 @@
 
       <el-dialog
         :visible.sync="centerDialogVisible"
-        width="30%"
+        width="300px"
+        center
+        :modal="false"
+        :close-on-click-modal="false"
+      >
+        <div class="text-center">{{ $t('payDetail').ask }}</div>
+        <span slot="footer" class="dialog-footer">
+          <div><Button color="red" @click="() => {saveProfile(); centerDialogVisible2 = true; centerDialogVisible = false; is_sync = 1}">{{$t('payDetail').yes}}</Button></div>
+          <Button style="margin-top: 10px" @click="centerDialogVisible = false">{{$t('payDetail').no}}</Button>
+        </span>
+      </el-dialog>
+
+      <el-dialog
+        :visible.sync="centerDialogVisible2"
+        width="300px"
         center
         :modal="false"
         :close-on-click-modal="false"
       >
         <div class="text-center">{{langValue(resData, 'msg')}}</div>
         <span slot="footer" class="dialog-footer">
-          <Button color="red" @click="centerDialogVisible = false">{{$t('buttons').modalConfirm}}</Button>
+          <Button color="red" @click="centerDialogVisible2 = false">{{$t('buttons').modalConfirm}}</Button>
         </span>
       </el-dialog>
 
@@ -78,6 +92,8 @@ export default {
         mobile: '',
         address: '',
         centerDialogVisible: false,
+        centerDialogVisible2: false,
+        is_sync: 0,
         resData: {},
     }
   },
@@ -136,9 +152,10 @@ export default {
           real_name: this.real_name,
           mobile: this.mobile,
           address: this.address,
+          is_sync: this.is_sync,
           id: 0,
         }).then(res => {
-            this.centerDialogVisible = true;
+            // this.centerDialogVisible = true;
             this.resData = res;
         })
       },

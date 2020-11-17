@@ -55,6 +55,7 @@ export default {
       this.ajaxPost('api/shop/getUserDetail', {
       }).then(res => {
         this.userName = res.data.username;
+        window.sessionStorage.setItem('userName', res.data.username)
         this.isLogin = true;
         this.setLoginHandle(true)
       }).catch(err => this.showMsg(err))
@@ -73,7 +74,12 @@ export default {
     handleLogout(){
       this.ajaxPost('api/shop/logout', {
       }).then(res => {
-        window.location.href = '/robbbbuy/shop'
+        if(this.$route.fullPath === '/robbbbuy/shop'){
+          window.location.reload()
+        } else {
+          window.location.href = '#/robbbbuy/shop'
+        }
+
       }).catch(err => this.showMsg(err))
     }
   }

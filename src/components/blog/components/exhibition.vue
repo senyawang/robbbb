@@ -10,7 +10,7 @@
     >
         <div class="img-body">
             <!-- <img ref="img" :src="fullUrl" alt=""> -->
-            <video ref="video" src="/static/exhibition.mp4"  class="rob-video-detail" id="videoDetail"></video>
+            <video ref="video" src="/public/exhibition.mp4" class="rob-video-detail" id="videoDetail"></video>
         </div>
     </el-dialog>
 

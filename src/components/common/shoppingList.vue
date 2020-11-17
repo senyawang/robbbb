@@ -4,11 +4,11 @@
         <tr style="background:#eee;">
             <th></th>
             <th width="160px"></th>
-            <th>商品名称</th>
-            <th>单价</th>
-            <th>数量</th>
-            <th>总价</th>
-            <th align="center">{{type === "cart" ? '' : '日期'}}</th>
+            <th>{{$t('shoppingCart').proName}}</th>
+            <th> {{$t('shoppingCart').price}} </th>
+            <th>{{$t('shoppingCart').number}} </th>
+            <th>{{$t('shoppingCart').total}} </th>
+            <th align="center">{{type === "cart" ? '' : $t('shoppingCart').date}}</th>
         </tr>
         <tr v-for="(item, index) of proList" :key="item.id">
             <td class="text-center mx-auto">

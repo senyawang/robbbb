@@ -25,7 +25,7 @@
           <div class="side-content" v-html="langValue(resData, 'content')">
           </div>
           <div class="text-right">
-                <el-input-number v-model="num" @change="handleChange" :min="1" :max="3" label="描述文字"></el-input-number>
+                <el-input-number v-model="num" @change="handleChange" :min="1" :max="3" ></el-input-number>
           </div>
 
           <div class="ui-flex-box btn-area">
@@ -144,7 +144,8 @@ export default {
 }
 </script>
 <style lang='scss'>
-.pro-list {
+.detail {
+  .pro-list {
   position: relative;
   width: 800px;
   padding: 0 50px 20px;
@@ -257,6 +258,7 @@ export default {
   left: 0;
   background: url('../../assets/left.png') no-repeat;
   background-size: contain;
+}
 }
 
 </style>

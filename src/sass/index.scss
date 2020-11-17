@@ -47,6 +47,11 @@ button:focus {
 
 
 .el-dialog {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-top: auto !important;
+  transform: translate(-50%, -50%);
   box-shadow: none;
   border: 1px solid $black;
   border-radius: 0;
@@ -58,7 +63,7 @@ button:focus {
   }
   .el-icon-close:before {
     content: '';
-    display: inline-block;
+    display: none;
     width: 12px;
     height: 10px;
     background: url("~@/assets/x.png");
@@ -67,7 +72,11 @@ button:focus {
       opacity: .5;
     }
   }
+  .el-dialog__header {
+      padding: 0;
+    }
   .el-dialog__body {
+    padding: 20px 0 ;
     font-size: 18px;
     color: #000;
   }

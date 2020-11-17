@@ -10,8 +10,6 @@ import store from './vuex/store.js'
 import App from './App.vue'
 import messages from './lang.config.js';
 
-import 'element-ui/lib/theme-chalk/index.css';
-
 Vue.use(ElementUI);
 Vue.use(VueRouter)
 Vue.use(store)
@@ -25,7 +23,7 @@ const i18n = new VueI18n({
 })
 
 
-axios.defaults.baseURL = 'http://www.trex000.com/';
+axios.defaults.baseURL = '/apis';
 // axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
 let route = new VueRouter({ mode: 'hash', routes: routes })

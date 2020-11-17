@@ -24,6 +24,8 @@
 </template>
 
 <script>
+import 'element-ui/lib/theme-chalk/index.css';
+
 import Header from './components/common/header.vue';
 import Footer from './components/common/footer';
 import Button from './components/common/Button';
