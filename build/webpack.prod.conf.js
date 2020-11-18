@@ -111,7 +111,7 @@ const webpackConfig = merge(baseWebpackConfig, {
     // copy custom public assets
     new CopyWebpackPlugin([
       {
-        from: path.resolve(__dirname, '../public'),
+        from: path.resolve(__dirname, '../assets'),
         to: config.build.assetsSubDirectory,
         ignore: ['.*']
       }

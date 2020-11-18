@@ -17,16 +17,7 @@ export default {
     props: ['detailName', 'actionUrl'],
     data () {
       return {
-        artList: [
-          {
-            imgsrc: "../../assets/1.jpg",
-            title: "这是一个标题"
-          },
-          {
-            imgsrc: "../../assets/1.jpg",
-            title: "这是一个标题"
-          }
-        ]
+        artList: [ ]
       }
     },
     mounted () {
