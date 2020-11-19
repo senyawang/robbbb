@@ -1,6 +1,6 @@
 <template>
 <div :class="showTitle ? 'main-body' : ''">
-    <Title v-if="showTitle" title="联系" />
+    <Title v-if="showTitle" :title="$t('mainNav')[4]" />
     <div class="contact">
           <h5> {{$t('contact').text1}} </h5>
           <h5 class="mt-12"> {{$t('contact').text2}} </h5>
