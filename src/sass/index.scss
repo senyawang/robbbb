@@ -45,42 +45,105 @@ button:focus {
     outline: none;
 }
 
-
-.el-dialog {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  margin-top: auto !important;
-  transform: translate(-50%, -50%);
-  box-shadow: none;
-  border: 1px solid $black;
-  border-radius: 0;
-  &.no-border {
-    border: 0 none;
-    .el-dialog__body {
-      height: 100%;
+#app {
+  .el-dialog {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-top: auto !important;
+    transform: translate(-50%, -50%);
+    box-shadow: none;
+    border: 1px solid $black;
+    border-radius: 0;
+    &.no-border {
+      border: 0 none;
+      .el-dialog__body {
+        height: 100%;
+      }
     }
-  }
-  .el-icon-close:before {
-    content: '';
-    display: none;
-    width: 12px;
-    height: 10px;
-    background: url("~@/assets/x.png");
-    background-size: 100% 100%;
-    &:hover {
-      opacity: .5;
+    .el-icon-close:before {
+      content: '';
+      display: none;
+      width: 12px;
+      height: 10px;
+      background: url("~@/assets/x.png");
+      background-size: 100% 100%;
+      &:hover {
+        opacity: .5;
+      }
     }
-  }
-  .el-dialog__header {
+    .el-dialog__header {
       padding: 0;
     }
-  .el-dialog__body {
-    padding: 20px 0 ;
-    font-size: 18px;
-    color: #000;
+    .el-dialog__body {
+      padding: 20px 0 ;
+      font-size: 18px;
+      color: #000;
+    }
+  }
+
+  .el-input-number{
+    width: 90px;
+    height: 30px;
+    line-height: 30px;
+
+    &.is-disabled {
+      .el-icon-minus,
+      .el-icon-plus{
+        display: none;
+      }
+      .el-input-number__decrease,
+      .el-input-number__increase,
+      .el-input__inner {
+        border-color: $black;
+      }
+    }
+
+    .el-input {
+      width: 90px;
+    }
+
+    .el-input-number__decrease, .el-input-number__increase {
+      width: 24px;
+      height: 28px;
+      line-height: 28px;
+      border-color: $black;
+      background: #fff;
+      font-weight: 900;
+      color: $black;
+      font-size: 18px;
+
+    }
+
+    .el-input__inner {
+      width: 90px;
+      height: 30px;
+      padding: 0;
+      background: #f0f0f0;
+      border: 1px solid $black;
+      border-radius: 0;
+      font-size: 18px;
+
+    }
+
+    .el-icon-minus,
+    .el-icon-plus{
+      line-height: 28px;
+      font-size: 18px;
+      font-weight: 900;
+      &:hover {
+        opacity: .5;
+      }
+    }
+
+    .el-input-number__decrease:hover:not(.is-disabled)~.el-input .el-input__inner:not(.is-disabled),
+    .el-input-number__increase:hover:not(.is-disabled)~.el-input .el-input__inner:not(.is-disabled) {
+      border-color: $black;
+    }
+
   }
 }
+
 
 .dialog-logo {
   padding: 20px 0 0;
@@ -94,66 +157,6 @@ button:focus {
   padding: 0 0 20px;
 }
 
-.el-input-number{
-  width: 90px;
-  height: 30px;
-  line-height: 30px;
-
-  &.is-disabled {
-      .el-icon-minus,
-      .el-icon-plus{
-        display: none;
-      }
-      .el-input-number__decrease,
-      .el-input-number__increase,
-      .el-input__inner {
-        border-color: $black;
-      }
-  }
-
-  .el-input {
-    width: 90px;
-  }
-
-  .el-input-number__decrease, .el-input-number__increase {
-    width: 24px;
-    height: 28px;
-    line-height: 28px;
-    border-color: $black;
-    background: #fff;
-    font-weight: 900;
-    color: $black;
-    font-size: 18px;
-
-  }
-
-  .el-input__inner {
-    width: 90px;
-    height: 30px;
-    padding: 0;
-    background: #f0f0f0;
-    border: 1px solid $black;
-    border-radius: 0;
-    font-size: 18px;
-
-  }
-
-  .el-icon-minus,
-  .el-icon-plus{
-    line-height: 28px;
-    font-size: 18px;
-    font-weight: 900;
-    &:hover {
-      opacity: .5;
-    }
-  }
-
-  .el-input-number__decrease:hover:not(.is-disabled)~.el-input .el-input__inner:not(.is-disabled),
-  .el-input-number__increase:hover:not(.is-disabled)~.el-input .el-input__inner:not(.is-disabled) {
-    border-color: $black;
-  }
-
-}
 
 .mbp {
   line-height: 1.6;
