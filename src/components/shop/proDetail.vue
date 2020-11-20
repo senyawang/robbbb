@@ -225,7 +225,8 @@ export default {
 }
 .side-content {
     height: 355px;
-    overflow: scroll;
+    overflow-y: auto;
+    overflow-x: hidden;
     border: 1px solid #000000;
 }
 

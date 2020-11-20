@@ -22,8 +22,8 @@
 
       <div class="rob-text-area" v-show="showDesc">
           <Title :title="langValue(resData, 'title')" />
-          <div class="side-content">
-              {{langValue(resData, 'content')}}
+          <div class="side-content" v-html="langValue(resData, 'content')">
+
           </div>
       </div>
 
@@ -118,7 +118,8 @@ export default {
   }
   .side-content {
     height: 460px;
-    overflow: scroll;
+    overflow-y: auto;
+    overflow-x: hidden;
     border: 1px solid #000;
   }
 

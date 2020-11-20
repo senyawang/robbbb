@@ -10,10 +10,7 @@
 
       <div class="rob-text-area">
           <Title :title="langValue(resData, 'title')" />
-          <div class="side-content">
-              {{langValue(resData, 'content')}}
-
-          </div>
+          <div class="side-content" v-html="langValue(resData, 'content')"></div>
       </div>
 
     </div>
@@ -95,6 +92,7 @@ export default {
 }
 .side-content {
     height: 500px;
-    overflow: scroll;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 </style>

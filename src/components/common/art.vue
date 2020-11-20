@@ -3,7 +3,7 @@
       <div class="art-list">
           <div class="rob-photo" v-for="(item, index) in artList" :key="index">
               <router-link :to="{ name: detailName, params: { id: item.id }}">
-                  <div class="img-wrapper"><img src="../../assets/1.jpg" alt=""></div>
+                  <div class="img-wrapper"><img :src="item.pic | formatImg" alt=""></div>
                   <h3 class="text-right">{{langValue(item, 'title')}}</h3>
               </router-link>
           </div>
