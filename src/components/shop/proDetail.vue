@@ -123,7 +123,7 @@ export default {
           pic: resData.pic,
           en_title: resData.en_title,
           price: resData.price,
-          number: this.num,
+          point: this.num,
         }
         const localCart = JSON.parse(localStorage.getItem('CART')) || [];
         const newLocalCart = localCart.filter(item => item.id !== resData.id);

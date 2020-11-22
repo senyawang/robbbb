@@ -42,6 +42,7 @@ export default {
       navList: [],
       errMsg: '',
       centerDialogVisible: false,
+
       // headerType: this.$route.fullPath.startsWith('/robbbbuy') ? 'shop' : '',
     }
   },
@@ -61,6 +62,7 @@ export default {
       this.centerDialogVisible = true;
       this.errMsg = val;
     })
+
   },
   methods: {
     getNavs(){
@@ -108,5 +110,26 @@ a:visited {
         flex: 1 1 auto;
     min-width: 1%;
 }
+.items-center {
+  align-items: center;
+}
+.justify-center {
+  justify-content: center;
+}
+  .mask-index {
+    position: fixed;
+    z-index: 9;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background: #fff;
+    text-align: center;
+    opacity: 1;
+    transition: all 1.5s;
+    img {
+      width: 300px;
+    }
+  }
 
 </style>

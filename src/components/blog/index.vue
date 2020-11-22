@@ -1,6 +1,11 @@
 <template>
   <div class="video">
     <video @click="videoPlay" src="../../assets/video.mp4" loop="loop" autoplay class="rob-video" id="videoDetail"></video>
+
+    <div class="mask-index ui-flex-box items-center justify-center" v-if="show" :style="{opacity: showIndex ? 1 : 0}">
+      <div class="ui-flex-item"><img src="../../assets/logo-index.png" alt=""></div>
+    </div>
+
   </div>
 </template>
 
@@ -11,8 +16,18 @@ export default {
   name: 'Home',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      showIndex: true,
+      show: true
     }
+  },
+  mounted () {
+    setTimeout(() => {
+      this.showIndex = false
+    }, 1000)
+
+    setTimeout(() => {
+      this.show = false
+    }, 2500)
   },
   methods: {
     videoPlay(e){

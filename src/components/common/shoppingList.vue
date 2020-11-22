@@ -35,20 +35,20 @@
               </div>
             </td>
             <td class="num text-center" style="width: 90px;height: 30px;">
-                <el-input-number step-strictly :disabled="type !== 'cart'" v-model="item.number" @change="(val) => handleChange(item.id, val)" :min="1" :max="3" ></el-input-number>
+                <el-input-number step-strictly :disabled="type !== 'cart'" v-model="item.point" @change="(val) => handleChange(item.id, val)" :min="1" :max="3" ></el-input-number>
             </td>
             <td>
               <div v-if="type === 'cart'">
-              ￥<span id="all_id" class="iiiiiii">{{item.price * item.number | money}}</span>
+              ￥<span id="all_id" class="iiiiiii">{{item.price * item.point | money}}</span>
               </div>
-              <div v-else class="text-center">
-                <span v-for="(img, index) in item.number" :key="index" :style="{display: item.number === 3 && index === 0 ? 'block' : 'inline-block'}">
+              <div v-else class="text-center" style="width: 120px">
+                <span v-for="(img, index) in item.point" :key="index" :style="{display: item.point === 3 && index === 0 ? 'block' : 'inline-block'}">
                   <img src="../../assets/logo-index.png" width="60" alt="">
                 </span>
               </div>
               </td>
             <td class="text-center">
-              <span v-if="type !== 'cart'" style="font-size: 14px;">{{item.orderDate}}</span>
+              <span v-if="type !== 'cart'" style="font-size: 14px;">{{item.add_time}}</span>
               <img @click="delProduct(item.id)" v-else src="../../assets/wr.png" width="14" height="14" alt="">
             </td>
         </tr>

@@ -23,7 +23,8 @@ const i18n = new VueI18n({
 })
 
 
-axios.defaults.baseURL = 'http://www.trex000.com';
+axios.defaults.baseURL = '/apis';
+// axios.defaults.baseURL = 'http://www.trex000.com';
 // axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
 let route = new VueRouter({ mode: 'hash', routes: routes })

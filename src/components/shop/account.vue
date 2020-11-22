@@ -1,17 +1,17 @@
 <template>
 <div>
   <div class="pt-60 myAccount">
-      <div class="ui-flex-box justify-content-between" id="xianshiwodeziliao">
+      <div class="ui-flex-box justify-content-between">
           <div @click="showMyProfile = true" class="shoushi">{{$t('account').myProfile}}</div>
-          <img src="../../assets/www.png" class="tupiantihuan" alt="">
+          <img :src="robbbuy[0]" class="tupiantihuan" alt="">
       </div>
       <div class="ui-flex-box justify-content-between" id="xianshigenggaimima">
           <div @click="showModifyPwd = true" class="shoushi">{{$t('account').modifyPwd}}</div>
-          <img src="../../assets/qqq.png" class="tupiantihuan" alt="">
+          <img :src="robbbuy[1]" class="tupiantihuan" alt="">
       </div>
       <div class="ui-flex-box justify-content-between">
           <div @click="goHistory" class="shoushi">{{$t('account').shopHistory}}</div>
-          <img src="../../assets/qqq.png" class="tupiantihuan" alt="">
+          <img :src="robbbuy[2]" class="tupiantihuan" alt="">
       </div>
   </div>
 
@@ -86,6 +86,16 @@
 
 <script>
 import Button from '../common/Button';
+import rob1 from '../../assets/qqq.png'
+import rob2 from '../../assets/www.png'
+
+const delay = t => new Promise((resolve) => setTimeout(resolve, t))
+
+const swapItem = function(arr, fromIndex, toIndex) {
+  arr[toIndex] = arr.splice(fromIndex, 1, arr[toIndex])[0];
+  return arr;
+};
+
 export default {
     data () {
       return {
@@ -96,7 +106,10 @@ export default {
         address: '',
         oldPwd: '',
         pwd: '',
-        repwd: ''
+        repwd: '',
+        robbbuy1: rob1,
+        robbbuy2: rob1,
+        robbbuy: [rob2, rob1, rob1]
       }
     },
     components: {
@@ -105,7 +118,34 @@ export default {
     created () {
       this.getProfiles();
     },
+  mounted () {
+      this.showAnimation()
+  },
     methods: {
+      async showAnimation () {
+        await delay(500)
+        const rob = [...this.robbbuy]
+
+        for (let i = 1; i < rob.length; i++) {
+          console.log(500)
+          this.robbbuy = swapItem(rob, i-1, i)
+          await delay(500)
+
+        }
+        await delay(500)
+        this.robbbuy = swapItem(rob, rob.length - 1, 0)
+        console.log(this.robbbuy, rob)
+        for (let i = 1; i < rob.length; i++) {
+          await delay(150)
+          this.robbbuy = swapItem(rob, i-1, i)
+        }
+
+        await delay(1000)
+        this.robbbuy = swapItem(rob, rob.length - 1, 0)
+
+        this.showAnimation()
+
+      },
       goHistory(){
         this.$router.push('/robbbbuy/history')
       },
