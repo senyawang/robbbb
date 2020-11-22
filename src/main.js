@@ -22,9 +22,7 @@ const i18n = new VueI18n({
   messages, // 设置地区信息
 })
 
-
-axios.defaults.baseURL = '/apis';
-// axios.defaults.baseURL = 'http://www.trex000.com';
+axios.defaults.baseURL = process.env.NODE_ENV === 'production' ? 'http://www.trex000.com' : '/apis';
 // axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
 let route = new VueRouter({ mode: 'hash', routes: routes })
