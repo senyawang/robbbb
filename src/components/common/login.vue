@@ -5,7 +5,7 @@
         center
     >
         <template v-slot:title>
-          <div class="text-center logo"> <img src="../../assets/robbbbuy.png"  alt="" > </div>
+          <div class="text-center dialog-logo"> <img src="../../assets/robbbbuy.png"  alt="" > </div>
         </template>
 
         <div class="form-style">

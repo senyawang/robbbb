@@ -58,7 +58,7 @@ Vue.mixin({
       return loc === 'zh' ? value : `en_${value}`;
     },
     formatImg(val) {
-      return `http://www.trex000.com${val}`;
+      return process.env.NODE_ENV === 'production' ? `http://www.trex000.com${val}` : `http://203.195.204.34${val}`;
     }
   },
   // provide: () => {

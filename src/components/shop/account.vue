@@ -198,6 +198,10 @@ export default {
     }
 }
 
+.mbp {
+  margin-bottom: 10px;
+}
+
 .justify-content-between {
   -ms-flex-pack: justify !important;
   justify-content: space-between !important;

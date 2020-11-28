@@ -50,7 +50,7 @@
                 {{$t('other').thanks}}
             </div>
         <div style="width: 1000px;height: 100%;display: flex; align-items: center;">
-              <video src="../../assets/video/ch.mp4" id="video"></video>
+              <video src="../../assets/video/ch.mp4" muted autoplay id="video"></video>
         </div>
         <div class="kuang right" id="right">
             {{userName}}

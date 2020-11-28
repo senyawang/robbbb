@@ -41,9 +41,13 @@ export default {
   flex-wrap: wrap;
   // justify-content: space-between;
   .rob-photo {
-    flex: 0 0 31%;
+    flex: 0 0 33.33333%;
     padding-right: 2.3333%;
     margin-bottom: 40px;
+
+    &:nth-child(3n) {
+      padding-right: 0;
+    }
     a {
       display: block;
     }

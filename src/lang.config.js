@@ -98,7 +98,7 @@ export default {
       cart: '购物车'
     },
     login: {
-      userName: '用户名或者邮箱',
+      userName: '用户名或电子邮箱',
       password: '密码',
       confirm: '确定',
     },
@@ -129,7 +129,7 @@ export default {
       userAddress: '收件地址',
       pwd: '当前密码',
       newpwd: '新密码',
-      repwd: '确认密码'
+      repwd: '确认新密码'
     },
     shoppingCart: {
       proName: '商品名称',
