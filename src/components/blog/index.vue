@@ -1,6 +1,7 @@
 <template>
   <div class="video">
-    <video @click="videoPlay" src="../../assets/video.mp4" loop="loop" autoplay class="rob-video" id="videoDetail"></video>
+    <!--<video @click="videoPlay" src="../../assets/video.mp4" loop="loop" autoplay class="rob-video" id="videoDetail"></video>-->
+    <video @click="videoPlay" src="http://203.195.204.34/assets/media/video.a4e7419.mp4" loop="loop" autoplay class="rob-video" id="videoDetail"></video>
 
     <div class="mask-index ui-flex-box items-center justify-center" v-if="show" :style="{opacity: showIndex ? 1 : 0}">
       <div class="ui-flex-item"><img src="../../assets/logo-index.png" alt=""></div>
