@@ -1,7 +1,10 @@
 @import './sass/reset.scss';
 @import './sass/var.scss';
 @import './sass/base.scss';
-
+body {
+  overflow-y: auto;
+  overflow-y: overlay;
+}
 #app {
   .main-body {
     padding-top: 40px;
@@ -19,7 +22,7 @@
 
   .form-style {
     color: $black;
-    padding: 0 30px;
+    padding: 0 40px;
     .label {
       font-size: 14px;
       line-height: 2;
@@ -46,6 +49,13 @@
     outline: none;
   }
 
+  .dialog-message {
+    width: auto !important;
+    min-width: 280px;
+    .el-icon-close:before {
+      display: none !important;
+    }
+  }
 
   .el-dialog {
     position: absolute;
@@ -62,9 +72,13 @@
         height: 100%;
       }
     }
+    .el-dialog__headerbtn {
+      top: 10px;
+      right: 15px;
+    }
     .el-icon-close:before {
       content: '';
-      display: none;
+      display: inline-block;
       width: 12px;
       height: 10px;
       background: url("~@/assets/x.png");
@@ -77,16 +91,16 @@
       padding: 0;
     }
     .el-dialog__body {
-      padding: 20px 0 ;
+      padding: 20px;
       font-size: 18px;
       color: #000;
     }
   }
 
   .dialog-logo {
-    padding: 20px 0 0;
+    padding: 40px 0 20px;
     img {
-      width: 200px;
+      width: 300px;
     }
   }
 
@@ -131,6 +145,7 @@
     .el-input__inner {
       width: 90px;
       height: 30px;
+      line-height: 30px;
       padding: 0;
       background: #f0f0f0;
       border: 1px solid $black;

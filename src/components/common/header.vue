@@ -81,8 +81,9 @@ export default {
   methods: {
     handleLangValue() {
       const loc = this.$i18n.locale;
-      this.$i18n.locale = loc === 'en' ? 'zh' : 'en'
-      window.localStorage.setItem("LOCALE", this.$i18n.locale)
+      const lang = loc === 'en' ? 'zh' : 'en'
+      this.$i18n.locale = lang
+      window.localStorage.setItem("LOCALE", lang)
 },
     getNavs(pid){
         if(this.navList.length) return Promise.resolve();

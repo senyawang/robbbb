@@ -1,6 +1,6 @@
 <template>
     <div class="footer">
-        ️©2021 ROBBBB. All Rights Reserved.
+      ©2021 ROBBBB. All Rights Reserved.
     </div>
 </template>
 

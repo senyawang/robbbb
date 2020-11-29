@@ -71,6 +71,7 @@ export default {
       userAddress: 'Consignee Address',
       text1: 'Please check the information carefully',
       text2: 'Support express delivery service outside China',
+      text3: 'Your profile will be protected',
       btnNext: 'Next',
       totalPrice: 'Subtotal',
       edit: 'Edit',
@@ -98,7 +99,7 @@ export default {
       cart: '购物车'
     },
     login: {
-      userName: '用户名或者邮箱',
+      userName: '用户名或电子邮箱',
       password: '密码',
       confirm: '确定',
     },
@@ -129,7 +130,7 @@ export default {
       userAddress: '收件地址',
       pwd: '当前密码',
       newpwd: '新密码',
-      repwd: '确认密码'
+      repwd: '确认新密码'
     },
     shoppingCart: {
       proName: '商品名称',
@@ -157,6 +158,7 @@ export default {
       userAddress: '收件地址',
       text1: '请仔细核对收件信息',
       text2: '支持发往中国境外',
+      text3: '您的资料会受到保护',
       btnNext: '下一步',
       totalPrice: '价格总计',
       edit: '编辑',

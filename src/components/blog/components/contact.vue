@@ -23,18 +23,18 @@
           </div>
     </div>
 
-    <el-dialog
-        :visible.sync="centerDialogVisible"
-        width="30%"
-        center
-        :modal="false"
-        :close-on-click-modal="false"
-    >
-        <div class="text-center">{{errMsg}}</div>
-        <span slot="footer" class="dialog-footer">
-          <Button color="red" @click="centerDialogVisible = false">确定</Button>
-        </span>
-    </el-dialog>
+    <!--<el-dialog-->
+        <!--:visible.sync="centerDialogVisible"-->
+        <!--width="30%"-->
+        <!--center-->
+        <!--:modal="false"-->
+        <!--:close-on-click-modal="false"-->
+    <!--&gt;-->
+        <!--<div class="text-center">{{errMsg}}</div>-->
+        <!--<span slot="footer" class="dialog-footer">-->
+          <!--<Button color="red" @click="centerDialogVisible = false">确定</Button>-->
+        <!--</span>-->
+    <!--</el-dialog>-->
 
 </div>
 </template>

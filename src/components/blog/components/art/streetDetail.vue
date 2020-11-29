@@ -14,7 +14,7 @@
             indicator-position="none"
         >
             <el-carousel-item v-for="(item, index) in imgList" :key="index">
-              <img @click="handleZoom" :src="`http://www.trex000.com${item}`">
+              <img @click="handleZoom" :src="item | formatImg">
             </el-carousel-item>
           </el-carousel>
           <div class="pro-total-num">{{`${current}/${imgList.length}`}}</div>

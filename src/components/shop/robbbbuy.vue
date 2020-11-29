@@ -1,8 +1,8 @@
 <template>
   <div>
     <Art :actionUrl='actionUrl' detailName="proDetail" />
-    <div class="mask-index ui-flex-box items-center justify-center" v-if="show" :style="{opacity: showIndex ? 1 : 0}">
-      <div class="ui-flex-item"><img src="../../assets/robbbbuy.png" alt=""></div>
+    <div class="mask-index ui-flex-box items-center justify-center" v-if="show" :style="{opacity: showBg ? 1 : 0}">
+      <div class="ui-flex-item"><img :style="{opacity: showIndex ? 1 : 0, width: '800px'}" src="../../assets/robbbbuy.png" alt=""></div>
     </div>
   </div>
 </template>
@@ -14,11 +14,12 @@ export default {
     return {
       actionUrl: 'api/shop/getShopList',
       showIndex: true,
-      show: true
+      show: true,
+      showBg: true
     }
   },
   components: {
-    Art,
+    Art
   },
   mounted () {
     setTimeout(() => {
@@ -26,8 +27,12 @@ export default {
     }, 1000)
 
     setTimeout(() => {
-      this.show = false
+      this.showBg = false
     }, 2500)
+
+    setTimeout(() => {
+      this.show = false
+    }, 4500)
   }
 }
 </script>

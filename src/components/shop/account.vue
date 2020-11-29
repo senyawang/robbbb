@@ -37,7 +37,7 @@
                   <div class="label">{{$t('account').userAddress}}</div>
                   <input type="text" class="form-input" v-model="address">
               </div>
-              <p class="mbp font-12"><span class="c-red">*</span>{{$t('payDetail').text1}}</p>
+              <p class="mbp font-12"><span class="c-red">*</span>{{$t('payDetail').text3}}</p>
               <p class="mbp font-12"><span class="c-red">*</span>{{$t('payDetail').text2}}</p>
           </div>
 
@@ -196,6 +196,10 @@ export default {
     .shoushi:hover {
       opacity: .5;
     }
+}
+
+.mbp {
+  margin-bottom: 10px;
 }
 
 .justify-content-between {

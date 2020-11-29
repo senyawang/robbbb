@@ -9,7 +9,7 @@
 
     <el-dialog
         :visible.sync="centerDialogVisible"
-        width="30%"
+        custom-class="dialog-message"
         center
         :modal="false"
         :close-on-click-modal="false"
@@ -84,6 +84,7 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #000;
+  min-height: 101vh;
 }
 .container {
   width: 1100px;
@@ -129,6 +130,7 @@ a:visited {
     transition: all 1.5s;
     img {
       width: 300px;
+      transition: all 1.5s;
     }
   }
 
