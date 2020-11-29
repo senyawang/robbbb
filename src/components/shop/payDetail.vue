@@ -56,7 +56,7 @@
       >
         <div class="text-center">{{ $t('payDetail').ask }}</div>
         <span slot="footer" class="dialog-footer">
-          <div><Button color="red" @click="() => {saveProfile(); centerDialogVisible2 = true; centerDialogVisible = false; is_sync = 1}">{{$t('payDetail').yes}}</Button></div>
+          <div><Button color="red" @click="() => {saveProfile()}">{{$t('payDetail').yes}}</Button></div>
           <Button style="margin-top: 10px" @click="centerDialogVisible = false">{{$t('payDetail').no}}</Button>
         </span>
       </el-dialog>
@@ -157,6 +157,11 @@ export default {
         }).then(res => {
             // this.centerDialogVisible = true;
             this.resData = res;
+            this.centerDialogVisible2 = true;
+            this.centerDialogVisible = false;
+            is_sync = 1
+        }).catch(e => {
+          this.centerDialogVisible = false;
         })
       },
   }
