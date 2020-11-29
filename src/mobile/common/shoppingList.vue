@@ -1,55 +1,52 @@
 <template>
   <div class="shopping-list">
     <div class="shoppingCar">
-        <div v-for="(item, index) of proList" :key="item.id" class="ui-flex-box cart-item">
-            <div class="text-center mx-auto">
-                <div v-if="type !== 'cart'">{{index+1}}</div>
-                <div v-else class="mycheck text-center d-inline-block">
-                    <input type="checkbox" v-model="selected" :value="item.id" :id="item.id" name="">
-                    <label :for="item.id"> </label>
-                </div>
+      <van-swipe-cell
+        :right-width="60"
+        v-for="(item, index) of proList"
+        :key="String(item.add_time)"
+        class="swipe-cart"
+        :disabled="type === 'history'"
+      >
+        <!--<span slot="left">选择</span>-->
+        <div class="ui-flex-box cart-item">
+          <div class="text-center mx-auto">
+            <div v-if="type !== 'cart'">{{index+1}}</div>
+            <div v-else class="mycheck text-center d-inline-block">
+              <input type="checkbox" v-model="selected" :value="item.id" :id="item.id" name="">
+              <label :for="item.id"> </label>
             </div>
-            <div class="shoushi img-box">
+          </div>
+          <div class="shoushi img-box">
+            <router-link :to="{ name: 'proDetail', params: { id: item.id }}">
+              <img width="160" :src="item.pic | formatImg" alt="">
+            </router-link>
+          </div>
+
+          <div class="shoushi ui-flex-item pro-des">
+            <div class="title">
               <router-link :to="{ name: 'proDetail', params: { id: item.id }}">
-                  <img width="160" :src="item.pic | formatImg" alt="">
+                {{langValue(item, 'title')}}
               </router-link>
             </div>
 
-            <div class="shoushi ui-flex-item pro-des">
-              <div class="title">
-                <router-link :to="{ name: 'proDetail', params: { id: item.id }}">
-                    {{langValue(item, 'title')}}
-                </router-link>
+            <div id="price_id"  class="ui-flex-box price">
+              <div v-if="type === 'cart'" class="red">￥{{item.price | money}}</div>
+              <span v-else>{{item.add_time.split(' ')[0]}}</span>
+
+              <div class="ui-flex-item text-right">
+                <el-input-number v-if="type === 'cart'" step-strictly :disabled="type !== 'cart'" v-model="item.point" @change="(val) => handleChange(item.id, val)" :min="1" :max="3" ></el-input-number>
+                <span class="xiaoren" v-else><img src="../../assets/logo-index.png" width="40" alt=""> X {{item.point}}</span>
               </div>
-
-
-              <div id="price_id"  class="ui-flex-box price">
-                <div v-if="type === 'cart'" class="red">￥{{item.price | money}}</div>
-                <span v-else>{{item.orderDate}}</span>
-
-                <div class="ui-flex-item text-right">
-                    <el-input-number step-strictly :disabled="type !== 'cart'" v-model="item.number" @change="(val) => handleChange(item.id, val)" :min="1" :max="3" ></el-input-number>
-                </div>
-              </div>
-
             </div>
 
-
-            <!-- <td>
-              <div v-if="type === 'cart'">
-              ￥<span id="all_id" class="iiiiiii">{{item.price * item.number | money}}</span>
-              </div>
-              <div v-else class="text-center">
-                <span v-for="(img, index) in item.number" :key="index" :style="{display: item.number === 3 && index === 0 ? 'block' : 'inline-block'}">
-                  <img src="../../assets/logo-index.png" width="60" alt="">
-                </span>
-              </div>
-              </td>
-            <td class="text-center">
-
-              <img @click="delProduct(item.id)" src="../../assets/wr.png" width="14" height="14" alt="">
-            </td> -->
+          </div>
         </div>
+        <div slot="right" class="swipe-del">
+          <img @click="delProduct(item.id)" src="../../assets/wr.png" width="14" height="14" alt="">
+        </div>
+      </van-swipe-cell>
+
     </div>
   </div>
 </template>
@@ -60,99 +57,89 @@ export default {
     type: String,
     handleChange: Function,
     delHandle: Function,
-    updatePrice: Function,
-},
+    updatePrice: Function
+  },
   name: 'ShoppingList',
   data () {
     return {
       selected: [],
-      proList: [
-          {
-            id: 12341234,
-            checked: true,
-            title: "这是一个标题",
-            point: 2,
-            price: 1999,
-            total: 1999,
-            pic: '/static/1.jpg',
-            orderDate: '2020-02-22'
-          },
-           {
-            id: 64536536,
-            checked: true,
-            title: "这是二个标题",
-            point: 3,
-            price: 1999,
-            total: 1999,
-            pic: '/static/1.jpg',
-            orderDate: '2020-02-22'
-          }
-      ]
+      proList: []
     }
   },
   created () {
-    this.init();
+    this.init()
   },
   watch: {
-      selected(val){
-        this.updatePrice(val);
-        // const cartList = JSON.parse(localStorage.getItem("CART")) || [];
-        // const checkedCart = cartList.filter(item => val.includes(item.id))
-      }
+    selected (val) {
+      this.updatePrice(val)
+      // const cartList = JSON.parse(localStorage.getItem("CART")) || [];
+      // const checkedCart = cartList.filter(item => val.includes(item.id))
+    }
   },
   methods: {
-    init(){
-      if(this.type === "cart"){
-        const cartList = JSON.parse(localStorage.getItem("CART")) || [];
-        this.proList = cartList;
+    init () {
+      if (this.type === 'cart') {
+        const cartList = JSON.parse(localStorage.getItem('CART')) || []
+        this.proList = cartList
         cartList.filter(item => item.checked).map(ck => this.selected.push(ck.id))
       } else {
-        this.ajaxPost('api/shop/getOrderList', {
-          id: this.$route.params.id,
-        }).then(res => {
-          // this.imgList = res.data.pic_list;
+        const loading = this.$loading()
+        this.ajaxPost('api/shop/getOrderList', {}).then(res => {
+          let length = res.data.length
+          const proList = []
           res.data.forEach(item => {
-            this.getOrderDetail(item.id);
+            this.getOrderDetail(item.id)
+              .then(({data}) => {
+                if (data && data[0]) {
+                  proList.push(data[0])
+                } else {
+                  console.log(data, item, 'undef')
+                }
+              })
+              .finally(() => {
+                length--
+                console.log(length, 'length')
+                if (length === 0) {
+                  console.log(length, proList, 'proList')
+                  this.proList = proList
+                  loading.close()
+                }
+              })
           })
           console.log(res.data)
         })
       }
     },
-    delProduct(id){
-      if(this.delHandle){
-        this.delHandle(id);
+    delProduct (id) {
+      if (this.delHandle) {
+        this.delHandle(id)
       }
-      const cartList = JSON.parse(localStorage.getItem("CART")) || [];
-      console.log(cartList);
-        this.proList = cartList;
+      const cartList = JSON.parse(localStorage.getItem('CART')) || []
+      console.log(cartList)
+      this.proList = cartList
     },
-    getOrderDetail(id){
-       this.ajaxPost('api/shop/getOrderDetail', {
-          id,
-        }).then(res => {
-          this.proList.push(res.data[0]);
-        })
+    getOrderDetail (id) {
+      return this.ajaxPost('api/shop/getOrderDetail', {
+        id
+      })
     },
-    format(num){
-      return () => number_format(num);
-    },
+    format (num) {
+      return () => number_format(num)
+    }
   },
   filters: {
-        money(value) {
-           if (/[^0-9\.]/.test(value))
-          return "0";
-        if (value == null || value == "")
-          return "0";
-        value = value.toString().replace(/^(\d*)$/, "$1.");
-        value = (value + "00").replace(/(\d*\.\d\d)\d*/, "$1");
-        value = value.replace(".", ",");
-        var re = /(\d)(\d{3},)/;
-        while (re.test(value))
-          value = value.replace(re, "$1,$2");
-        value = value.replace(/,(\d\d)$/, ".$1");
-        return value;
-        }
-    },
+    money (value) {
+      if (/[^0-9\.]/.test(value)) { return '0' }
+      if (value == null || value == '') { return '0' }
+      value = value.toString().replace(/^(\d*)$/, '$1.')
+      value = (value + '00').replace(/(\d*\.\d\d)\d*/, '$1')
+      value = value.replace('.', ',')
+      var re = /(\d)(\d{3},)/
+      while (re.test(value)) { value = value.replace(re, '$1,$2') }
+      value = value.replace(/,(\d\d)$/, '.$1')
+      return value
+    }
+  }
 }
 </script>
 <style lang='scss'>
@@ -162,10 +149,12 @@ export default {
     margin-top: 11px;
     text-align: center;
     .cart-item {
+      align-items: center;
+      width: 100%;
         padding: 25px 15px;
-        border: 1px solid #ccc;
     }
     .mx-auto {
+      font-size: 30px;
       margin-right: 20px;
     }
     img:hover {
@@ -183,11 +172,12 @@ export default {
       height: 100px;
     }
     .price {
-      color: $themeColor;
+      align-items: center;
       line-height: 30px;
       height: 30px;
     }
     .red {
+      color: $themeColor;
       line-height: 40px;
     }
     .img-box {
@@ -201,12 +191,32 @@ export default {
     }
 }
 
-.shoppingCar .choose {
-    border-radius: 50%;
-    width: 20px;
-    height: 20px;
-    border: 2px solid #000;
-    color: #aaa;
-    display: inline-block;
+.shopping-list {
+  .swipe-cart {
+    margin-bottom: 26px;
+    border: 1px solid #ccc;
+    .van-swipe-cell__wrapper {
+      display: flex;
+      align-items: center;
+    }
+  }
+  .swipe-del {
+    position: relative;
+    display: flex;
+    height: 100%;
+    width: 120px;
+    align-items: center;
+    justify-content: center;
+  }
+  .mycheck label {
+    border-color: #999 !important;
+  }
 }
+  .xiaoren {
+    color: $themeColor;
+    img {
+      display: inline-block;
+      vertical-align: middle;
+    }
+  }
 </style>

@@ -21,7 +21,7 @@
           <div class="side-content" v-html="langValue(resData, 'content')">
           </div>
           <div class="text-center">
-                <el-input-number v-model="num" @change="handleChange" :min="1" :max="3" label="描述文字"></el-input-number>
+                <el-input-number v-model="num" @change="handleChange" :min="1" :max="3"></el-input-number>
           </div>
 
           <div class="ui-flex-box btn-area">
@@ -33,7 +33,6 @@
 
       <el-dialog
             :visible.sync="centerDialogVisible"
-            width="260px"
             center
             :show-close="false"
             :modal="false"
@@ -119,7 +118,7 @@ export default {
           pic: resData.pic,
           en_title: resData.en_title,
           price: resData.price,
-          number: this.num,
+          point: this.num,
         }
         const localCart = JSON.parse(localStorage.getItem('CART')) || [];
         const newLocalCart = localCart.filter(item => item.id !== resData.id);
@@ -223,7 +222,8 @@ export default {
 .side-content {
     height: 355px;
     margin-bottom: 40px;
-    overflow: scroll;
+  overflow-y: auto;
+  overflow-x: hidden;
     border: 1px solid #000000;
 }
 

@@ -30,6 +30,9 @@ export default {
     Login,
     Register,
   },
+  mounted() {
+    console.log(this.$route.name, 'this.$route.name')
+  },
   watch: {
     '$route' (to, from) {
         this.subTitle = to.name

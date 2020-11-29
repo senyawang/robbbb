@@ -1,15 +1,16 @@
 <template>
   <div class="navbox position-relative">
+
     <router-link v-if="flag==='shop'" to="/robbbbuy/shop" class="logo-robbbbuy" id="logo">
       <img src="../../assets/robbbbuy.png"  alt="" :style="{opacity: showMainNav || showSubNav ? 0 : 1}" >
     </router-link>
     <router-link v-else-if='!(showMainNav || showSubNav)' to="/" class="logo" id="logo">
       <img src="../../assets/logo.png"  alt="" :style="{opacity: showMainNav || showSubNav ? 0 : 1}" >
     </router-link>
-    <div class="nav-menu " >
 
-      <div class="nav-top">
-          <span :style="{opacity: (showMainNav || showSubNav) ? 1 : 0}" v-show="showMainNav || showSubNav" @click="handleLangValue" class="lang">{{$i18n.locale === 'en' ? '中文' : 'EN'}}</span>
+    <div class="nav-menu " >
+      <div class="nav-top" :style="{zIndex: (showMainNav || showSubNav) ? '10' : '2' }">
+          <span :style="{opacity: (showMainNav || showSubNav) ? 1 : 0, zIndex: (showMainNav || showSubNav) ? '10' : '3' }" v-show="showMainNav || showSubNav" @click="handleLangValue" class="lang">{{$i18n.locale === 'en' ? 'CN' : 'EN'}}</span>
           <div class="hamburger" id="hamburger-1" @click="handleShowMainNav" :class="showMainNav && 'is-active'" >
             <span class="line"></span>
             <span class="line"></span>
@@ -178,7 +179,7 @@ export default {
   position: absolute;
   top: 42px;
   left: 0;
-  z-index: 1;
+  z-index: 3;
   img {
     opacity: 1;
     transition: all .5s;
@@ -202,7 +203,7 @@ export default {
 .red { color: $themeColor; }
 .navbox {
   position: relative;
-  z-index: 9;
+  z-index: 10;
   height: 126px;
 }
 .nav-menu {
@@ -220,7 +221,11 @@ export default {
       }
   }
 
-  .nav-left li {
+  .nav-left {
+    display: flex;
+    flex-wrap: wrap;
+    li {
+      flex: 1 1 100%;
       position: relative;
       z-index: 9;
       font-size: 36px;
@@ -228,8 +233,17 @@ export default {
       line-height: 70px;
       text-align: center;
       a {
-          display: block;
+        display: block;
       }
+
+    }
+  }
+  .main-nav {
+    .nav-left li {
+      &:nth-child(3) {
+        order: 5;
+      }
+    }
   }
 
   .sub-nav {

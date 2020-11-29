@@ -1,5 +1,5 @@
 <template>
-    <div class="detail ui-flex-box">
+    <div class="detail prodetail ui-flex-box">
 
       <div :class='["pro-list", "ui-flex-item", {"full-screen": !showDesc}]'>
         <Title :title="langValue(resData, 'title')" align="center" v-if="!showDesc" />
@@ -25,7 +25,7 @@
           <div class="side-content" v-html="langValue(resData, 'content')">
           </div>
           <div class="text-right">
-                <el-input-number v-model="num" @change="handleChange" :min="1" :max="3" label="描述文字"></el-input-number>
+                <el-input-number v-model="num" @change="handleChange" :min="1" :max="3" ></el-input-number>
           </div>
 
           <div class="ui-flex-box btn-area">
@@ -123,7 +123,7 @@ export default {
           pic: resData.pic,
           en_title: resData.en_title,
           price: resData.price,
-          number: this.num,
+          point: this.num,
         }
         const localCart = JSON.parse(localStorage.getItem('CART')) || [];
         const newLocalCart = localCart.filter(item => item.id !== resData.id);
@@ -144,7 +144,8 @@ export default {
 }
 </script>
 <style lang='scss'>
-.pro-list {
+.prodetail {
+  .pro-list {
   position: relative;
   width: 800px;
   padding: 0 50px 20px;
@@ -224,7 +225,8 @@ export default {
 }
 .side-content {
     height: 355px;
-    overflow: scroll;
+    overflow-y: auto;
+    overflow-x: hidden;
     border: 1px solid #000000;
 }
 
@@ -257,6 +259,7 @@ export default {
   left: 0;
   background: url('../../assets/left.png') no-repeat;
   background-size: contain;
+}
 }
 
 </style>

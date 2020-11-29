@@ -55,6 +55,7 @@ export default {
       this.ajaxPost('api/shop/getUserDetail', {
       }).then(res => {
         this.userName = res.data.username;
+        window.sessionStorage.setItem('userName', res.data.username)
         this.isLogin = true;
         this.setLoginHandle(true)
       }).catch(err => this.showMsg(err))
@@ -73,7 +74,12 @@ export default {
     handleLogout(){
       this.ajaxPost('api/shop/logout', {
       }).then(res => {
-        window.location.href = '/'
+        if(this.$route.fullPath === '/robbbbuy/shop'){
+          window.location.reload()
+        } else {
+          window.location.href = '#/robbbbuy/shop'
+        }
+
       }).catch(err => this.showMsg(err))
     }
   }
@@ -120,9 +126,9 @@ export default {
 
 .xxx {
   img {
-    width: 20px;
-    height: 20px;
-    margin-top: 8px;
+    width: 14px;
+    height: 14px;
+    margin-top: 15px;
     margin-right: 20px;
     cursor: pointer;
     &:hover {
@@ -183,8 +189,13 @@ export default {
   z-index: 9;
   margin: 0 6% 0 0;
   display: inline-block;
+  cursor: pointer;
   a {
     display: block;
+
+  }
+  &:hover {
+    opacity: .5;
   }
 }
 

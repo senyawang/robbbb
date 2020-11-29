@@ -5,7 +5,7 @@
       <div style="min-height: 50vh">
           <router-view> </router-view>
       </div>
-      <Footer />
+      <Footer v-if="showFooter" />
     </div>
 
     <el-dialog
@@ -14,7 +14,6 @@
         center
         :show-close="false"
         :modal="false"
-        class="test"
         :close-on-click-modal="false"
     >
         <div class="text-center err-info">{{errMsg}}</div>
@@ -47,18 +46,18 @@ export default {
     }
   },
   computed: {
+    showFooter () {
+      return this.$route.name !== 'cart'
+    },
     headerType(){
       return this.$route.fullPath.startsWith('/robbbbuy') ? 'shop' : '';
     },
   },
   mounted () {
-    console.log(this, 'this');
     const lang = window.localStorage.getItem('LOCALE')
-    console.log(lang, 'lang')
     this.$i18n.locale = lang
     this.getNavs();
     this.$Event.$on('ERROR', (val) => {
-      console.log(val, 'val');
       this.centerDialogVisible = true;
       this.errMsg = val;
     })
@@ -67,7 +66,6 @@ export default {
     getNavs(){
         this.ajaxPost('api/index/getNavList', {}).then(res => {
           this.navList = res.data;
-          console.log(res, 'navList')
         })
     }
   }
@@ -112,15 +110,5 @@ a:visited {
 .err-info {
   font-size: 32px;
 }
-.test {
-  .el-dialog__header {
-    display: none;
-  }
-  .el-dialog__body {
-    padding: 50px 20px 40px;
-  }
-  .el-dialog__footer {
-    padding-top: 0;
-  }
-}
+
 </style>

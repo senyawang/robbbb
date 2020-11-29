@@ -4,11 +4,11 @@
         <tr style="background:#eee;">
             <th></th>
             <th width="160px"></th>
-            <th>商品名称</th>
-            <th>单价</th>
-            <th>数量</th>
-            <th>总价</th>
-            <th align="center">{{type === "cart" ? '' : '日期'}}</th>
+            <th>{{$t('shoppingCart').proName}}</th>
+            <th> {{$t('shoppingCart').price}} </th>
+            <th>{{$t('shoppingCart').number}} </th>
+            <th>{{$t('shoppingCart').total}} </th>
+            <th align="center">{{type === "cart" ? '' : $t('shoppingCart').date}}</th>
         </tr>
         <tr v-for="(item, index) of proList" :key="item.id">
             <td class="text-center mx-auto">
@@ -23,7 +23,7 @@
                   <img width="160" :src="item.pic | formatImg" alt="">
               </router-link>
             </td>
-            <td class="shoushi">
+            <td class="shoush title">
               <router-link :to="{ name: 'proDetail', params: { id: item.id }}">
                   {{langValue(item, 'title')}}
               </router-link>
@@ -35,20 +35,20 @@
               </div>
             </td>
             <td class="num text-center" style="width: 90px;height: 30px;">
-                <el-input-number step-strictly :disabled="type !== 'cart'" v-model="item.number" @change="(val) => handleChange(item.id, val)" :min="1" :max="3" ></el-input-number>
+                <el-input-number step-strictly :disabled="type !== 'cart'" v-model="item.point" @change="(val) => handleChange(item.id, val)" :min="1" :max="3" ></el-input-number>
             </td>
             <td>
               <div v-if="type === 'cart'">
-              ￥<span id="all_id" class="iiiiiii">{{item.price * item.number | money}}</span>
+              ￥<span id="all_id" class="iiiiiii">{{item.price * item.point | money}}</span>
               </div>
-              <div v-else class="text-center">
-                <span v-for="(img, index) in item.number" :key="index" :style="{display: item.number === 3 && index === 0 ? 'block' : 'inline-block'}">
+              <div v-else class="text-center" style="width: 120px">
+                <span v-for="(img, index) in item.point" :key="index" :style="{display: item.point === 3 && index === 0 ? 'block' : 'inline-block'}">
                   <img src="../../assets/logo-index.png" width="60" alt="">
                 </span>
               </div>
               </td>
             <td class="text-center">
-              <span v-if="type !== 'cart'" style="font-size: 14px;">{{item.orderDate}}</span>
+              <span v-if="type !== 'cart'" style="font-size: 14px;">{{item.add_time}}</span>
               <img @click="delProduct(item.id)" v-else src="../../assets/wr.png" width="14" height="14" alt="">
             </td>
         </tr>
@@ -69,26 +69,26 @@ export default {
     return {
       selected: [],
       proList: [
-          {
-            id: 12341234,
-            checked: true,
-            title: "这是一个标题",
-            point: 2,
-            price: 1999,
-            total: 1999,
-            pic: '/static/1.jpg',
-            orderDate: '2020-02-22'
-          },
-           {
-            id: 64536536,
-            checked: true,
-            title: "这是二个标题",
-            point: 3,
-            price: 1999,
-            total: 1999,
-            pic: '/static/1.jpg',
-            orderDate: '2020-02-22'
-          }
+          // {
+          //   id: 12341234,
+          //   checked: true,
+          //   title: "这是一个标题",
+          //   point: 2,
+          //   price: 1999,
+          //   total: 1999,
+          //   pic: '/static/1.jpg',
+          //   orderDate: '2020-02-22'
+          // },
+          //  {
+          //   id: 64536536,
+          //   checked: true,
+          //   title: "这是二个标题",
+          //   point: 3,
+          //   price: 1999,
+          //   total: 1999,
+          //   pic: '/static/1.jpg',
+          //   orderDate: '2020-02-22'
+          // }
       ]
     }
   },
@@ -175,6 +175,11 @@ export default {
     img:hover {
       opacity: .5;
     }
+  .title {
+    &:hover {
+      opacity: .5;
+    }
+  }
 }
 
 .shoppingCar input {

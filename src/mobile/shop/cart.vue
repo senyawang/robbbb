@@ -6,72 +6,87 @@
         :delHandle="delHandle"
         :updatePrice="updatePrice"
         detailName="proDetail" />
-    <div class="text-right pay-button">
-      <p>价格总计：￥{{totalPrice | money}}</p>
-      <p><Button size="large" color="red" @click="totalPrice > 0 ? goToPay() : ''">立即支付</Button></p>
+    <div class="text-right pay-button ui-flex-box shopping-list">
+      <div class="mycheck text-center d-inline-block">
+        <input type="checkbox" v-model="selected" id="all" name="">
+        <label for="all"></label>
+      </div>
+      <span style="padding-left: 5px"> 全选</span>
+      <div class="text-right ui-flex-item theme-primary">
+        {{$t('shoppingCart').totalPrice}}：￥{{totalPrice | money}}
+        <Button size="large" class="sp" @click="totalPrice > 0 ? goToPay() : ''">{{$t('shoppingCart').goPay}}</Button>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import ShoppingList from '../common/shoppingList.vue';
-import Button from "../common/Button.vue";
+import ShoppingList from '../common/shoppingList.vue'
+import Button from '../common/Button.vue'
 export default {
   data () {
     return {
       actionUrl: '',
-      totalPrice: 0,
       selected: [],
+      isFixed: false,
+      totalPrice: 0
     }
   },
   components: {
     ShoppingList,
-    Button,
+    Button
   },
-  created () {
-       const localCart = JSON.parse(localStorage.getItem("CART")) || []
-        const totalPrice = localCart.reduce((a, c) => {
-          return a + c.price * c.number
-        }, 0)
-
-        this.totalPrice = totalPrice
+  computed: {
+    // totalPrice () {
+    //
+    // }
+  },
+  mounted () {
+    const localCart = JSON.parse(localStorage.getItem('CART')) || []
+    this.totalPrice = localCart.reduce((a, c) => {
+      return a + Number(c.price) * c.point
+    }, 0)
+    window.addEventListener('scroll', this.handleScroll)
+  },
+  destroy () {
+    window.removeEventListener('scroll', this.handleScroll)
   },
   methods: {
-    changeHandle(id, value){
-
-          const localCart = JSON.parse(localStorage.getItem("CART")) || []
-          localCart.find(item => item.id === id).number = value;
-          localStorage.setItem("CART", JSON.stringify(localCart))
-
-          this.updatePrice(this.selected);
+    handleScroll () {
 
     },
-    updatePrice(selected){
-       this.selected = selected;
-        const cartList = JSON.parse(localStorage.getItem("CART")) || [];
-        const checkedCart = cartList.filter(item => selected.includes(item.id))
-        const totalPrice = checkedCart.filter(item => item.checked).reduce((a, c) => {
-            return a + c.price * c.number
-          }, 0)
-        this.totalPrice = totalPrice
-        cartList.map(item => {
-          if(selected.includes(item.id)){
-            item.checked = true;
-          }
-        })
+    changeHandle (id, value) {
+      const localCart = JSON.parse(localStorage.getItem('CART')) || []
+      localCart.find(item => item.id === id).point = value
+      localStorage.setItem('CART', JSON.stringify(localCart))
 
-        localStorage.setItem("CART", JSON.stringify(cartList))
+      this.updatePrice(this.selected)
     },
-    delHandle(id){
+    updatePrice (selected) {
+      this.selected = selected
+      const cartList = JSON.parse(localStorage.getItem('CART')) || []
+      const checkedCart = cartList.filter(item => selected.includes(item.id))
+      const totalPrice = checkedCart.filter(item => item.checked).reduce((a, c) => {
+        return a + c.price * c.point
+      }, 0)
+      console.log(totalPrice, checkedCart, selected)
+      this.totalPrice = totalPrice
+      cartList.map(item => {
+        if (selected.includes(item.id)) {
+          item.checked = true
+        }
+      })
 
-        const localCart = JSON.parse(localStorage.getItem("CART")) || []
-        const newCart = localCart.filter(item => item.id !== id);
-        localStorage.setItem("CART", JSON.stringify(newCart))
-
-        this.updatePrice(this.selected);
-
+      localStorage.setItem('CART', JSON.stringify(cartList))
     },
-    goToPay(){
+    delHandle (id) {
+      const localCart = JSON.parse(localStorage.getItem('CART')) || []
+      const newCart = localCart.filter(item => item.id !== id)
+      localStorage.setItem('CART', JSON.stringify(newCart))
+
+      this.updatePrice(this.selected)
+    },
+    goToPay () {
       this.$router.push('/robbbbuy/payDetail')
     }
   }
@@ -79,10 +94,14 @@ export default {
 </script>
 <style lang='scss' scoped>
 .pay-button {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  padding: 20px;
+  align-items: center;
   padding-top: 30px;
   font-size: 18px;
-  & /deep/ p {
-    margin-bottom: 15px;
-  }
+  background: #fff;
 }
 </style>

@@ -35,25 +35,25 @@
             </div>
         </div>
         <div class="font-14">
-            <div><span class="c-red">*</span>快递服务：顺丰包邮</div>
-            <div><span class="c-red">*</span>发件时间：支付成功后7日内</div>
-            <div><span class="c-red">*</span>限定版画及其它限定艺术衍生品均属艺术家作品，除因快递缘故导致损坏以外不予退还，敬请理解。</div>
+            <div><span class="c-red">*</span> {{$t('other').express}} </div>
+            <div><span class="c-red">*</span> {{$t('other').expressTime}} </div>
+            <div><span class="c-red">*</span> {{$t('other').markText}} </div>
         </div>
     </div>
     <div class="text-right zf">
-        <Button class="ssssss" @click="bofang" id="zhifu">支付</Button>
+        <Button class="sp" @click="bofang" id="zhifu"> {{$t('buttons').pay}} </Button>
     </div>
 
 
     <div id="bofangshipin" class="bg-white" style="">
         <div class="kuang left" id="left">
-                鸣谢
+                {{$t('other').thanks}}
             </div>
         <div style="width: 1000px;height: 100%;display: flex; align-items: center;">
-              <video src="../../assets/video/ch.mp4" id="video"></video>
+              <video src="../../assets/video/ch.mp4" preload="metadata" muted autoplay id="video"></video>
         </div>
         <div class="kuang right" id="right">
-            阿斯顿撒旦撒
+            {{userName}}
         </div>
         <div id="kaishi" @click="bofang"></div>
     </div>
@@ -68,6 +68,11 @@ import $ from 'jquery';
 export default {
   components: {
     Button,
+  },
+  data(){
+    return {
+      userName: window.sessionStorage.getItem('userName')
+    }
   },
   mounted () {
     $(() => {

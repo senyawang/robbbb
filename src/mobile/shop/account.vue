@@ -5,16 +5,15 @@
       <div @click="showModifyPwd = true" class="shoushi">{{$t('account').modifyPwd}}</div>
       <div @click="goHistory" class="shoushi">{{$t('account').shopHistory}}</div>
       <p class="text-center" style="padding-bottom: 20px">
-          <img src="../../assets/www.png" class="tupiantihuan" alt="">
-          <img src="../../assets/qqq.png" class="tupiantihuan" alt="">
-          <img src="../../assets/qqq.png" class="tupiantihuan" alt="">
-          <img src="../../assets/qqq.png" class="tupiantihuan" alt="">
+        <img :src="robbbuy[0]" class="tupiantihuan" alt="">
+        <img :src="robbbuy[1]" class="tupiantihuan" alt="">
+        <img :src="robbbuy[2]" class="tupiantihuan" alt="">
       </p>
   </div>
 
   <el-dialog
           :visible.sync="showMyProfile"
-          width="90%"
+          class="dialog-main"
           center
       >
           <template v-slot:title>
@@ -23,32 +22,31 @@
 
           <div class="form-style">
               <div class="form-item">
-                  <div class="label">收件人姓名</div>
+                  <div class="label">{{$t('account').userName}}</div>
                   <input type="text" class="form-input" v-model="real_name">
               </div>
               <div class="form-item">
-                  <div class="label">收件人电话</div>
+                  <div class="label">{{$t('account').userMobile}}</div>
                   <input type="tel" class="form-input" v-model="mobile">
               </div>
               <div class="form-item">
-                  <div class="label">收件人地址</div>
+                  <div class="label">{{$t('account').userAddress}}</div>
                   <input type="text" class="form-input" v-model="address">
               </div>
-              <p class="mbp font-12"><span class="c-red">*</span>您的资料会受到保护</p>
-              <p class="mbp font-12"><span class="c-red">*</span>可发往中国境外</p>
+              <p class="mbp font-12"><span class="c-red">*</span>{{$t('payDetail').text3}}</p>
+              <p class="mbp font-12"><span class="c-red">*</span>{{$t('payDetail').text2}}</p>
           </div>
 
           <template v-slot:footer>
             <div class="dialog-footer">
-              <Button @click="saveProfile">确定</Button>
+              <Button @click="saveProfile">{{$t('account').btn}}</Button>
             </div>
           </template>
       </el-dialog>
 
-
       <el-dialog
           :visible.sync="showModifyPwd"
-          width="90%"
+          class="dialog-main"
           center
       >
           <template v-slot:title>
@@ -57,88 +55,130 @@
 
           <div class="form-style">
               <div class="form-item">
-                  <div class="label">当前密码</div>
+                  <div class="label">{{$t('account').pwd}}</div>
                   <input type="password" class="form-input" v-model="oldPwd">
               </div>
               <div class="form-item">
-                  <div class="label">新密码</div>
+                  <div class="label">{{$t('account').newpwd}}</div>
                   <input type="password" class="form-input" v-model="pwd">
               </div>
               <div class="form-item">
-                  <div class="label">确认密码</div>
+                  <div class="label">{{$t('account').repwd}}</div>
                   <input type="password" class="form-input" v-model="repwd">
               </div>
           </div>
 
           <template v-slot:footer>
             <div class="dialog-footer">
-              <Button @click="modifyPwd">确定</Button>
+              <Button @click="modifyPwd">{{$t('account').btn}}</Button>
             </div>
           </template>
       </el-dialog>
 </div>
 
-
 </template>
 
 <script>
-import Button from '../common/Button';
+import Button from '../common/Button'
+import rob1 from '../../assets/qqq.png'
+import rob2 from '../../assets/www.png'
+
+const delay = t => new Promise((resolve) => setTimeout(resolve, t))
+
+const swapItem = function (arr, fromIndex, toIndex) {
+  arr[toIndex] = arr.splice(fromIndex, 1, arr[toIndex])[0]
+  return arr
+}
+
 export default {
-    data () {
-      return {
-        showMyProfile: false,
-        showModifyPwd: false,
-        real_name: '',
-        mobile: '',
-        address: '',
-        oldPwd: '',
-        pwd: '',
-        repwd: ''
-      }
-    },
-    components: {
-      Button,
-    },
-    created () {
-      this.getProfiles();
-    },
-    methods: {
-      goHistory(){
-        this.$router.push('/robbbbuy/history')
-      },
-      getProfiles(){
-        this.ajaxPost('api/shop/getUserAddress', {
-          // id: this.$route.params.id,
-        }).then(res => {
-          const {real_name, mobile, address} = res.data;
-          this.real_name = real_name;
-          this.mobile = mobile;
-          this.address = address;
-          console.log(res.data)
-        })
-      },
-      saveProfile(){
-        this.ajaxPost('api/shop/editUserAddress', {
-          real_name: this.real_name,
-          mobile: this.mobile,
-          address: this.address,
-          id: 0,
-        }).then(res => {
-          this.showMyProfile = false;
-          console.log(res.data)
-        })
-      },
-      modifyPwd(){
-        this.ajaxPost('api/shop/modifyPwd', {
-          oldPwd: this.oldPwd,
-          pwd: this.pwd,
-          repwd: this.repwd,
-        }).then(res => {
-          this.showModifyPwd = false;
-          console.log(res.data)
-        })
-      },
+  data () {
+    return {
+      showMyProfile: false,
+      showModifyPwd: false,
+      real_name: '',
+      mobile: '',
+      address: '',
+      oldPwd: '',
+      pwd: '',
+      repwd: '',
+      robbbuy1: rob1,
+      robbbuy2: rob1,
+      robbbuy: [rob2, rob1, rob1],
+      stop: false
     }
+  },
+  components: {
+    Button
+  },
+  created () {
+    this.getProfiles()
+  },
+  mounted () {
+    this.showAnimation()
+  },
+  destroyed () {
+    this.stop = true
+  },
+  methods: {
+    async showAnimation () {
+      if (this.stop) return
+      await delay(500)
+      const rob = [...this.robbbuy]
+
+      for (let i = 1; i < rob.length; i++) {
+        console.log(500)
+        this.robbbuy = swapItem(rob, i - 1, i)
+        await delay(500)
+      }
+      await delay(500)
+      this.robbbuy = swapItem(rob, rob.length - 1, 0)
+      console.log(this.robbbuy, rob)
+      for (let i = 1; i < rob.length; i++) {
+        await delay(150)
+        this.robbbuy = swapItem(rob, i - 1, i)
+      }
+
+      await delay(1000)
+      this.robbbuy = swapItem(rob, rob.length - 1, 0)
+
+      this.showAnimation()
+    },
+    goHistory () {
+      this.$router.push('/robbbbuy/history')
+    },
+    getProfiles () {
+      this.ajaxPost('api/shop/getUserAddress', {
+        // id: this.$route.params.id,
+      }).then(res => {
+        const {real_name, mobile, address} = res.data
+        this.real_name = real_name
+        this.mobile = mobile
+        this.address = address
+        console.log(res.data)
+      })
+    },
+    saveProfile () {
+      this.ajaxPost('api/shop/editUserAddress', {
+        real_name: this.real_name,
+        mobile: this.mobile,
+        address: this.address,
+        id: 0
+      }).then(res => {
+        this.showMyProfile = false
+        console.log(res.data)
+      })
+    },
+    modifyPwd () {
+      this.ajaxPost('api/shop/modifyPwd', {
+        oldPwd: this.oldPwd,
+        pwd: this.pwd,
+        repwd: this.repwd
+      }).then(res => {
+        this.showModifyPwd = false
+        console.log(res.data)
+      })
+    }
+  }
 }
 </script>
 <style lang='scss' scoped>

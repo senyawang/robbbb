@@ -3,36 +3,14 @@
 
       <Title :title="langValue(resData, 'title')" />
       <div :class='["pro-list"]'>
-        <video ref="video" :src="video_url || '../../../../assets/video.mp4'" loop @click="videoPlay" class="rob-video-detail" id="videoDetail"></video>
+        <video ref="video" :src="video_url" loop @click="videoPlay" class="rob-video-detail" id="videoDetail"></video>
         <div class="btn-play" id="dabofang" @click="videoPlay">
             <img src="../../../../assets/play.png" alt="">
         </div>
       </div>
 
       <div class="rob-text-area">
-          <div class="side-content">
-              {{langValue(resData, 'content')}}
-              <div :style="{fontSize: '16px', lineHeight: '2', textAlign: 'center'}">
-                <p>世界上最远的距离，不是生与死的距离， 而是我站在你面前，你不知道我爱你</p>
-                <p>不是我站在你面前，你不知道我爱你，<br>而是爱到痴迷却不能说我爱你</p>
-              </div>
-              <div :style="{fontSize: '16px', lineHeight: '2', textAlign: 'center'}">
-                <p>世界上最远的距离，不是生与死的距离，而是我站在你面前，你不知道我爱你</p>
-                <p>你不知道我爱你，而是爱到痴迷却不能说我爱你</p>
-              </div>
-              <div :style="{fontSize: '16px', lineHeight: '2', textAlign: 'center'}">
-                <p>世界上最远的距离，不是生与死的距离，而是我站在你面前，你不知道我爱你</p>
-                <p>世界上最远的距离，而是爱到痴迷却不能说我爱你</p>
-              </div>
-              <div :style="{fontSize: '16px', lineHeight: '2', textAlign: 'center'}">
-                <p>世界上最远的距离，不是生与死的距离，而是我站在你面前，你不知道我爱你</p>
-                <p>你不知道我爱你，而是爱到痴迷却不能说我爱你</p>
-              </div>
-              <div :style="{fontSize: '16px', lineHeight: '2', textAlign: 'center'}">
-                <p>世界上最远的距离，不是生与死的距离，而是我站在你面前，你不知道我爱你</p>
-                <p>世界上最远的距离，而是爱到痴迷却不能说我爱你</p>
-              </div>
-          </div>
+          <div class="side-content" v-html="langValue(resData, 'content')"></div>
       </div>
 
     </div>

@@ -5,31 +5,31 @@
         center
     >
         <template v-slot:title>
-          <div class="text-center logo"> <img src="../../assets/robbbbuy.png"  alt="" > </div>
+          <div class="text-center dialog-logo"> <img src="../../assets/robbbbuy.png"  alt="" > </div>
         </template>
 
         <div class="form-style">
             <div class="form-item">
-                <div class="label">用户名</div>
+                <div class="label">{{$t('register').userName}}</div>
                 <input type="text" class="form-input" v-model="user_name">
             </div>
             <div class="form-item">
-                <div class="label">电子邮箱</div>
+                <div class="label">{{$t('register').email}}</div>
                 <input type="text" class="form-input" v-model="email">
             </div>
              <div class="form-item">
-                <div class="label">密码</div>
+                <div class="label">{{$t('register').pwd}}</div>
                 <input type="password" class="form-input" v-model="pwd">
             </div>
             <div class="form-item">
-                <div class="label">确认密码</div>
+                <div class="label">{{$t('register').repwd}}</div>
                 <input type="password" class="form-input" v-model="repwd">
             </div>
         </div>
 
         <template v-slot:footer>
           <div class="dialog-footer">
-            <Button @click="handleRegister">注册</Button>
+            <Button @click="handleRegister">{{$t('register').register}}</Button>
           </div>
         </template>
     </el-dialog>

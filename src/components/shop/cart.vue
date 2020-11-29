@@ -7,8 +7,8 @@
         :updatePrice="updatePrice"
         detailName="proDetail" />
     <div class="text-right pay-button">
-      <p>价格总计：￥{{totalPrice | money}}</p>
-      <p><Button size="large" color="red" @click="totalPrice > 0 ? goToPay() : ''">立即支付</Button></p>
+      <p>{{$t('shoppingCart').totalPrice}}：￥{{totalPrice | money}}</p>
+      <p><Button size="large" class="sp" @click="totalPrice > 0 ? goToPay() : ''">{{$t('shoppingCart').goPay}}</Button></p>
     </div>
   </div>
 </template>

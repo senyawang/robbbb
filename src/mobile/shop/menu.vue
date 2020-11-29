@@ -1,7 +1,7 @@
 <template>
   <div class="navbox">
-
     <div style="font-weight: 700">{{$t('routes')[title]}}</div>
+    <div v-show="!$t('routes')[title]" style="font-weight: 700">{{$t('routes').title}}</div>
 
     <div class="nav-menu">
       <div v-if="isLogin" class="nav-right jiantou">
@@ -46,7 +46,6 @@ export default {
   },
   mounted () {
     this.init();
-    console.log(localStorage.getItem("CART"));
     const localCart = JSON.parse(localStorage.getItem("CART")) || []
     this.cartNum = localCart.length
   },
@@ -55,6 +54,7 @@ export default {
       this.ajaxPost('api/shop/getUserDetail', {
       }).then(res => {
         this.userName = res.data.username;
+        window.sessionStorage.setItem('userName', res.data.username)
         this.isLogin = true;
         this.setLoginHandle(true)
       }).catch(err => this.showMsg(err))
@@ -73,7 +73,12 @@ export default {
     handleLogout(){
       this.ajaxPost('api/shop/logout', {
       }).then(res => {
-        window.location.href = '/'
+        if(this.$route.fullPath === '/robbbbuy/shop'){
+          window.location.reload()
+        } else {
+          window.location.href = '#/robbbbuy/shop'
+        }
+
       }).catch(err => this.showMsg(err))
     }
   }

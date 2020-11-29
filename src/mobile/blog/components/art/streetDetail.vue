@@ -7,7 +7,7 @@
             @change="slideChange"
           >
             <van-swipe-item v-for="(item, index) in imgList" :key="index">
-              <img @click="handleZoom" :src="item.imgSrc">
+              <img @click="handleZoom" :src="item | formatImg">
             </van-swipe-item>
             <template #indicator>
               <div class="pro-total-num">
@@ -18,8 +18,7 @@
       </div>
 
       <div class="rob-text-area" v-show="showDesc">
-          <div class="side-content">
-              {{langValue(resData, 'content')}}
+          <div class="side-content"  v-html="langValue(resData, 'content')">
           </div>
       </div>
 
@@ -74,7 +73,8 @@ export default {
       this.ajaxPost('api/index/getProductDetail', {
         id: this.$route.params.id,
       }).then(res => {
-        // this.imgList = res.data.pic_list;
+        console.log(res.data.pic_list, 'daddd')
+        this.imgList = res.data.pic_list;
         this.resData = res.data
         console.log(res.data)
       })

@@ -10,7 +10,8 @@
     >
         <div class="img-body">
             <!-- <img ref="img" :src="fullUrl" alt=""> -->
-            <video ref="video" src="/static/exhibition.mp4"  class="rob-video-detail" id="videoDetail"></video>
+            <video v-show="!playOver"  ref="video" muted="muted" src="/assets/exhibition.mp4" class="rob-video-detail" id="videoDetail"></video>
+            <div v-show="playOver">虚拟展览空间正在构建中</div>
         </div>
     </el-dialog>
 
@@ -28,6 +29,7 @@ export default {
       imgs: [],
       timer: null,
       baseUrl: process.env.BASE_URL,
+      playOver: false
     }
   },
   components: {
@@ -43,10 +45,10 @@ export default {
 
       video.addEventListener('ended', () => {
           video.style.opacity = 0;
-
+          this.playOver = true;
           setTimeout(() => {
             location.href = '/'
-          }, 600);
+          }, 1600);
       }, false)
 
     })
@@ -90,8 +92,15 @@ export default {
 </script>
 <style lang='scss' scoped>
 .img-body {
+  position: relative;
+  height: 100%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   video {
-    width: 100%;
+    margin: 0 auto;
+    width: 60%;
     transition:  all .5s;
   }
 }

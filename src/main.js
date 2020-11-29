@@ -10,22 +10,22 @@ import store from './vuex/store.js'
 import App from './App.vue'
 import messages from './lang.config.js';
 
-import 'element-ui/lib/theme-chalk/index.css';
-
 Vue.use(ElementUI);
 Vue.use(VueRouter)
 Vue.use(store)
-Vue.use(axios)
 Vue.use(VueI18n)
+
+Vue.prototype.axios = axios
 
 // 通过选项创建 VueI18n 实例
 const i18n = new VueI18n({
-  locale: 'zh', // 设置地区
+  locale: window.localStorage.getItem("LOCALE") || 'zh', // 设置地区
   messages, // 设置地区信息
 })
 
+const host = process.env.NODE_ENV === 'production' ? location.host : '203.195.204.34';
 
-axios.defaults.baseURL = '/apis';
+axios.defaults.baseURL = process.env.NODE_ENV === 'production' ? `http://${host}` : '/apis';
 // axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
 let route = new VueRouter({ mode: 'hash', routes: routes })
@@ -61,7 +61,7 @@ Vue.mixin({
       return loc === 'zh' ? value : `en_${value}`;
     },
     formatImg(val) {
-      return `http://www.trex000.com${val}`;
+      return `http://${host}${val}`;
     }
   },
   // provide: () => {

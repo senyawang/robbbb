@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <Title :title="title" />
+  <div class="main-body">
+    <Title :title="$t('subNav')[0]" />
     <Art :actionUrl='actionUrl' detailName="streetDetail" />
   </div>
 </template>

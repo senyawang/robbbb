@@ -1,40 +1,40 @@
 <template>
-<div class="main-body">
-    <Title v-if="showTitle" title="联系" />
+<div :class="showTitle ? 'main-body' : ''">
+    <Title v-if="showTitle" :title="$t('mainNav')[4]" />
     <div class="contact">
-          <h5>请留言，我们会尽快回复您。</h5>
-          <h5 class="mt-12">请填写全部信息以便我们能够满足您的需要，谢谢。</h5>
+          <h5> {{$t('contact').text1}} </h5>
+          <h5 class="mt-12"> {{$t('contact').text2}} </h5>
           <div class="ui-flex-box form-box">
               <div class="ui-flex-item">
-                  <h5>您的名字</h5>
+                  <h5> {{$t('contact').name}} </h5>
                   <input type="text" class=" mb-4" v-model="user_name">
-                  <h5>您的电子邮箱地址</h5>
+                  <h5> {{$t('contact').email}} </h5>
                   <input type="email" class=" mb-4" v-model="email">
-                  <h5>主题</h5>
+                  <h5> {{$t('contact').theme}} </h5>
                   <input type="text" class=" mb-4" v-model="title">
               </div>
               <div class="ui-flex-item">
-                  <h5>内容</h5>
+                  <h5> {{$t('contact').content}} </h5>
                   <textarea name="liuyan" id="liuyan" class="w-100" v-model="content"></textarea>
               </div>
           </div>
           <div class="text-right mt-2">
-              <Button size="large" @click="handleSubmit">发送信息</Button>
+              <Button size="large" @click="handleSubmit"> {{$t('contact').btn}} </Button>
           </div>
     </div>
 
-    <!-- <el-dialog
-        :visible.sync="centerDialogVisible"
-        width="30%"
-        center
-        :modal="false"
-        :close-on-click-modal="false"
-    >
-        <div class="text-center">{{errMsg}}</div>
-        <span slot="footer" class="dialog-footer">
-          <Button @click="centerDialogVisible = false">确定</Button>
-        </span>
-    </el-dialog> -->
+    <!--<el-dialog-->
+        <!--:visible.sync="centerDialogVisible"-->
+        <!--width="30%"-->
+        <!--center-->
+        <!--:modal="false"-->
+        <!--:close-on-click-modal="false"-->
+    <!--&gt;-->
+        <!--<div class="text-center">{{errMsg}}</div>-->
+        <!--<span slot="footer" class="dialog-footer">-->
+          <!--<Button color="red" @click="centerDialogVisible = false">确定</Button>-->
+        <!--</span>-->
+    <!--</el-dialog>-->
 
 </div>
 </template>
@@ -79,9 +79,8 @@ export default {
 </script>
 <style lang='scss' scoped>
 .contact {
-    font-size: 20px;
+    font-size: 18px;
     line-height: 1.8;
-    font-weight: 500;
 
     .submit {
           width: 200px;

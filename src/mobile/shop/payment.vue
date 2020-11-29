@@ -1,64 +1,63 @@
 <template>
 <div>
-<div class="pay-2 d-flex">
+<div class="pay-2">
         <div class="pay2">
-            <div class="d-flex">
-                <div>
+            <div class="d-flex justify-content-between">
+                <div class="ui-flex-item">
                     <img src="../../assets/weixin.png" alt="">
-                    <span>微信支付</span>
-                    <div class="mycheck text-center d-inline-block mr-4" style="margin-left: 135px">
-                        <input type="radio" value="1" id="checkbox1" name="pay">
-                        <label for="checkbox1"></label>
-                    </div>
+                    微信支付
                 </div>
 
+                <div class="mycheck">
+                  <input type="radio" value="1" id="checkbox1" name="pay">
+                  <label for="checkbox1"></label>
+                </div>
             </div>
-            <div class="d-flex">
-                <div>
-
+            <div class="d-flex justify-content-between">
+                <div class="ui-flex-item">
                     <img src="../../assets/alipay.png" alt="">
                     <span>支付宝</span>
-                    <div class="mycheck text-center d-inline-block mr-4" style="margin-left: 166px">
-                        <input type="radio" value="2" id="checkbox2" name="pay">
-                        <label for="checkbox2"></label>
-                    </div>
                 </div>
+
+              <div class="mycheck">
+                  <input type="radio" value="2" id="checkbox2" name="pay">
+                  <label for="checkbox2"></label>
+              </div>
             </div>
-            <div class="d-flex">
+            <div class="d-flex justify-content-between">
                 <div>
                     <img src="../../assets/PayPal.png" alt="">
-                    <div class="mycheck text-center d-inline-block mr-4" style="margin-left: 151px">
-                        <input type="radio" value="3" id="checkbox3" name="pay">
-                        <label for="checkbox3"></label>
-                    </div>
+                </div>
+
+                <div class="mycheck">
+                    <input type="radio" value="3" id="checkbox3" name="pay">
+                    <label for="checkbox3"></label>
                 </div>
             </div>
         </div>
-        <div class="font-14">
-            <div><span class="c-red">*</span>快递服务：顺丰包邮</div>
-            <div><span class="c-red">*</span>发件时间：支付成功后7日内</div>
-            <div><span class="c-red">*</span>限定版画及其它限定艺术衍生品均属艺术家作品，除因快递缘故导致损坏以外不予退还，敬请理解。</div>
+        <div class="font-14 text-center pay-text" style="margin-top: 40px">
+          <div><span class="c-red">*</span> {{$t('other').express}} </div>
+          <div><span class="c-red">*</span> {{$t('other').expressTime}} </div>
+          <div><span class="c-red">*</span> {{$t('other').markText}} </div>
         </div>
     </div>
-    <div class="text-right zf">
-        <Button class="ssssss" @click="bofang" id="zhifu">支付</Button>
+    <div class="text-center zf">
+        <Button class="ssssss" @click="bofang" id="zhifu"> {{$t('buttons').pay}} </Button>
     </div>
 
 
     <div id="bofangshipin" class="bg-white" style="">
         <div class="kuang left" id="left">
-                鸣谢
+                {{$t('other').thanks}}
             </div>
         <div style="width: 1000px;height: 100%;display: flex; align-items: center;">
-              <video src="../../assets/video/ch.mp4" id="video"></video>
+              <video src="../../assets/video/ch.mp4" preload="metadata" muted autoplay id="video"></video>
         </div>
         <div class="kuang right" id="right">
-            阿斯顿撒旦撒
+            {{userName}}
         </div>
         <div id="kaishi" @click="bofang"></div>
     </div>
-
-
 </div>
 </template>
 
@@ -68,6 +67,11 @@ import $ from 'jquery';
 export default {
   components: {
     Button,
+  },
+  data(){
+    return {
+      userName: window.sessionStorage.getItem('userName')
+    }
   },
   mounted () {
     $(() => {
@@ -111,8 +115,23 @@ export default {
 }
 </script>
 <style lang='scss' scoped>
-@import url("../../assets/bootstrap.css");
-@import url("../../assets/shopping.css");
+.pay2 {
+  line-height: 2;
+  & > .d-flex {
+    width: auto;
+    margin: 70px;
+    align-items: center;
+    font-size: 30px;
+  }
+  img {
+    height: 76px;
+    vertical-align: middle;
+    margin-right: 20px;
+  }
+  div:nth-child(3) img {
+    height: 60px;
+  }
+}
 #bofangshipin {
   position: fixed;
   z-index: 999;
@@ -124,8 +143,18 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+  background: #fff;
   background-size: 1368px;
   background-position: center;
+}
+.pay-text {
+  & > div {
+    margin-top: 40px;
+  }
+  line-height: 1.4;
+}
+.zf {
+  margin-top: 80px;
 }
 .videobox {
   width: 100%;
@@ -146,9 +175,8 @@ export default {
 }
 .left{
     left: 0;
-    top: 0;
+    top: 200px;
     border-right: 3px solid #000;
-    margin-top: 176px;
     margin-left: -280px;
     text-align: right;
     padding-right: 49px;
@@ -156,11 +184,11 @@ export default {
 }
 .right{
     right: 0;
-    top: 0;
+    top: auto;
+    bottom: 200px;
     width: 342px;
     margin-right: -342px;
     border-left: 3px solid #000;
-    margin-top: 503px;
     text-align: left;
     z-index: 1;
     padding-left: 50px;

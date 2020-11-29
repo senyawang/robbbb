@@ -1,28 +1,28 @@
 <template>
-<div class="main-body">
-    <Title v-if="showTitle" title="联系" />
+<div :class="showTitle ? 'main-body' : ''">
+    <Title v-if="showTitle" :title="$t('mainNav')[4]" />
     <div class="contact">
           <div class="text-center">
-              <h5>请留言，我们会尽快回复您。</h5>
-              <h5 class="mt-12">请填写全部信息以便我们能够满足您的需要，谢谢。</h5>
+            <h5> {{$t('contact').text1}} </h5>
+            <h5 class="mt-12"> {{$t('contact').text2}} </h5>
           </div>
 
           <div class=" form-box">
               <div class="" style="padding: 0 26px">
-                  <h5>您的名字</h5>
+                  <h5> {{$t('contact').name}} </h5>
                   <input type="text" class=" mb-4" v-model="user_name">
-                  <h5>您的电子邮箱地址</h5>
+                <h5> {{$t('contact').email}} </h5>
                   <input type="email" class=" mb-4" v-model="email">
-                  <h5>主题</h5>
+                <h5> {{$t('contact').theme}} </h5>
                   <input type="text" class=" mb-4" v-model="title">
               </div>
               <div class="">
-                  <h5 class="text-center">内容</h5>
+                <h5 class="text-center"> {{$t('contact').content}} </h5>
                   <textarea name="liuyan" id="liuyan" class="w-100" v-model="content"></textarea>
               </div>
           </div>
           <div class="text-center mt-2">
-              <Button size="large" @click="handleSubmit">发送信息</Button>
+              <Button size="large" @click="handleSubmit">{{$t('contact').btn}}</Button>
           </div>
     </div>
 
@@ -85,7 +85,7 @@ export default {
     font-size: 24px;
     line-height: 1.8;
     font-weight: 500;
-
+    padding-top: 40px;
     .submit {
           width: 200px;
           height: 50px;

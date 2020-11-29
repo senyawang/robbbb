@@ -23,7 +23,7 @@ export default {
     },
     init(){
       this.ajaxPost('api/shop/getOrderList', {
-        // id: this.$route.params.id,
+        id: this.$route.params.id,
       }).then(res => {
 
         console.log(res.data)
