@@ -167,7 +167,7 @@ export default {
       ask: '是否同步到我的资料？',
       yes: '是',
       no: '否',
-      weixin: '微信',
+      weixin: '微信支付',
       alipay: '支付宝'
     },
     other: {
