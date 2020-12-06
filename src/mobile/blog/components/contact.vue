@@ -22,7 +22,7 @@
               </div>
           </div>
           <div class="text-center mt-2">
-              <Button size="large" @click="handleSubmit">{{$t('contact').btn}}</Button>
+              <Button style="width: 140px" size="large" @click="handleSubmit">{{$t('contact').btn}}</Button>
           </div>
     </div>
 

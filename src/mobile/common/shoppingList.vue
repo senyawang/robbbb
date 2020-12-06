@@ -160,8 +160,8 @@ export default {
     img:hover {
       opacity: .5;
     }
-    /deep/ .el-input-number {
-      transform: scale(.7);
+    >>> .el-input-number {
+      transform: scale(.6);
       transform-origin: right top;
     }
     .pro-des {
@@ -169,9 +169,11 @@ export default {
       line-height: 30px;
     }
     .title {
+      font-size: 26px;
       height: 100px;
     }
     .price {
+      font-size: 28px;
       align-items: center;
       line-height: 30px;
       height: 30px;
@@ -217,6 +219,14 @@ export default {
     img {
       display: inline-block;
       vertical-align: middle;
+    }
+  }
+</style>
+<style lang="scss">
+  .shoppingCar {
+    .el-input-number {
+      transform: scale(.8);
+      transform-origin: right center;
     }
   }
 </style>

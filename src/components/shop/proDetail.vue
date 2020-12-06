@@ -46,7 +46,7 @@
             <div class="text-center">{{$t('shoppingCart').text1}}</div>
             <span slot="footer" class="dialog-footer">
               <Button @click="centerDialogVisible = false" class="red">{{$t('buttons').continueBuy}}</Button>
-              <p style="margin-top: 10px;">
+              <p style="margin-top: 15px;">
                 <Button type="ghost" @click="$router.push(`/robbbbuy/shop/cart`)">{{$t('buttons').goCart}}</Button>
               </p>
             </span>
@@ -56,9 +56,9 @@
 </template>
 
 <script>
-import Title from '../common/title';
-import Button from '../common/Button.vue';
-import EventBus from "../../utils/eventBus";
+import Title from '../common/title'
+import Button from '../common/Button.vue'
+import EventBus from '../../utils/eventBus'
 export default {
   data () {
     return {
@@ -144,6 +144,15 @@ export default {
 }
 </script>
 <style lang='scss'>
+  .en {
+    .prodetail {
+      .el-dialog {
+        .button {
+          font-size: 13px;
+        }
+      }
+    }
+  }
 .prodetail {
   .pro-list {
   position: relative;
@@ -205,6 +214,9 @@ export default {
 
 .btn-area {
   padding-top: 20px;
+  .button {
+    font-size: 16px;
+  }
   .ui-flex-item{
     flex: 1 1 50%;
     &:last-child {

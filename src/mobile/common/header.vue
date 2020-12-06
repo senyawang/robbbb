@@ -212,7 +212,8 @@ export default {
   .navs {
       position: absolute;
       top: 100%;
-      width: 100%;
+      left: -.5%;
+      width: 101%;
       z-index: 1;
 
       .main-nav {

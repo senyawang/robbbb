@@ -18,7 +18,7 @@
     >
         <div class="text-center err-info">{{errMsg}}</div>
         <span slot="footer" class="dialog-footer">
-          <Button @click="centerDialogVisible = false" class="red" size="large">{{$i18n.locale === 'zh' ? '确定' : 'ok'}}</Button>
+          <Button @tap="centerDialogVisible = false" class="red" size="large">{{$i18n.locale === 'zh' ? '确定' : 'ok'}}</Button>
         </span>
     </el-dialog>
 

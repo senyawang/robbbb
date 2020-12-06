@@ -7,7 +7,7 @@
             @change="slideChange"
           >
             <van-swipe-item v-for="(item, index) in resData.pic_list" :key="index">
-              <img @click="handleZoom" :src="item | formatImg" :alt="langValue(item, 'title')">
+              <img :src="item | formatImg" :alt="langValue(item, 'title')">
             </van-swipe-item>
             <template #indicator>
               <div class="pro-total-num">
@@ -138,6 +138,16 @@ export default {
   }
 }
 </script>
+<style lang="scss" scoped>
+  .en {
+    .el-dialog {
+      .button {
+        width: 250px;
+        font-size: 13Px;
+      }
+    }
+  }
+</style>
 <style lang='scss'>
 .detail {
   padding: 0 16px;

@@ -33,8 +33,8 @@
                   <div class="label">{{$t('account').userAddress}}</div>
                   <input type="text" class="form-input" v-model="address">
               </div>
-              <p class="mbp font-12"><span class="c-red">*</span>{{$t('payDetail').text3}}</p>
-              <p class="mbp font-12"><span class="c-red">*</span>{{$t('payDetail').text2}}</p>
+              <p class="mbp"><span class="c-red">*</span>{{$t('payDetail').text3}}</p>
+              <p class="mbp"><span class="c-red">*</span>{{$t('payDetail').text2}}</p>
           </div>
 
           <template v-slot:footer>

@@ -1,6 +1,13 @@
 <template>
   <div class="video">
-    <video @click="videoPlay" src="../../assets/video.mp4" loop="loop" autoplay class="rob-video" id="videoDetail"></video>
+    <video
+      @click="videoPlay"
+      src="../../assets/video.mp4"
+      loop="loop"
+      autoplay
+      playsinline
+      class="rob-video"
+      id="videoDetail"></video>
   </div>
 </template>
 

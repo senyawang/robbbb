@@ -5,7 +5,7 @@
             <div class="d-flex justify-content-between">
                 <div class="ui-flex-item">
                     <img src="../../assets/weixin.png" alt="">
-                    微信支付
+                    {{$t('payDetail').weixin}}
                 </div>
 
                 <div class="mycheck">
@@ -16,7 +16,7 @@
             <div class="d-flex justify-content-between">
                 <div class="ui-flex-item">
                     <img src="../../assets/alipay.png" alt="">
-                    <span>支付宝</span>
+                    <span>{{$t('payDetail').alipay}}</span>
                 </div>
 
               <div class="mycheck">
@@ -45,13 +45,12 @@
         <Button class="ssssss" @click="bofang" id="zhifu"> {{$t('buttons').pay}} </Button>
     </div>
 
-
     <div id="bofangshipin" class="bg-white" style="">
         <div class="kuang left" id="left">
                 {{$t('other').thanks}}
             </div>
         <div style="width: 1000px;height: 100%;display: flex; align-items: center;">
-              <video src="../../assets/video/ch.mp4" preload="metadata" muted autoplay id="video"></video>
+              <video src="../../assets/video/ch.mp4" playsinline preload="metadata" autoplay id="video"></video>
         </div>
         <div class="kuang right" id="right">
             {{userName}}
@@ -62,13 +61,13 @@
 </template>
 
 <script>
-import Button from "../common/Button.vue";
-import $ from 'jquery';
+import Button from '../common/Button.vue'
+import $ from 'jquery'
 export default {
   components: {
-    Button,
+    Button
   },
-  data(){
+  data () {
     return {
       userName: window.sessionStorage.getItem('userName')
     }
@@ -77,39 +76,37 @@ export default {
     $(() => {
       $('#bofangshipin').hide()
     })
-
   },
   methods: {
-    bofang(){
-
+    bofang () {
       $('#zhifu').animate({
-                  opacity: 0
-              },1500)
-        setTimeout(()=>{
-              $('#bofangshipin').fadeIn()
-              $('#video')[0].play()
-              setTimeout(()=>{
-                  window.location.href='/'
-              },57 * 1000)
-          },1500)
+        opacity: 0
+      }, 1500)
+      setTimeout(() => {
+        $('#bofangshipin').fadeIn()
+        $('#video')[0].play()
+        setTimeout(() => {
+          window.location.href = '/'
+        }, 57 * 1000)
+      }, 1500)
 
-          setTimeout(()=>{
-              $('#left').animate({
-                  marginLeft:'-280px'
-              },1500)
-              $('#right').animate({
-                  marginRight:'-342px'
-              },1500)
-          },50 * 1000)
+      setTimeout(() => {
+        $('#left').animate({
+          marginLeft: '-280px'
+        }, 1500)
+        $('#right').animate({
+          marginRight: '-342px'
+        }, 1500)
+      }, 50 * 1000)
 
-          setTimeout(()=>{
-              $('#left').animate({
-                  marginLeft:0
-              },1500)
-              $('#right').animate({
-                  marginRight:0
-              },1500)
-        },34 * 1000)
+      setTimeout(() => {
+        $('#left').animate({
+          marginLeft: 0
+        }, 1500)
+        $('#right').animate({
+          marginRight: 0
+        }, 1500)
+      }, 34 * 1000)
     }
   }
 }

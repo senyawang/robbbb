@@ -6,6 +6,7 @@
         :delHandle="delHandle"
         :updatePrice="updatePrice"
         detailName="proDetail" />
+    <div style="height: 100px;"></div>
     <div class="text-right pay-button ui-flex-box shopping-list">
       <div class="mycheck text-center d-inline-block">
         <input type="checkbox" v-model="selected" id="all" name="">
@@ -14,7 +15,7 @@
       <span style="padding-left: 5px"> 全选</span>
       <div class="text-right ui-flex-item theme-primary">
         {{$t('shoppingCart').totalPrice}}：￥{{totalPrice | money}}
-        <Button size="large" class="sp" @click="totalPrice > 0 ? goToPay() : ''">{{$t('shoppingCart').goPay}}</Button>
+        <Button style="min-width: 120px;width: auto; padding: 0 10px;" size="large" class="sp" @click="totalPrice > 0 ? goToPay() : ''">{{$t('shoppingCart').goPay}}</Button>
       </div>
     </div>
   </div>
@@ -98,10 +99,10 @@ export default {
   left: 0;
   bottom: 0;
   width: 100%;
-  padding: 20px;
+  padding: 36px;
   align-items: center;
   padding-top: 30px;
-  font-size: 18px;
+  font-size: 28px;
   background: #fff;
 }
 </style>

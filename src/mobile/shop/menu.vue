@@ -77,6 +77,9 @@ export default {
           window.location.reload()
         } else {
           window.location.href = '#/robbbbuy/shop'
+          setTimeout(() => {
+            window.location.reload()
+          })
         }
 
       }).catch(err => this.showMsg(err))
@@ -141,7 +144,11 @@ export default {
       }
     }
   }
-
+.en {
+  .cart-num {
+    margin-left: 8em !important;
+  }
+}
 .login {
   cursor: pointer;
 }

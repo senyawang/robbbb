@@ -3,7 +3,7 @@
         <div class="pay1">
 
             <div v-for="item in shopList" :key="item.id" class="d-flex">
-                <img :src="item.pic | formatImg" alt="" width="120">
+                <img :src="item.pic | formatImg" alt="" width="120" height="80">
                 <div class="pl-2 f28 ui-flex-item"><p class="ml-2">{{langValue(item, 'title')}}</p></div>
                 <div class="nnn text-right f28" style="line-height: 1.5;">
                     <p class="m-0">￥{{item.price | money}}</p>
@@ -177,7 +177,8 @@ export default {
 /*@import url("../../assets/shopping.css");*/
 
 .form-style {
-  padding: 0 80px;
+  font-size: 24px;
+  padding: 0 70px;
 }
 .pay1 {
   padding: 20px;
@@ -185,9 +186,14 @@ export default {
 
 }
 .text {
-  font-size: 12px;
-  line-height: 1.7;
+  font-size: 14px;
+  line-height: 2;
   padding-left: 10px;
+}
+>>> .en {
+  .text {
+    font-size: 12px;
+  }
 }
 .nnn {
   .c-red {
