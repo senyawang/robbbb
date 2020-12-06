@@ -11,7 +11,7 @@
         <div class="img-body">
             <div v-show="showText" class="text">虚拟展览空间建设中</div>
             <!-- <img ref="img" :src="fullUrl" alt=""> -->
-            <video ref="video" src="../../../assets/exhibition.mp4" playsinline  class="rob-video-detail" id="videoDetail"></video>
+            <video preload="auto" ref="video" src="../../../assets/exhibition.mp4" playsinline  class="rob-video-detail" id="videoDetail"></video>
         </div>
     </el-dialog>
 

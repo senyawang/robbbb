@@ -2,42 +2,35 @@
 <div>
 <div class="pay-2 d-flex">
         <div class="pay2">
-            <div class="d-flex">
-                <div>
-                    <img src="../../assets/weixin.png" alt="">
-                    <span>微信支付</span>
-                    <div class="mycheck text-center d-inline-block mr-4" style="margin-left: 135px">
-                        <input type="radio" value="1" id="checkbox1" name="pay">
-                        <label for="checkbox1"></label>
-                    </div>
-                </div>
+            <div class="d-flex align-items-center">
+                  <img src="../../assets/weixin.png" alt="">
+                  <span style="margin-top: 0" class="ui-flex-item">{{$t('payDetail').weixin}}</span>
+                  <div class="mycheck text-center d-inline-block mr-4">
+                      <input type="radio" value="1" id="checkbox1" name="pay">
+                      <label for="checkbox1"></label>
+                  </div>
 
             </div>
-            <div class="d-flex">
-                <div>
-
-                    <img src="../../assets/alipay.png" alt="">
-                    <span>支付宝</span>
-                    <div class="mycheck text-center d-inline-block mr-4" style="margin-left: 166px">
-                        <input type="radio" value="2" id="checkbox2" name="pay">
-                        <label for="checkbox2"></label>
-                    </div>
+            <div class="d-flex align-items-center">
+                <img src="../../assets/alipay.png" alt="">
+                <span  style="margin-top: 0" class="ui-flex-item">{{$t('payDetail').alipay}}</span>
+                <div class="mycheck text-center d-inline-block mr-4">
+                  <input type="radio" value="2" id="checkbox2" name="pay">
+                  <label for="checkbox2"></label>
                 </div>
             </div>
-            <div class="d-flex">
-                <div>
-                    <img src="../../assets/PayPal.png" alt="">
-                    <div class="mycheck text-center d-inline-block mr-4" style="margin-left: 151px">
-                        <input type="radio" value="3" id="checkbox3" name="pay">
-                        <label for="checkbox3"></label>
-                    </div>
+            <div class="d-flex align-items-center">
+                <div class="ui-flex-item"><img src="../../assets/PayPal.png" alt=""></div>
+                <div class="mycheck text-center d-inline-block mr-4">
+                    <input type="radio" value="3" id="checkbox3" name="pay">
+                    <label for="checkbox3"></label>
                 </div>
             </div>
         </div>
-        <div class="font-14">
-            <div><span class="c-red">*</span> {{$t('other').express}} </div>
-            <div><span class="c-red">*</span> {{$t('other').expressTime}} </div>
-            <div><span class="c-red">*</span> {{$t('other').markText}} </div>
+        <div class="font-14 express-des">
+            <div>{{$t('other').express}} </div>
+            <div>{{$t('other').expressTime}} </div>
+            <div>{{$t('other').markText}} </div>
         </div>
     </div>
     <div class="text-right zf">
@@ -76,22 +69,59 @@ export default {
   },
   mounted () {
     $(() => {
-      $('#bofangshipin').hide()
+      // $('#bofangshipin').hide()
     })
 
   },
   methods: {
     bofang(){
+      const video = document.querySelector('#video')
+      video.play()
 
       $('#zhifu').animate({
                   opacity: 0
               },1500)
         setTimeout(()=>{
-              $('#bofangshipin').fadeIn()
-              $('#video')[0].play()
-              setTimeout(()=>{
-                  window.location.href='/'
-              },57 * 1000)
+              $('#bofangshipin').fadeIn().css('opacity', 1).css('z-index', 999)
+              video.play()
+
+              const loading = this.$loading({
+                lock: true,
+                text: '视频加载中，请稍等...',
+                spinner: 'el-icon-loading',
+                background: 'rgba(0, 0, 0, 0.7)'
+              });
+
+            video.onloadeddata = function() {
+              loading.close()
+            }
+
+          video.addEventListener("playing", function() {
+            console.log("[Playing] loading of video");
+            loading.close()
+            if ( video.readyState == 4 ) {
+              console.log("[Finished] loading of video");
+            }
+          });
+          video.addEventListener("suspend", function(e) {
+            console.log("[Suspended] loading of video");
+            if ( video.readyState == 4 ) {
+              console.log("[Finished] loading of video");
+              loading.close()
+            }
+          });
+
+              video.addEventListener('canplaythrough', () => {
+                loading.close()
+              });
+
+
+          video.addEventListener('ended', () => {
+                window.location.href = '/'
+              })
+              // setTimeout(()=>{
+              //     window.location.href='/'
+              // },57 * 1000)
           },1500)
 
           setTimeout(()=>{
@@ -120,13 +150,15 @@ export default {
 @import url("../../assets/shopping.css");
 #bofangshipin {
   position: fixed;
-  z-index: 999;
+  z-index: -1;
   left: 0;
   top: 0;
   width: 100vw;
   height: 100vh;
   overflow: hidden;
   display: flex;
+  opacity: 0;
+  background: #fff;
   justify-content: center;
   align-items: center;
   background-size: 1368px;
@@ -170,5 +202,26 @@ export default {
     z-index: 1;
     padding-left: 50px;
 }
-
+  .express-des {
+    padding: 13px 0 0 50px;
+    div {
+      margin-bottom: 40px;
+      position: relative;
+      line-height: 2 !important;
+      &:before {
+        content: '*';
+        position: absolute;
+        color: #F6625E;
+        left: -10px;
+      }
+    }
+  }
+.pay2 {
+  img {
+    margin-top: 0;
+  }
+  .mr-4 {
+    margin-right: 40px !important;
+  }
+}
 </style>

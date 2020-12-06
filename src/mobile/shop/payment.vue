@@ -50,7 +50,7 @@
                 {{$t('other').thanks}}
             </div>
         <div style="width: 1000px;height: 100%;display: flex; align-items: center;">
-              <video src="../../assets/video/ch.mp4" playsinline preload="metadata" autoplay id="video"></video>
+              <video src="../../assets/video/ch.mp4" playsinline preload="auto" autoplay id="video"></video>
         </div>
         <div class="kuang right" id="right">
             {{userName}}
@@ -74,21 +74,59 @@ export default {
   },
   mounted () {
     $(() => {
-      $('#bofangshipin').hide()
+      // $('#bofangshipin').hide()
     })
   },
   methods: {
-    bofang () {
+    bofang(){
+      const video = document.querySelector('#video')
+      video.play()
+
       $('#zhifu').animate({
-        opacity: 0
-      }, 1500)
-      setTimeout(() => {
-        $('#bofangshipin').fadeIn()
-        $('#video')[0].play()
-        setTimeout(() => {
-          window.location.href = '/'
-        }, 57 * 1000)
-      }, 1500)
+                  opacity: 0
+              },1500)
+        setTimeout(()=>{
+              $('#bofangshipin').fadeIn().css('opacity', 1).css('z-index', 999)
+              video.play()
+
+              const loading = this.$loading({
+                lock: true,
+                text: '视频加载中，请稍等...',
+                spinner: 'el-icon-loading',
+                background: 'rgba(0, 0, 0, 0.7)'
+              });
+
+            video.onloadeddata = function() {
+              loading.close()
+            }
+
+          video.addEventListener("playing", function() {
+            console.log("[Playing] loading of video");
+            loading.close()
+            if ( video.readyState == 4 ) {
+              console.log("[Finished] loading of video");
+            }
+          });
+          video.addEventListener("suspend", function(e) {
+            console.log("[Suspended] loading of video");
+            if ( video.readyState == 4 ) {
+              console.log("[Finished] loading of video");
+              loading.close()
+            }
+          });
+
+              video.addEventListener('canplaythrough', () => {
+                loading.close()
+              });
+
+
+          video.addEventListener('ended', () => {
+                window.location.href = '/'
+              })
+              // setTimeout(()=>{
+              //     window.location.href='/'
+              // },57 * 1000)
+          },1500)
 
       setTimeout(() => {
         $('#left').animate({

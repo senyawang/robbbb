@@ -5,6 +5,7 @@
       src="../../assets/video.mp4"
       loop="loop"
       autoplay
+      preload="auto"
       playsinline
       class="rob-video"
       id="videoDetail"></video>
