@@ -27,7 +27,7 @@ export default {
       buy: 'Buy',
       addToCart: 'Add to cart',
       sendMessage: 'Send message',
-      modalConfirm: 'OK',
+      modalConfirm: 'Confirm',
       totalText: 'Subtotal',
       continueBuy: 'Continue browsing',
       goCart: 'View cart',
@@ -77,7 +77,9 @@ export default {
       edit: 'Edit',
       ask: 'Whether sync to user profile?',
       yes: 'Yes',
-      no: 'No'
+      no: 'No',
+      weixin: 'WeChat Pay',
+      alipay: 'Alipay'
     },
     other: {
       thanks: 'Thanks',
@@ -101,7 +103,7 @@ export default {
     login: {
       userName: '用户名或电子邮箱',
       password: '密码',
-      confirm: '确定',
+      confirm: '登录',
     },
     register: {
       userName: '用户名',
@@ -164,7 +166,9 @@ export default {
       edit: '编辑',
       ask: '是否同步到我的资料？',
       yes: '是',
-      no: '否'
+      no: '否',
+      weixin: '微信',
+      alipay: '支付宝'
     },
     other: {
       thanks: '鸣谢',

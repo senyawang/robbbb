@@ -1,17 +1,17 @@
 <template>
   <div class="video">
+    <!--<iframe frameborder="0" width="100%" height="500" src="https://v.qq.com/txp/iframe/player.html?vid=e08445lv2ud" allowFullScreen="true"></iframe>-->
     <video
       @click="videoPlay"
       preload="metadata"
       src="../../assets/video.mp4"
-      muted
       loop="loop"
       autoplay
       class="rob-video"
       id="videoDetail"
-      poster="../../assets/index.png"
     >
     </video>
+    <!--poster="../../assets/index.png"-->
     <!--<video @click="videoPlay" src="http://203.195.204.34/assets/media/video.a4e7419.mp4"  loop="loop" muted autoplay class="rob-video" id="videoDetail"></video>-->
 
     <div class="mask-index ui-flex-box items-center justify-center" v-if="show" :style="{opacity: showBg ? 1 : 0}">

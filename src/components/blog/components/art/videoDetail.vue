@@ -4,7 +4,7 @@
       <div :class='["pro-list", "ui-flex-item"]'>
         <video ref="video" :src="video_url" loop @click="videoPlay" class="rob-video-detail" id="videoDetail"></video>
         <div class="btn-play" id="dabofang" @click="videoPlay">
-            <img src="../../../../assets/play.png" alt="">
+            <img v-if="showBtn" src="../../../../assets/play.png" alt="">
         </div>
       </div>
 
@@ -45,6 +45,7 @@ export default {
     },
     videoPlay(e){
       const video = this.$refs.video;
+      this.showBtn = !this.showBtn
       if(video.paused){
         video.play();
       } else {

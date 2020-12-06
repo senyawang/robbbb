@@ -117,7 +117,7 @@ export default {
     margin-left: 37px;
   }
   .side-content {
-    height: 460px;
+    height: 445px;
     overflow-y: auto;
     overflow-x: hidden;
     border: 1px solid #000;
