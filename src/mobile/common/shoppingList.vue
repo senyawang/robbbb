@@ -4,7 +4,7 @@
       <van-swipe-cell
         :right-width="60"
         v-for="(item, index) of proList"
-        :key="String(item.add_time)"
+        :key="String(item.id)"
         class="swipe-cart"
         :disabled="type === 'history'"
       >
@@ -13,7 +13,7 @@
           <div class="text-center mx-auto">
             <div v-if="type !== 'cart'">{{index+1}}</div>
             <div v-else class="mycheck text-center d-inline-block">
-              <input type="checkbox" v-model="selected" :value="item.id" :id="item.id" name="">
+              <input type="checkbox" v-model="selected" :checked="item.checked" :value="item.id" :id="item.id" name="">
               <label :for="item.id"> </label>
             </div>
           </div>
@@ -62,9 +62,22 @@ export default {
   name: 'ShoppingList',
   data () {
     return {
-      selected: [],
-      proList: []
+      proList: null,
+      selected: []
     }
+  },
+  computed: {
+    // selected: {
+    //   get () {
+    //
+    //   },
+    //   set (val) {
+    //     console.log(val, 'aaaa')
+    //     const a = []
+    //     this.proList.filter(item => item.checked).map(ck => a.push(ck.id))
+    //     return a
+    //   }
+    // }
   },
   created () {
     this.init()
@@ -74,6 +87,9 @@ export default {
       this.updatePrice(val)
       // const cartList = JSON.parse(localStorage.getItem("CART")) || [];
       // const checkedCart = cartList.filter(item => val.includes(item.id))
+    },
+    proList (val) {
+      console.log(val, 'prolist')
     }
   },
   methods: {
@@ -109,6 +125,14 @@ export default {
           console.log(res.data)
         })
       }
+    },
+    selectAll () {
+      const cartList = JSON.parse(localStorage.getItem('CART')) || []
+      cartList.map(item => { this.selected.push(item.id) })
+      console.log(this.proList, 'prolist')
+    },
+    unSelectAll () {
+      this.selected = []
     },
     delProduct (id) {
       if (this.delHandle) {

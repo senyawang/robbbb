@@ -83,6 +83,7 @@ export default {
       alipay: 'Alipay'
     },
     other: {
+      selectAll: 'All',
       thanks: 'Thanks',
       express: 'Express service: free delivery by SF express',
       expressTime: 'Delivery time: within seven days of successful payment',
@@ -173,6 +174,7 @@ export default {
       alipay: '支付宝'
     },
     other: {
+      selectAll: '全选',
       thanks: '鸣谢',
       express: '快递服务：顺丰包邮',
       expressTime: '发件时间：支付成功后7日内',

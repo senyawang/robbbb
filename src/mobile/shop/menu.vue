@@ -110,6 +110,10 @@ export default {
   position: relative;
   align-items: top;
   overflow: hidden;
+  font-weight: 400;
+  .login {
+    font-weight: 400;
+  }
 }
 
  .main-nav {
@@ -118,11 +122,12 @@ export default {
     width: 100%;
     background: #fff;
     padding: 40px 20px;
-    .nav-left {
+   font-weight: 700;
+   .nav-left {
       li {
         position: relative;
         z-index: 9;
-        font: 32px/2 arial;
+        font: 700 32px/2 arial;
         a {
           display: block;
         }
@@ -157,7 +162,6 @@ export default {
   position: relative;
   z-index: 1;
   font-size: 30px;
-  font-weight: 700;
   margin-top: 30px;
   img {
     /*height: 36px;*/

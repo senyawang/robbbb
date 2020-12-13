@@ -2,6 +2,7 @@
   <div>
     <ShoppingList
         type='cart'
+        ref="shoplist"
         :handleChange="changeHandle"
         :delHandle="delHandle"
         :updatePrice="updatePrice"
@@ -9,10 +10,10 @@
     <div style="height: 100px;"></div>
     <div class="text-right pay-button ui-flex-box shopping-list">
       <div class="mycheck text-center d-inline-block">
-        <input type="checkbox" v-model="selected" id="all" name="">
+        <input type="checkbox" v-model="selectedAll" id="all" name="" @click="handleSelectAll">
         <label for="all"></label>
       </div>
-      <span style="padding-left: 5px"> 全选</span>
+      <span style="padding-left: 5px">{{$t('other').selectAll}}</span>
       <div class="text-right ui-flex-item theme-primary">
         {{$t('shoppingCart').totalPrice}}：￥{{totalPrice | money}}
         <Button style="min-width: 120px;width: auto; padding: 0 10px;" size="large" class="sp" @click="totalPrice > 0 ? goToPay() : ''">{{$t('shoppingCart').goPay}}</Button>
@@ -30,7 +31,8 @@ export default {
       actionUrl: '',
       selected: [],
       isFixed: false,
-      totalPrice: 0
+      totalPrice: 0,
+      cartLength: 0
     }
   },
   components: {
@@ -38,12 +40,25 @@ export default {
     Button
   },
   computed: {
-    // totalPrice () {
-    //
-    // }
+    selectedAll: {
+      get () {
+        return this.selected.length === this.cartLength
+      },
+      set (val) {
+        if (val) {
+          this.$refs.shoplist.selectAll()
+        } else {
+          this.$refs.shoplist.unSelectAll()
+        }
+      }
+    }
+  },
+  watch: {
+    selected (val) {}
   },
   mounted () {
     const localCart = JSON.parse(localStorage.getItem('CART')) || []
+    this.cartLength = localCart.length
     this.totalPrice = localCart.reduce((a, c) => {
       return a + Number(c.price) * c.point
     }, 0)
@@ -55,6 +70,10 @@ export default {
   methods: {
     handleScroll () {
 
+    },
+    handleSelectAll (event) {
+      console.log(event.target.checked, 'event')
+      // this.$refs.shoplist.selectAll(event.target.checked)
     },
     changeHandle (id, value) {
       const localCart = JSON.parse(localStorage.getItem('CART')) || []

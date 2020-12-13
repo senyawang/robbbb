@@ -123,7 +123,7 @@ export default {
       margin-bottom: 30px;
     }
     .mt-2 {
-      margin-top: 20px;
+      margin-top: 40px;
     }
 }
 </style>

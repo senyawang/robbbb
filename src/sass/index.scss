@@ -13,6 +13,7 @@ body {
 }
 .text-center {
   text-align: center;
+  word-break: break-word;
 }
 
 .shoushi {
@@ -37,6 +38,7 @@ body {
     border-radius: 0;
     border: 1px solid $black;
     box-shadow: none;
+    -webkit-appearance: none;
   }
 }
 

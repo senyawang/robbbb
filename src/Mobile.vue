@@ -18,7 +18,7 @@
     >
         <div class="text-center err-info">{{errMsg}}</div>
         <span slot="footer" class="dialog-footer">
-          <Button @tap="centerDialogVisible = false" class="red" size="large">{{$i18n.locale === 'zh' ? '确定' : 'ok'}}</Button>
+          <Button @click="centerDialogVisible = false" class="red" size="large">{{$i18n.locale === 'zh' ? '确定' : 'ok'}}</Button>
         </span>
     </el-dialog>
 
@@ -109,6 +109,7 @@ a:visited {
 }
 .err-info {
   font-size: 32px;
+  word-break: break-word;
 }
 
 </style>

@@ -183,7 +183,11 @@ export default {
 .pay1 {
   padding: 20px;
   border: 1px solid #000;
-
+  .d-flex {
+    &:not(:last-child) {
+      margin-bottom: 20px;
+    }
+  }
 }
 .text {
   font-size: 14px;
