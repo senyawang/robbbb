@@ -17,7 +17,7 @@
 
   <el-dialog
           :visible.sync="showMyProfile"
-          width="480px"
+          width="460px"
           center
       >
           <template v-slot:title>
@@ -51,7 +51,7 @@
 
       <el-dialog
           :visible.sync="showModifyPwd"
-          width="480px"
+          width="460px"
           center
       >
           <template v-slot:title>
@@ -74,7 +74,7 @@
           </div>
 
           <template v-slot:footer>
-            <div class="dialog-footer">
+            <div class="dialog-footer" style="padding-top: 0">
               <Button @click="modifyPwd">{{$t('account').btn}}</Button>
             </div>
           </template>
@@ -107,6 +107,7 @@ export default {
         oldPwd: '',
         pwd: '',
         repwd: '',
+        unmount: false,
         robbbuy1: rob1,
         robbbuy2: rob1,
         robbbuy: [rob2, rob1, rob1]
@@ -121,8 +122,12 @@ export default {
   mounted () {
       this.showAnimation()
   },
+  destroyed(){
+    this.unmount = true;
+  },
     methods: {
       async showAnimation () {
+        if (this.unmount) return
         await delay(500)
         const rob = [...this.robbbuy]
 

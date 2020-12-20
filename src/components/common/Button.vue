@@ -20,6 +20,7 @@ export default {
   width: 142px;
   height: 40px;
   background: $black;
+  font-size: 16px;
   color: #fff;
   border: 0 none;
   &:hover {

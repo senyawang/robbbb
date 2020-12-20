@@ -2,10 +2,13 @@
     <div class="detail main-body ui-flex-box">
 
       <div :class='["pro-list", "ui-flex-item"]'>
-        <video ref="video" :src="video_url" loop @click="videoPlay" class="rob-video-detail" id="videoDetail"></video>
-        <div class="btn-play" id="dabofang" @click="videoPlay">
-            <img src="../../../../assets/play.png" alt="">
-        </div>
+        <template v-if="video_url">
+          <video ref="video" :src="video_url" loop @click="videoPlay" class="rob-video-detail" id="videoDetail"></video>
+          <div class="btn-play" id="dabofang" @click="videoPlay">
+            <img v-if="showBtn" src="../../../../assets/play.png" alt="">
+          </div>
+        </template>
+        <iframe v-else width="100%" height="450" frameborder="0" :src="resData.video_link" allowFullScreen="true"></iframe>
       </div>
 
       <div class="rob-text-area">
@@ -45,6 +48,7 @@ export default {
     },
     videoPlay(e){
       const video = this.$refs.video;
+      this.showBtn = !this.showBtn
       if(video.paused){
         video.play();
       } else {
@@ -58,6 +62,7 @@ export default {
 .pro-list {
   position: relative;
   width: 800px;
+  height: 450px;
   margin: 80px 0 20px;
   padding: 0;
   text-align: center;
@@ -91,8 +96,9 @@ export default {
     margin-left: 37px;
 }
 .side-content {
-    height: 500px;
-    overflow-y: auto;
+    height: 515px;
+  border: 1px solid #000;
+  overflow-y: auto;
     overflow-x: hidden;
 }
 </style>

@@ -5,10 +5,10 @@
             <th></th>
             <th width="160px"></th>
             <th>{{$t('shoppingCart').proName}}</th>
-            <th> {{$t('shoppingCart').price}} </th>
-            <th>{{$t('shoppingCart').number}} </th>
-            <th>{{$t('shoppingCart').total}} </th>
-            <th align="center">{{type === "cart" ? '' : $t('shoppingCart').date}}</th>
+            <th width="150" > {{$t('shoppingCart').price}} </th>
+            <th width="100">{{$t('shoppingCart').number}} </th>
+            <th width="150">{{$t('shoppingCart').total}} </th>
+            <th style="min-width: 100px" align="center">{{type === "cart" ? '' : $t('shoppingCart').date}}</th>
         </tr>
         <tr v-for="(item, index) of proList" :key="item.id">
             <td class="text-center mx-auto">
@@ -92,7 +92,7 @@ export default {
       ]
     }
   },
-  created () {
+  mounted () {
     this.init();
   },
   watch: {
@@ -129,10 +129,12 @@ export default {
         this.proList = cartList;
     },
     getOrderDetail(id){
-       this.ajaxPost('api/shop/getOrderDetail', {
+      this.ajaxPost('api/shop/getOrderDetail', {
           id,
         }).then(res => {
-          this.proList.push(res.data[0]);
+        console.log(res.data[0].id, 'item.id')
+
+        this.proList.push(res.data[0]);
         })
     },
     format(num){

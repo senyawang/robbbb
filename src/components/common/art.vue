@@ -53,7 +53,7 @@ export default {
     }
     .img-wrapper {
       width: 100%;
-      max-height: 250px;
+      height: 227px;
       overflow: hidden;
     }
     img {

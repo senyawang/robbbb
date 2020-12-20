@@ -59,8 +59,9 @@ export default {
     Button,
   },
   methods: {
-    handleSubmit(){
-      this.ajaxPost('api/index/addMessage', {
+    handleSubmit () {
+      const api = this.$route.name === 'contact' ? 'api/index/addMessage' : 'api/shop/addService'
+      this.ajaxPost(api, {
         user_name: this.user_name,
         title: this.title,
         email: this.email,
@@ -106,7 +107,7 @@ export default {
       }
       textarea {
         width: 100%;
-        height: 290px;
+        height: 280px;
         padding: 10px;
         border-radius: 0;
         border: 1px solid #000;

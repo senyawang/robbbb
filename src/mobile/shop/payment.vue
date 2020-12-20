@@ -50,7 +50,8 @@
                 {{$t('other').thanks}}
             </div>
         <div style="width: 1000px;height: 100%;display: flex; align-items: center;">
-              <video src="../../assets/video/ch.mp4" playsinline preload="auto" autoplay id="video"></video>
+          <video v-if="$i18n.locale === 'zh'" src="../../assets/video/ch.mp4" preload="metadata" playsinline muted autoplay id="video"></video>
+          <video v-else src="../../assets/video/en.mp4" preload="metadata" muted autoplay id="video" playsinline></video>
         </div>
         <div class="kuang right" id="right">
             {{userName}}

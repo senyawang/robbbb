@@ -18,7 +18,7 @@
     >
         <div class="text-center err-info">{{errMsg}}</div>
         <span slot="footer" class="dialog-footer">
-          <Button @click="centerDialogVisible = false" class="red" size="large">{{$i18n.locale === 'zh' ? '确定' : 'ok'}}</Button>
+          <Button @click="centerDialogVisible = false" class="red" size="large">{{$i18n.locale === 'zh' ? '确定' : 'OK'}}</Button>
         </span>
     </el-dialog>
 
@@ -54,8 +54,8 @@ export default {
     },
   },
   mounted () {
-    const lang = window.localStorage.getItem('LOCALE')
-    this.$i18n.locale = lang
+    const lang = window.sessionStorage.getItem('LOCALE')
+    this.$i18n.locale = lang || 'zh'
     this.getNavs();
     this.$Event.$on('ERROR', (val) => {
       this.centerDialogVisible = true;

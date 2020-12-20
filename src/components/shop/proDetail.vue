@@ -62,83 +62,83 @@ import EventBus from '../../utils/eventBus'
 export default {
   data () {
     return {
-        current: 1,
-        showDesc: true,
-        num: 1,
-        resData: {},
-        centerDialogVisible: false,
-        imgList: [
-          {
-            imgSrc: '/static/img/1.607ddd7.jpg',
-            title: '你是我的小苹果'
-          },
-          {
-            imgSrc: '/static/img/1.607ddd7.jpg',
-            title: '你是我的小苹果'
-          }
-        ]
+      current: 1,
+      showDesc: true,
+      num: 1,
+      resData: {},
+      centerDialogVisible: false,
+      imgList: [
+        {
+          imgSrc: '/static/img/1.607ddd7.jpg',
+          title: '你是我的小苹果'
+        },
+        {
+          imgSrc: '/static/img/1.607ddd7.jpg',
+          title: '你是我的小苹果'
+        }
+      ]
     }
   },
-  inject: ["globalData"],
+  inject: ['globalData'],
   components: {
     Title,
     Button
   },
   created () {
-    this.init();
+    this.init()
   },
   methods: {
-     init(){
+    init () {
       this.ajaxPost('api/shop/getShopDetail', {
-        id: this.$route.params.id,
+        id: this.$route.params.id
       }).then(res => {
-        this.imgList = res.data.pic_list;
+        this.imgList = res.data.pic_list
         this.resData = res.data
         console.log(res.data)
       })
     },
-    handleChange(){
+    handleChange () {
 
     },
-    slideChange(val){
-        this.current = val + 1;
+    slideChange (val) {
+      this.current = val + 1
     },
-    handleZoom(){
-      this.showDesc = !this.showDesc;
+    handleZoom () {
+      this.showDesc = !this.showDesc
     },
-    addToCart(id){
-      const {isLogin} = this.globalData;
+    addToCart (id) {
+      const {isLogin} = this.globalData
       console.log(isLogin, this.globalData)
-      if(!isLogin){
-        EventBus.$emit('showLogin');
+      if (!isLogin) {
+        EventBus.$emit('showLogin')
         return
       }
 
       console.log(this.resData)
-        const { resData } = this;
-        const product = {
-          checked: true,
-          id: resData.id,
-          title: resData.title,
-          pic: resData.pic,
-          en_title: resData.en_title,
-          price: resData.price,
-          point: this.num,
-        }
-        const localCart = JSON.parse(localStorage.getItem('CART')) || [];
-        const newLocalCart = localCart.filter(item => item.id !== resData.id);
-        newLocalCart.push(product)
-        localStorage.setItem('CART', JSON.stringify(newLocalCart))
-        this.centerDialogVisible = true;
+      const { resData } = this
+      const product = {
+        checked: true,
+        id: resData.id,
+        title: resData.title,
+        pic: resData.pic,
+        en_title: resData.en_title,
+        price: resData.price,
+        point: this.num
+      }
+      const localCart = JSON.parse(localStorage.getItem('CART')) || []
+      const newLocalCart = localCart.filter(item => item.id !== resData.id)
+      newLocalCart.push(product)
+      localStorage.setItem('CART', JSON.stringify(newLocalCart))
+      this.centerDialogVisible = true
     },
-    handleBuy(){
-      const {isLogin} = this.globalData;
+    handleBuy () {
+      const {isLogin} = this.globalData
       console.log(isLogin, this.globalData)
-      if(!isLogin){
-        EventBus.$emit('showLogin');
+      if (!isLogin) {
+        EventBus.$emit('showLogin')
         return
       }
-        this.$router.push(`/robbbbuy/payDetail?id=${this.resData.id}&num=${this.num}`)
+      this.$router.push(`/robbbbuy/payDetail?id=${this.resData.id}&num=${this.num}`)
     }
   }
 }
@@ -176,7 +176,7 @@ export default {
   }
   .pro-total-num {
     padding-left: 60px;
-    margin-top: 20px;
+    margin-top: 40px;
     text-align: left;
     font-size: 20px;
   }
@@ -236,7 +236,7 @@ export default {
     }
 }
 .side-content {
-    height: 355px;
+    height: 340px;
     overflow-y: auto;
     overflow-x: hidden;
     border: 1px solid #000000;

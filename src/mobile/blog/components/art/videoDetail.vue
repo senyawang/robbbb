@@ -3,10 +3,13 @@
 
       <Title :title="langValue(resData, 'title')" />
       <div :class='["pro-list"]'>
-        <video ref="video" :src="video_url" loop @click="videoPlay" class="rob-video-detail" id="videoDetail"></video>
-        <div class="btn-play" id="dabofang" @click="videoPlay">
-            <img src="../../../../assets/play.png" alt="">
-        </div>
+        <template v-if="video_url">
+          <video ref="video" :src="video_url" loop @click="videoPlay" class="rob-video-detail" id="videoDetail"></video>
+          <div class="btn-play" id="dabofang" @click="videoPlay">
+            <img v-if="showBtn" src="../../../../assets/play.png" alt="">
+          </div>
+        </template>
+        <iframe v-else width="100%" frameborder="0" :src="resData.video_link" allowFullScreen="true"></iframe>
       </div>
 
       <div class="rob-text-area">

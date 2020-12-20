@@ -43,7 +43,9 @@
                 {{$t('other').thanks}}
             </div>
         <div style="width: 1000px;height: 100%;display: flex; align-items: center;">
-              <video src="../../assets/video/ch.mp4" preload="metadata" muted autoplay id="video"></video>
+              <video v-if="$i18n.locale === 'zh'" src="../../assets/video/ch.mp4" preload="metadata" muted autoplay id="video"></video>
+              <video v-else src="../../assets/video/en.mp4" preload="metadata" muted autoplay id="video"></video>
+              <!--<video src="http://203.195.204.34/assets/media/ch.034c6c2.mp4" preload="metadata" muted autoplay id="video"></video>-->
         </div>
         <div class="kuang right" id="right">
             {{userName}}
@@ -158,7 +160,6 @@ export default {
   overflow: hidden;
   display: flex;
   opacity: 0;
-  background: #fff;
   justify-content: center;
   align-items: center;
   background-size: 1368px;
