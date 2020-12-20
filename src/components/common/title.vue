@@ -15,6 +15,7 @@ export default {
   margin-bottom: 22px;
   text-align: right;
   font-size: 22px;
+  min-height: 22px;
   font-weight: 500;
 }
 </style>

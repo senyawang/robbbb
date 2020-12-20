@@ -10,8 +10,8 @@
     >
         <div class="img-body">
             <!-- <img ref="img" :src="fullUrl" alt=""> -->
-            <video v-show="!playOver"  ref="video" muted="muted" src="/assets/exhibition.mp4" class="rob-video-detail" id="videoDetail"></video>
-            <div v-show="playOver">虚拟展览空间正在构建中</div>
+            <video v-show="!playOver" preload="auto"  ref="video" muted="muted" src="/assets/exhibition.mp4" class="rob-video-detail" id="videoDetail"></video>
+            <div v-show="playOver" style="font-size: 28px;">{{$t('other').exhibition}}</div>
         </div>
     </el-dialog>
 
@@ -100,7 +100,7 @@ export default {
   align-items: center;
   video {
     margin: 0 auto;
-    width: 60%;
+    width: 50%;
     transition:  all .5s;
   }
 }

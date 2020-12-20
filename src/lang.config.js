@@ -2,11 +2,11 @@ export default {
   en: {
     mainNav: ['ART', 'EXHIBITIONS', 'ROBBBBuy', 'ABOUT', 'CONTACT'],
     subNav: ['Street Art', 'Easel Art', 'Video Art', 'Fun'],
-    shopTitle: ['ROBBBBuy', 'Log In', 'Register', 'Welcome'],
+    shopTitle: ['Buy ROBBBB', 'Log In', 'Register', 'Welcome'],
     shopNav: ['My Account', 'Shopping Cart', 'Customer Service', 'Sign Out'],
     routes: {
-      shop: 'ROBBBBuy',
-      proDetail: 'productDetail',
+      shop: 'Buy ROBBBB',
+      proDetail: '',
       service: 'Customer Service',
       account: 'My Account',
       cart: 'Shopping Cart'
@@ -86,6 +86,7 @@ export default {
       express: 'Express service: free delivery by SF express',
       expressTime: 'Delivery time: within seven days of successful payment',
       markText: 'Limited edition prints and other limited edition art derivatives are works of artist, no return except damage caused by express delivery, please understand.',
+      exhibition: 'Virtual exhibition space is being built...'
     }
   },
   zh: {
@@ -174,7 +175,8 @@ export default {
       thanks: '鸣谢',
       express: '快递服务：顺丰包邮',
       expressTime: '发件时间：支付成功后7日内',
-      markText: '限定版画及其它限定艺术衍生品均属艺术家作品，除因快递缘故导致损坏以外不予退还，敬请理解。',
+      markText: '限定版画及其它限定艺术衍生品均属艺术家作品，除因快递缘故导致损坏以外不予退换，敬请理解。',
+      exhibition: '虚拟展览空间正在搭建中...',
     }
   }
 }

@@ -83,7 +83,7 @@ export default {
       const loc = this.$i18n.locale;
       const lang = loc === 'en' ? 'zh' : 'en'
       this.$i18n.locale = lang
-      window.localStorage.setItem("LOCALE", lang)
+      window.sessionStorage.setItem("LOCALE", lang)
 },
     getNavs(pid){
         if(this.navList.length) return Promise.resolve();
@@ -196,9 +196,9 @@ export default {
 
 .xxx {
   img {
-    width: 20px;
-    height: 20px;
-    margin-top: 8px;
+    width: 15px !important;
+    height: 15px !important;
+    margin-top: 10px !important;
     margin-right: 20px;
     cursor: pointer;
     &:hover {
@@ -232,19 +232,19 @@ export default {
   height: 36px;
 }
 
-.en {
-  .nav-left {
-    li {
-      font-size: 20px;
-    }
-  }
-}
+/*.en {*/
+  /*.nav-left {*/
+    /*li {*/
+      /*font-size: 20px;*/
+    /*}*/
+  /*}*/
+/*}*/
 .nav-left li {
   position: relative;
   z-index: 9;
   margin: 0 10% 0 0;
   display: inline-block;
-  font-size: 24px;
+  font-size: 20px;
   a {
     display: block;
     &:hover {

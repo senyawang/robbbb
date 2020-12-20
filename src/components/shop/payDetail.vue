@@ -34,9 +34,9 @@
               </div>
 
               <div class="d-flex">
-                <Button style="width: 80px; height: 34px" class="shoushi fs-16" @click="centerDialogVisible = true">{{$t('buttons').modalConfirm}}</Button>
+                <Button style="width: 88px; height: 34px; font-size: 14px;" class="shoushi fs-16" @click="centerDialogVisible = true">{{$t('buttons').modalConfirm}}</Button>
                 <div class="text">
-                    <p class="m-0"><span class="c-red">*</span>{{$t('payDetail').text1}}</p>
+                    <p><span class="c-red">*</span>{{$t('payDetail').text1}}</p>
                     <p><span class="c-red">*</span>{{$t('payDetail').text2}}</p>
                 </div>
             </div>
@@ -223,9 +223,13 @@ export default {
 
 .text {
   font-size: 12px;
-  line-height: 1.7;
+  line-height: 1;
   padding-left: 10px;
+  p {
+    margin-bottom: 8px;
+  }
 }
+
 .nnn {
   .c-red {
     margin-top: 10px;

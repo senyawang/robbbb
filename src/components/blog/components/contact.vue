@@ -40,38 +40,39 @@
 </template>
 
 <script>
-import Title from '../../common/title';
-import Button from '../../common/Button';
+import Title from '../../common/title'
+import Button from '../../common/Button'
 export default {
   data () {
     return {
       centerDialogVisible: false,
-      showTitle: this.$route.name === "contact",
+      showTitle: this.$route.name === 'contact',
       user_name: '',
       email: '',
       title: '',
       content: '',
-      errMsg: '',
+      errMsg: ''
     }
   },
   components: {
     Title,
-    Button,
+    Button
   },
   methods: {
-    handleSubmit(){
-      this.ajaxPost('api/index/addMessage', {
+    handleSubmit () {
+      const api = this.$route.name === 'contact' ? 'api/index/addMessage' : 'api/shop/addService'
+      this.ajaxPost(api, {
         user_name: this.user_name,
         title: this.title,
         email: this.email,
-        content: this.content,
+        content: this.content
       }).then(res => {
-        console.log(res, 'res');
+        console.log(res, 'res')
         this.errMsg = res.msg
-        this.centerDialogVisible = true;
+        this.centerDialogVisible = true
       }).catch(err => {
         this.errMsg = err
-        this.centerDialogVisible = true;
+        this.centerDialogVisible = true
       })
     }
   }
@@ -106,7 +107,7 @@ export default {
       }
       textarea {
         width: 100%;
-        height: 290px;
+        height: 280px;
         padding: 10px;
         border-radius: 0;
         border: 1px solid #000;
