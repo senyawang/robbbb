@@ -61,11 +61,17 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style scoped lang="scss">
 .video {
   margin-top: -20px;
 }
 .rob-video {
   width: 100%;
 }
+  .mask-index {
+    img {
+      width: 200px !important;
+      height: 200px;
+    }
+  }
 </style>

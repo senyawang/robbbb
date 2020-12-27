@@ -12,6 +12,10 @@ export default {
 </script>
 <style lang='scss' scoped>
 .detail-title {
+  margin-left: 10%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
   margin-bottom: 22px;
   text-align: right;
   font-size: 22px;

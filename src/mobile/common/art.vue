@@ -55,6 +55,11 @@ export default {
       }
     }
     h3 {
+      margin-left: 10%;
+      width: 90%;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
       margin-top: 10px;
       font-size: 32px;
       line-height: 1.5;

@@ -111,5 +111,22 @@ a:visited {
   font-size: 32px;
   word-break: break-word;
 }
-
+.mask-index {
+  position: fixed;
+  z-index: 99;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background: #fff;
+  text-align: center;
+  opacity: 1;
+  transition: all 1.5s;
+  align-items: center;
+  justify-content: center;
+  img {
+    width: 300px;
+    transition: all 1.5s;
+  }
+}
 </style>

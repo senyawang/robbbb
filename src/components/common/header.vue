@@ -196,9 +196,9 @@ export default {
 
 .xxx {
   img {
-    width: 20px;
-    height: 20px;
-    margin-top: 8px;
+    width: 15px !important;
+    height: 15px !important;
+    margin-top: 10px !important;
     margin-right: 20px;
     cursor: pointer;
     &:hover {
@@ -232,19 +232,19 @@ export default {
   height: 36px;
 }
 
-.en {
-  .nav-left {
-    li {
-      font-size: 20px;
-    }
-  }
-}
+/*.en {*/
+  /*.nav-left {*/
+    /*li {*/
+      /*font-size: 20px;*/
+    /*}*/
+  /*}*/
+/*}*/
 .nav-left li {
   position: relative;
   z-index: 9;
   margin: 0 10% 0 0;
   display: inline-block;
-  font-size: 24px;
+  font-size: 20px;
   a {
     display: block;
     &:hover {
@@ -257,11 +257,11 @@ export default {
   transition: all .8s ease;
 }
 .slide-fade-leave-active {
-  transition: all .5s cubic-bezier(0.7, 0.9, 0.9, 0.9);
+  transition: all .8s cubic-bezier(0.7, 0.9, 0.9, 0.9);
 }
 .slide-fade-enter, .slide-fade-leave-to
 /* .slide-fade-leave-active for below version 2.1.8 */ {
-  transform: translateX(500px);
+  transform: translateX(900px);
   opacity: 0;
 }
 
@@ -273,13 +273,13 @@ export default {
 }
 .slide-left-enter
 /* .slide-fade-leave-active for below version 2.1.8 */ {
-  transform: translateX(-500px);
+  transform: translateX(-900px);
   opacity: 0;
 }
 
 .slide-left-leave-to
 /* .slide-fade-leave-active for below version 2.1.8 */ {
-  transform: translateX(500px);
+  transform: translateX(900px);
   opacity: 0;
 }
 

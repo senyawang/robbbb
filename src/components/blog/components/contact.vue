@@ -27,12 +27,13 @@
         <!--:visible.sync="centerDialogVisible"-->
         <!--width="30%"-->
         <!--center-->
+        <!--custom-class="dialog-message"-->
         <!--:modal="false"-->
         <!--:close-on-click-modal="false"-->
     <!--&gt;-->
-        <!--<div class="text-center">{{errMsg}}</div>-->
+        <!--<div class="text-center">{{langValue(res, 'msg')}}</div>-->
         <!--<span slot="footer" class="dialog-footer">-->
-          <!--<Button color="red" @click="centerDialogVisible = false">确定</Button>-->
+          <!--<Button color="red" @click="centerDialogVisible = false">{{$i18n.locale === 'zh' ? '确定' : 'OK'}}</Button>-->
         <!--</span>-->
     <!--</el-dialog>-->
 
@@ -40,23 +41,23 @@
 </template>
 
 <script>
-import Title from '../../common/title';
-import Button from '../../common/Button';
+import Title from '../../common/title'
+import Button from '../../common/Button'
 export default {
   data () {
     return {
       centerDialogVisible: false,
-      showTitle: this.$route.name === "contact",
+      showTitle: this.$route.name === 'contact',
       user_name: '',
       email: '',
       title: '',
       content: '',
-      errMsg: '',
+      res: ''
     }
   },
   components: {
     Title,
-    Button,
+    Button
   },
   methods: {
     handleSubmit () {
@@ -65,14 +66,19 @@ export default {
         user_name: this.user_name,
         title: this.title,
         email: this.email,
-        content: this.content,
+        content: this.content
       }).then(res => {
-        console.log(res, 'res');
-        this.errMsg = res.msg
-        this.centerDialogVisible = true;
+        console.log(res, 'res')
+        this.res = res
+        this.centerDialogVisible = true
+        this.user_name = ''
+        this.email = ''
+        this.title = ''
+        this.content = ''
+        this.$Event.$emit('ERROR', this.$i18n.locale === 'zh' ? res.msg : res.en_msg)
       }).catch(err => {
-        this.errMsg = err
-        this.centerDialogVisible = true;
+        // this.errMsg = err
+        // this.centerDialogVisible = true
       })
     }
   }

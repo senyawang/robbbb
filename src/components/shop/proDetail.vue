@@ -3,6 +3,7 @@
 
       <div :class='["pro-list", "ui-flex-item", {"full-screen": !showDesc}]'>
         <Title :title="langValue(resData, 'title')" align="center" v-if="!showDesc" />
+        <h1 v-if="showDesc" class="title">{{langValue(resData, 'title')}}</h1>
         <button @click="$refs.carouse.prev()" type="button" class="el-carousel__arrow el-carousel__arrow--left"><i class="el-icon-arrow-left"></i></button>
         <button @click="$refs.carouse.next()" type="button" class="el-carousel__arrow el-carousel__arrow--right"><i class="el-icon-arrow-right"></i></button>
         <el-carousel
@@ -14,7 +15,6 @@
             indicator-position="none"
         >
             <el-carousel-item class="pro-item" v-for="(item, index) in resData.pic_list" :key="index">
-              <h1 v-if="showDesc">{{langValue(resData, 'title')}}</h1>
               <img @click="handleZoom" :src="item | formatImg" :alt="langValue(item, 'title')">
             </el-carousel-item>
           </el-carousel>
@@ -164,8 +164,12 @@ export default {
     padding: 0 60px;
   }
   h1 {
+    padding: 0 60px;
+    overflow: hidden;
     text-align: left;
     font-size: 20px;
+    line-height: 1.5;
+    word-break: break-all;
     margin-bottom: 20px;
   }
   img {
