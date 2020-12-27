@@ -9,8 +9,7 @@ export default {
       proDetail: '',
       service: 'Customer Service',
       account: 'My Account',
-      cart: 'Shopping Cart',
-      title: 'BUY ROBBBB'
+      cart: 'Shopping Cart'
     },
     login: {
       userName: 'Username or Email Address',
@@ -101,8 +100,7 @@ export default {
       proDetail: '',
       service: '顾客服务',
       account: '我的账户',
-      cart: '购物车',
-      title: '购买ROBBBB'
+      cart: '购物车'
     },
     login: {
       userName: '用户名或电子邮箱',

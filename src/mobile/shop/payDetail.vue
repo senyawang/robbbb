@@ -4,7 +4,7 @@
 
             <div v-for="item in shopList" :key="item.id" class="d-flex">
                 <img :src="item.pic | formatImg" alt="" width="120" height="80">
-                <div class="pl-2 f28 ui-flex-item"><p class="ml-2">{{langValue(item, 'title')}}</p></div>
+                <div class="pl-2 f28 ui-flex-item ml-2"><div class="title">{{langValue(item, 'title')}}</div></div>
                 <div class="nnn text-right f28" style="line-height: 1.5;">
                     <p class="m-0">￥{{item.price | money}}</p>
                     <p class="c-red ">x{{item.point}}</p>
@@ -60,29 +60,16 @@
         </span>
       </el-dialog>
 
-      <el-dialog
-        :visible.sync="centerDialogVisible2"
-        center
-        :modal="false"
-        class="custom-dialog"
-        :close-on-click-modal="false"
-      >
-        <div class="text-center">{{langValue(resData, 'msg')}}</div>
-        <span slot="footer" class="dialog-footer">
-          <Button color="red" @click="centerDialogVisible2 = false">{{$t('buttons').modalConfirm}}</Button>
-        </span>
-      </el-dialog>
-
     </div>
 
 </template>
 
 <script>
-import Button from "../common/Button.vue";
+import Button from '../common/Button.vue'
 
 export default {
   components: {
-    Button,
+    Button
   },
   data () {
     return {
@@ -94,6 +81,7 @@ export default {
         centerDialogVisible2: false,
         is_sync: 0,
         totalPrice: 0,
+        id: 0,
         resData: {},
     }
   },
@@ -145,26 +133,27 @@ export default {
         this.ajaxPost('api/shop/getUserAddress', {
           // id: this.$route.params.id,
         }).then(res => {
-          const {real_name, mobile, address} = res.data || {};
+          const {real_name, mobile, address, id} = res.data || {};
           this.real_name = real_name;
           this.mobile = mobile;
+          this.id = id
           this.address = address;
           console.log(res.data)
         })
       },
       saveProfile(){
+        this.is_sync = 1
         this.ajaxPost('api/shop/editUserAddress', {
           real_name: this.real_name,
           mobile: this.mobile,
           address: this.address,
           is_sync: this.is_sync,
-          id: 0,
+          id: this.id || 0,
         }).then(res => {
             // this.centerDialogVisible = true;
             this.resData = res;
-            this.centerDialogVisible2 = true;
+          this.$Event.$emit('ERROR', this.$i18n.locale === 'zh' ? res.msg : res.en_msg)
             this.centerDialogVisible = false;
-            is_sync = 1
         }).catch(e => {
           this.centerDialogVisible = false;
         })
@@ -187,6 +176,16 @@ export default {
     &:not(:last-child) {
       margin-bottom: 20px;
     }
+  }
+  .title {
+    font-size: 18px;
+    line-height: 1.8;
+    word-break: break-all;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
   }
 }
 .text {

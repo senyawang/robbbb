@@ -71,11 +71,16 @@ export default {
         content: this.content,
       }).then(res => {
         console.log(res, 'res');
-        this.errMsg = res.msg
+        this.res = res
         this.centerDialogVisible = true;
+        this.user_name = ''
+        this.email = ''
+        this.title = ''
+        this.content = ''
+        this.$Event.$emit('ERROR', this.$i18n.locale === 'zh' ? res.msg : res.en_msg)
       }).catch(err => {
-        this.errMsg = err
-        this.centerDialogVisible = true;
+        // this.errMsg = err
+        // this.centerDialogVisible = true
       })
     }
   }

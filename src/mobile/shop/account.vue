@@ -101,6 +101,7 @@ export default {
       oldPwd: '',
       pwd: '',
       repwd: '',
+      id: 0,
       robbbuy1: rob1,
       robbbuy2: rob1,
       robbbuy: [rob2, rob1, rob1],
@@ -150,10 +151,11 @@ export default {
       this.ajaxPost('api/shop/getUserAddress', {
         // id: this.$route.params.id,
       }).then(res => {
-        const {real_name, mobile, address} = res.data
+        const {real_name, mobile, address, id} = res.data
         this.real_name = real_name
         this.mobile = mobile
         this.address = address
+        this.id = id
         console.log(res.data)
       })
     },
@@ -162,9 +164,10 @@ export default {
         real_name: this.real_name,
         mobile: this.mobile,
         address: this.address,
-        id: 0
+        id: this.id,
       }).then(res => {
         this.showMyProfile = false
+        this.$Event.$emit('ERROR', this.$i18n.locale === 'zh' ? res.msg : res.en_msg)
         console.log(res.data)
       })
     },
@@ -174,7 +177,11 @@ export default {
         pwd: this.pwd,
         repwd: this.repwd
       }).then(res => {
+        this.oldPwd = ''
+        this.pwd = ''
+        this.repwd = ''
         this.showModifyPwd = false
+        this.$Event.$emit('ERROR', this.$i18n.locale === 'zh' ? res.msg : res.en_msg)
         console.log(res.data)
       })
     }

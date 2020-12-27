@@ -102,6 +102,7 @@ export default {
         const loading = this.$loading()
         this.ajaxPost('api/shop/getOrderList', {}).then(res => {
           let length = res.data.length
+          if (!length) return loading.close()
           const proList = []
           res.data.forEach(item => {
             this.getOrderDetail(item.id)
@@ -193,8 +194,16 @@ export default {
       line-height: 30px;
     }
     .title {
+      line-height: 1.6;
+      word-break: break-all;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
       font-size: 26px;
-      height: 100px;
+      height: 80px;
+      margin-bottom: 20px;
     }
     .price {
       font-size: 28px;

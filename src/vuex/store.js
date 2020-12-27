@@ -6,7 +6,7 @@ Vue.use(Vuex)
 const state = {
     pageDirection: 'vux-pop-in', // 页面跳转方向 vux-pop-out 后退 “vux-pop-in”前进
     pageTitle: '',
-    isLoading: true
+    showModal: false
 }
 
 

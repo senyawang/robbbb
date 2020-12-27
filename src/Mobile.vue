@@ -125,7 +125,7 @@ a:visited {
   align-items: center;
   justify-content: center;
   img {
-    width: 300px;
+    width: 200px;
     transition: all 1.5s;
   }
 }
