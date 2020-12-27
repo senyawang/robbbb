@@ -1,6 +1,6 @@
 <template>
     <div class="footer">
-      ©2021 ROBBBB. All Rights Reserved.
+      ©Anytime ROBBBB. All Rights Reserved.
     </div>
 </template>
 
@@ -11,7 +11,7 @@ export default {
 </script>
 <style lang='scss' scoped>
 .footer {
-  padding: 20px;
+  padding: 70px 20px 20px;
   text-align: center;
 }
 </style>

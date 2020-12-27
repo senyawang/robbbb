@@ -19,7 +19,7 @@
       </div>
 
       <div v-if="isLogin" class="nav-right jiantou">
-        <span v-show="!showMainNav">{{$t('shopTitle')[3]}}，</span><span @click="handleShowMainNav" class="user-name">{{userName}}</span>
+        <span v-show="!showMainNav">{{$t('shopTitle')[3]}}，</span><span @click="handleShowMainNav" :class="['user-name', showMainNav && 'active']">{{userName}}</span>
       </div>
       <div v-else class="nav-right jiantou login">
         <span @click="handleShowLogin">{{$t('shopTitle')[1]}}</span>
@@ -94,7 +94,8 @@ export default {
 .user-name {
   color: $themeColor;
   cursor: pointer;
-  &:hover {
+  &:hover,
+  &.active {
     opacity: .7;
   }
 }
@@ -105,7 +106,7 @@ export default {
   height: 40px;
   z-index: 9;
   line-height: 36px;
-  font-size: 22px;
+  font-size: 20px;
 }
 .nav-menu {
   position: relative;
@@ -179,14 +180,6 @@ export default {
   }
 }
 
-.en {
-  .nav-left {
-    li {
-      cursor: pointer;
-      font-size: 20px;
-    }
-  }
-}
 .nav-left li {
   position: relative;
   z-index: 9;

@@ -27,12 +27,13 @@
         <!--:visible.sync="centerDialogVisible"-->
         <!--width="30%"-->
         <!--center-->
+        <!--custom-class="dialog-message"-->
         <!--:modal="false"-->
         <!--:close-on-click-modal="false"-->
     <!--&gt;-->
-        <!--<div class="text-center">{{errMsg}}</div>-->
+        <!--<div class="text-center">{{langValue(res, 'msg')}}</div>-->
         <!--<span slot="footer" class="dialog-footer">-->
-          <!--<Button color="red" @click="centerDialogVisible = false">确定</Button>-->
+          <!--<Button color="red" @click="centerDialogVisible = false">{{$i18n.locale === 'zh' ? '确定' : 'OK'}}</Button>-->
         <!--</span>-->
     <!--</el-dialog>-->
 
@@ -51,7 +52,7 @@ export default {
       email: '',
       title: '',
       content: '',
-      errMsg: ''
+      res: ''
     }
   },
   components: {
@@ -68,11 +69,16 @@ export default {
         content: this.content
       }).then(res => {
         console.log(res, 'res')
-        this.errMsg = res.msg
+        this.res = res
         this.centerDialogVisible = true
+        this.user_name = ''
+        this.email = ''
+        this.title = ''
+        this.content = ''
+        this.$Event.$emit('ERROR', this.$i18n.locale === 'zh' ? res.msg : res.en_msg)
       }).catch(err => {
-        this.errMsg = err
-        this.centerDialogVisible = true
+        // this.errMsg = err
+        // this.centerDialogVisible = true
       })
     }
   }

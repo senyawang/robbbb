@@ -5,9 +5,9 @@
             <th></th>
             <th width="160px"></th>
             <th>{{$t('shoppingCart').proName}}</th>
-            <th width="150" > {{$t('shoppingCart').price}} </th>
+            <th width="150" align="center" > {{$t('shoppingCart').price}} </th>
             <th width="100">{{$t('shoppingCart').number}} </th>
-            <th width="150">{{$t('shoppingCart').total}} </th>
+            <th width="150" align="center">{{$t('shoppingCart').total}} </th>
             <th style="min-width: 100px" align="center">{{type === "cart" ? '' : $t('shoppingCart').date}}</th>
         </tr>
         <tr v-for="(item, index) of proList" :key="item.id">
@@ -24,11 +24,11 @@
               </router-link>
             </td>
             <td class="shoush title">
-              <router-link :to="{ name: 'proDetail', params: { id: item.id }}">
+              <router-link :to="{ name: 'proDetail', params: { id: item.id }}" class="name">
                   {{langValue(item, 'title')}}
               </router-link>
               </td>
-            <td id="price_id" align="center">
+            <td id="price_id" align="center" class="text-center">
               <div v-if="type === 'cart'">￥{{item.price | money}}</div>
               <div v-else style="text-align: center">
                 <img src="../../assets/logo-index.png" width="60" alt="">
@@ -38,7 +38,7 @@
                 <el-input-number step-strictly :disabled="type !== 'cart'" v-model="item.point" @change="(val) => handleChange(item.id, val)" :min="1" :max="3" ></el-input-number>
             </td>
             <td>
-              <div v-if="type === 'cart'">
+              <div v-if="type === 'cart'" class="text-center">
               ￥<span id="all_id" class="iiiiiii">{{item.price * item.point | money}}</span>
               </div>
               <div v-else class="text-center" style="width: 120px">
@@ -169,6 +169,17 @@ export default {
         padding: 10px 15px;
         vertical-align: middle;
         border: 1px solid #000;
+    }
+    .name {
+      display: inline-block;
+      width: 300px;
+      line-height: 1.6;
+      word-break: break-all;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
     }
     th {
       font-size: 18px;

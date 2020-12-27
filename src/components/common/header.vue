@@ -257,11 +257,11 @@ export default {
   transition: all .8s ease;
 }
 .slide-fade-leave-active {
-  transition: all .5s cubic-bezier(0.7, 0.9, 0.9, 0.9);
+  transition: all .8s cubic-bezier(0.7, 0.9, 0.9, 0.9);
 }
 .slide-fade-enter, .slide-fade-leave-to
 /* .slide-fade-leave-active for below version 2.1.8 */ {
-  transform: translateX(500px);
+  transform: translateX(900px);
   opacity: 0;
 }
 
@@ -273,13 +273,13 @@ export default {
 }
 .slide-left-enter
 /* .slide-fade-leave-active for below version 2.1.8 */ {
-  transform: translateX(-500px);
+  transform: translateX(-900px);
   opacity: 0;
 }
 
 .slide-left-leave-to
 /* .slide-fade-leave-active for below version 2.1.8 */ {
-  transform: translateX(500px);
+  transform: translateX(900px);
   opacity: 0;
 }
 

@@ -42,8 +42,10 @@ export default {
   // justify-content: space-between;
   .rob-photo {
     flex: 0 0 33.33333%;
+    max-width: 33.33333%;
     padding-right: 2.3333%;
     margin-bottom: 40px;
+    line-height: 1.5;
 
     &:nth-child(3n) {
       padding-right: 0;
@@ -63,9 +65,16 @@ export default {
       }
     }
     h3 {
+      margin-left: 10%;
+      width: 90%;
+      height: 20px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
       margin-top: 10px;
       font-size: 16px;
       text-align: right;
+
     }
   }
 }
