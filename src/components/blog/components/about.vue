@@ -36,6 +36,5 @@ export default {
 <style lang='scss' scoped>
 .about {
   min-height: 300px;
-  background: #f0f0f0;
 }
 </style>

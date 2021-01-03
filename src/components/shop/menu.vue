@@ -1,6 +1,6 @@
 <template>
   <div class="navbox ui-flex-box" style="margin-bottom: 15px;">
-    <div v-show="!showMainNav">{{$t('routes')[title]}}</div>
+    <div class="menu-title" :style="{opacity: showMainNav ? 0 : 1, transition: 'all .5s', float: 'left'}">{{$t('routes')[title]}}</div>
     <div class="nav-menu ui-flex-item">
       <div class="navs">
         <transition name="slide-fade">
@@ -98,6 +98,9 @@ export default {
   &.active {
     opacity: .7;
   }
+}
+.menu-title {
+  position: absolute;
 }
 .red { color: $themeColor; }
 .navbox {

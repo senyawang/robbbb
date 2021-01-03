@@ -92,7 +92,8 @@ export default {
   }
 }
 .rob-text-area {
-    width: 370px;
+  flex: 0 0 330px;
+    width: 330px;
     margin-left: 37px;
 }
 .side-content {

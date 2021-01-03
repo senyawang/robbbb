@@ -168,8 +168,9 @@ export default {
     overflow: hidden;
     text-align: left;
     font-size: 20px;
-    line-height: 1.5;
-    word-break: break-all;
+    line-height: 1;
+    text-overflow: ellipsis;
+    white-space: nowrap;
     margin-bottom: 20px;
   }
   img {
@@ -180,7 +181,6 @@ export default {
   }
   .pro-total-num {
     padding-left: 60px;
-    margin-top: 40px;
     text-align: left;
     font-size: 20px;
   }
@@ -193,6 +193,9 @@ export default {
   top: 0;
   width: 1100px;
   background: #fff;
+  .detail-title {
+    margin-left: 0;
+  }
   img {
     width: 900px;
     height: auto;

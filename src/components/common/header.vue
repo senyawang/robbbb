@@ -1,9 +1,9 @@
 <template>
   <div class="navbox position-relative">
-    <router-link v-if="flag==='shop'" to="/robbbbuy/shop" class="logo-robbbbuy" id="logo">
+    <router-link v-if="flag==='shop'" to="/robbbbuy/shop" :class="['logo-robbbbuy', (!showMainNav && !showSubNav) && 'logo-hover']" id="logo">
       <img src="../../assets/robbbbuy.png"  alt="" :style="{opacity: showMainNav || showSubNav ? 0 : 1}" >
     </router-link>
-    <router-link v-else to="/" class="logo" id="logo">
+    <router-link v-else to="/" id="logo" :class="['logo', (!showMainNav && !showSubNav) && 'logo-hover']">
       <img src="../../assets/logo.png"  alt="" :style="{opacity: showMainNav || showSubNav ? 0 : 1}" >
     </router-link>
     <div class="nav-menu " >
@@ -136,6 +136,15 @@ export default {
   }
 }
 
+.logo-hover {
+  &:hover {
+    img {
+      transition: all .01s;
+      opacity: .5 !important;
+    }
+  }
+}
+
 .logo-robbbbuy {
   width: 220px;
   position: absolute;
@@ -180,6 +189,11 @@ export default {
     display: flex;
     .nav-left {
       flex: 1 1 auto;
+      span {
+        &:hover {
+          opacity: .5;
+        }
+      }
     }
   }
 

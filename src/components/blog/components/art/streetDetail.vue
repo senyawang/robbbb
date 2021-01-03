@@ -94,6 +94,9 @@ export default {
     top: 0;
     width: 1100px;
     background: #fff;
+    .detail-title {
+      margin-left: 0px;
+    }
     img {
       width: 900px;
       height: auto;
@@ -113,7 +116,8 @@ export default {
     }
   }
   .rob-text-area {
-    width: 370px;
+    flex: 0 0 330px;
+    width: 330px;
     margin-left: 37px;
   }
   .side-content {
