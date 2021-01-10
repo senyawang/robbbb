@@ -117,7 +117,7 @@ export default {
       console.log(this.resData)
       const { resData } = this
       const product = {
-        checked: true,
+        checked: false,
         id: resData.id,
         title: resData.title,
         pic: resData.pic,
@@ -130,6 +130,7 @@ export default {
       newLocalCart.push(product)
       localStorage.setItem('CART', JSON.stringify(newLocalCart))
       this.centerDialogVisible = true
+      EventBus.$emit('cartchange')
     },
     handleBuy () {
       const {isLogin} = this.globalData
@@ -168,8 +169,10 @@ export default {
     overflow: hidden;
     text-align: left;
     font-size: 20px;
-    line-height: 1.5;
-    word-break: break-all;
+    line-height: 1;
+    height: 22px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
     margin-bottom: 20px;
   }
   img {
@@ -180,7 +183,6 @@ export default {
   }
   .pro-total-num {
     padding-left: 60px;
-    margin-top: 40px;
     text-align: left;
     font-size: 20px;
   }
@@ -193,6 +195,9 @@ export default {
   top: 0;
   width: 1100px;
   background: #fff;
+  .detail-title {
+    margin-left: 0;
+  }
   img {
     width: 900px;
     height: auto;

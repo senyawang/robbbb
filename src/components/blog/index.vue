@@ -6,6 +6,7 @@
       preload="metadata"
       src="../../assets/video.mp4"
       loop="loop"
+      muted
       autoplay
       class="rob-video"
       id="videoDetail"
@@ -15,7 +16,7 @@
     <!--<video @click="videoPlay" src="http://203.195.204.34/assets/media/video.a4e7419.mp4"  loop="loop" muted autoplay class="rob-video" id="videoDetail"></video>-->
 
     <div class="mask-index ui-flex-box items-center justify-center" v-if="show" :style="{opacity: showBg ? 1 : 0}">
-      <div class="ui-flex-item"><img :style="{opacity: showIndex ? 1 : 0}" src="../../assets/logo-index.png" alt=""></div>
+      <div class="ui-flex-item"><img @load.once="onloadImg" :style="{opacity: showIndex ? 1 : 0}" src="../../assets/logo-index.png" alt=""></div>
     </div>
 
   </div>
@@ -34,19 +35,20 @@ export default {
     }
   },
   mounted () {
-    setTimeout(() => {
-      this.showIndex = false
-    }, 1000)
 
-    setTimeout(() => {
-      this.showBg = false
-    }, 2500)
-
-    setTimeout(() => {
-      this.show = false
-    }, 4500)
   },
   methods: {
+    onloadImg () {
+      this.showIndex = false
+      setTimeout(() => {
+        this.showBg = false
+      }, 1500)
+
+      setTimeout(() => {
+        this.show = false
+        this.showIndex = true
+      }, 2000)
+    },
     videoPlay(e){
       const video = e.target;
       if(video.paused){

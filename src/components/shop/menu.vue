@@ -1,6 +1,6 @@
 <template>
   <div class="navbox ui-flex-box" style="margin-bottom: 15px;">
-    <div v-show="!showMainNav">{{$t('routes')[title]}}</div>
+    <div class="menu-title" :style="{opacity: showMainNav ? 0 : 1, transition: 'all .5s', float: 'left'}">{{$t('routes')[title]}}</div>
     <div class="nav-menu ui-flex-item">
       <div class="navs">
         <transition name="slide-fade">
@@ -11,9 +11,9 @@
               <li ><router-link to="/robbbbuy/service">{{$t('shopNav')[2]}}</router-link></li>
               <li  @click="handleLogout">{{$t('shopNav')[3]}}</li>
             </ul>
-            <div class="xxx">
-              <img @click="handleShowMainNav" src="../../assets/x.png" class="float-right shoushi" id="xxx" >
-            </div>
+            <!--<div class="xxx">-->
+              <!--<img @click="handleShowMainNav" src="../../assets/x.png" class="float-right shoushi" id="xxx" >-->
+            <!--</div>-->
           </div>
         </transition>
       </div>
@@ -31,9 +31,10 @@
 </template>
 
 <script>
+import EventBus from '../../utils/eventBus'
 export default {
   name: 'Menu',
-  props: ["title", "handleShowLogin", "handleShowRegister", "setLoginHandle"],
+  props: ['title', 'handleShowLogin', 'handleShowRegister', 'setLoginHandle'],
   data () {
     return {
       subtitle: '',
@@ -41,40 +42,45 @@ export default {
       showSubNav: false,
       isLogin: false,
       userName: '',
-      cartNum: 0,
+      cartNum: 0
     }
   },
   mounted () {
-    this.init();
-    console.log(localStorage.getItem("CART"));
-    const localCart = JSON.parse(localStorage.getItem("CART")) || []
+    this.init()
+    console.log(localStorage.getItem('CART'))
+    const localCart = JSON.parse(localStorage.getItem('CART')) || []
     this.cartNum = localCart.length
+
+    EventBus.$on('cartchange', () => {
+      const localCart = JSON.parse(localStorage.getItem('CART')) || []
+      this.cartNum = localCart.length
+    })
   },
   methods: {
-    init(){
+    init () {
       this.ajaxPost('api/shop/getUserDetail', {
       }).then(res => {
-        this.userName = res.data.username;
+        this.userName = res.data.username
         window.sessionStorage.setItem('userName', res.data.username)
-        this.isLogin = true;
+        this.isLogin = true
         this.setLoginHandle(true)
       }).catch(err => this.showMsg(err))
     },
-    handleShowMainNav() {
-      this.showMainNav = this.showSubNav ? false : !this.showMainNav;
-      this.showSubNav = false;
+    handleShowMainNav () {
+      this.showMainNav = this.showSubNav ? false : !this.showMainNav
+      this.showSubNav = false
     },
-    handleShowSubNav() {
-      this.showSubNav = true;
+    handleShowSubNav () {
+      this.showSubNav = true
       // this.showMainNav = false;
     },
-    loginHandle(){
-      this.handleShowLogin();
+    loginHandle () {
+      this.handleShowLogin()
     },
-    handleLogout(){
+    handleLogout () {
       this.ajaxPost('api/shop/logout', {
       }).then(res => {
-        if(this.$route.fullPath === '/robbbbuy/shop'){
+        if (this.$route.fullPath === '/robbbbuy/shop') {
           window.location.reload()
         } else {
           window.location.href = '#/robbbbuy/shop'
@@ -82,7 +88,6 @@ export default {
             window.location.reload()
           })
         }
-
       }).catch(err => this.showMsg(err))
     }
   }
@@ -98,6 +103,9 @@ export default {
   &.active {
     opacity: .7;
   }
+}
+.menu-title {
+  position: absolute;
 }
 .red { color: $themeColor; }
 .navbox {

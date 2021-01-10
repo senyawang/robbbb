@@ -2,14 +2,14 @@
     <div class="d-flex justify-content-between">
         <div>
             <div class="d-flex justify-content-between pay1">
-                <div style="max-height: 392px;overflow: auto">
+                <div style="max-height: 340px;overflow: auto">
 
                     <div v-for="item in shopList" :key="item.id" class="d-flex item justify-content-between">
                         <img class="img" :src="item.pic | formatImg" alt="">
                       <div class="pl-2 ui-flex-item ml-2"><div class="title">{{langValue(item, 'title')}}</div></div>
                         <div class="text-right">
-                            <p class="m-0" style="line-height: 1.8;">￥{{item.price | money}}</p>
-                            <p class="c-red ">x{{item.point}}</p>
+                            <p class="m-0" style="line-height: 1.5; font-size: 18px;">￥{{item.price | money}}</p>
+                            <p class="c-red " style="line-height: 1.8;">x{{item.point}}</p>
                         </div>
                     </div>
 
@@ -82,7 +82,8 @@ export default {
       centerDialogVisible: false,
       centerDialogVisible2: false,
       is_sync: 0,
-      resData: {}
+      resData: {},
+      totalPrice: 0,
     }
   },
   created () {
@@ -191,6 +192,7 @@ export default {
   line-height: 1.8;
   padding-left: 10px;
   p {
+    line-height: 1;
     margin-bottom: 8px;
   }
 }

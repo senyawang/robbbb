@@ -30,11 +30,12 @@ export default {
   },
   created () {
     const localCart = JSON.parse(localStorage.getItem('CART')) || []
-    const totalPrice = localCart.reduce((a, c) => {
-      return a + c.price * c.point
-    }, 0)
-
-    this.totalPrice = totalPrice
+    // const totalPrice = localCart.filter(item => item.checked).reduce((a, c) => {
+    //   return a + c.price * c.point
+    // }, 0)
+    localCart.forEach(item => item.checked = false)
+    localStorage.setItem('CART', JSON.stringify(localCart))
+    // this.totalPrice = totalPrice
   },
   methods: {
     changeHandle (id, value) {
@@ -48,13 +49,17 @@ export default {
       this.selected = selected
       const cartList = JSON.parse(localStorage.getItem('CART')) || []
       const checkedCart = cartList.filter(item => selected.includes(item.id))
-      const totalPrice = checkedCart.filter(item => item.checked).reduce((a, c) => {
+      console.log(checkedCart, selected, 'ttttpppp')
+      const totalPrice = checkedCart.reduce((a, c) => {
+        console.log(a, 'aaaa')
         return a + c.price * c.point
       }, 0)
       this.totalPrice = totalPrice
       cartList.map(item => {
         if (selected.includes(item.id)) {
           item.checked = true
+        } else {
+          item.checked = false
         }
       })
 

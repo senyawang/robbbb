@@ -57,106 +57,103 @@
 </template>
 
 <script>
+  import EventBus from '../../utils/eventBus'
 export default {
   props: {
     type: String,
     handleChange: Function,
     delHandle: Function,
-    updatePrice: Function,
-},
+    updatePrice: Function
+  },
   name: 'ShoppingList',
   data () {
     return {
       selected: [],
       proList: [
-          // {
-          //   id: 12341234,
-          //   checked: true,
-          //   title: "这是一个标题",
-          //   point: 2,
-          //   price: 1999,
-          //   total: 1999,
-          //   pic: '/static/1.jpg',
-          //   orderDate: '2020-02-22'
-          // },
-          //  {
-          //   id: 64536536,
-          //   checked: true,
-          //   title: "这是二个标题",
-          //   point: 3,
-          //   price: 1999,
-          //   total: 1999,
-          //   pic: '/static/1.jpg',
-          //   orderDate: '2020-02-22'
-          // }
+        // {
+        //   id: 12341234,
+        //   checked: true,
+        //   title: "这是一个标题",
+        //   point: 2,
+        //   price: 1999,
+        //   total: 1999,
+        //   pic: '/static/1.jpg',
+        //   orderDate: '2020-02-22'
+        // },
+        //  {
+        //   id: 64536536,
+        //   checked: true,
+        //   title: "这是二个标题",
+        //   point: 3,
+        //   price: 1999,
+        //   total: 1999,
+        //   pic: '/static/1.jpg',
+        //   orderDate: '2020-02-22'
+        // }
       ]
     }
   },
   mounted () {
-    this.init();
+    this.init()
   },
   watch: {
-      selected(val){
-        this.updatePrice(val);
-        // const cartList = JSON.parse(localStorage.getItem("CART")) || [];
-        // const checkedCart = cartList.filter(item => val.includes(item.id))
-      }
+    selected (val) {
+      this.updatePrice(val)
+    }
   },
   methods: {
-    init(){
-      if(this.type === "cart"){
-        const cartList = JSON.parse(localStorage.getItem("CART")) || [];
-        this.proList = cartList;
+    init () {
+      if (this.type === 'cart') {
+        const cartList = JSON.parse(localStorage.getItem('CART')) || []
+        this.proList = cartList
         cartList.filter(item => item.checked).map(ck => this.selected.push(ck.id))
       } else {
         this.ajaxPost('api/shop/getOrderList', {
-          id: this.$route.params.id,
+          id: this.$route.params.id
         }).then(res => {
           // this.imgList = res.data.pic_list;
           res.data.forEach(item => {
-            this.getOrderDetail(item.id);
+            this.getOrderDetail(item.id)
           })
           console.log(res.data)
         })
       }
     },
-    delProduct(id){
-      if(this.delHandle){
-        this.delHandle(id);
+    delProduct (id) {
+      if (this.delHandle) {
+        this.delHandle(id)
       }
-      const cartList = JSON.parse(localStorage.getItem("CART")) || [];
-      console.log(cartList);
-        this.proList = cartList;
+      const cartList = JSON.parse(localStorage.getItem('CART')) || []
+      console.log(cartList)
+      this.proList = cartList
+      EventBus.$emit('cartchange')
     },
-    getOrderDetail(id){
+    getOrderDetail (id) {
       this.ajaxPost('api/shop/getOrderDetail', {
-          id,
-        }).then(res => {
+        id
+      }).then(res => {
         console.log(res.data[0].id, 'item.id')
 
-        this.proList.push(res.data[0]);
-        })
+        this.proList.push(res.data[0])
+      })
     },
-    format(num){
-      return () => number_format(num);
-    },
+    format (num) {
+      return () => number_format(num)
+    }
   },
   filters: {
-        money(value) {
-           if (/[^0-9\.]/.test(value))
-          return "0";
-        if (value == null || value == "")
-          return "0";
-        value = value.toString().replace(/^(\d*)$/, "$1.");
-        value = (value + "00").replace(/(\d*\.\d\d)\d*/, "$1");
-        value = value.replace(".", ",");
-        var re = /(\d)(\d{3},)/;
-        while (re.test(value))
-          value = value.replace(re, "$1,$2");
-        value = value.replace(/,(\d\d)$/, ".$1");
-        return value;
-        }
-    },
+    money (value) {
+      if (/[^0-9\.]/.test(value)) { return '0' }
+      if (value == null || value == '') { return '0' }
+      value = value.toString().replace(/^(\d*)$/, '$1.')
+      value = (value + '00').replace(/(\d*\.\d\d)\d*/, '$1')
+      value = value.replace('.', ',')
+      var re = /(\d)(\d{3},)/
+      while (re.test(value)) { value = value.replace(re, '$1,$2') }
+      value = value.replace(/,(\d\d)$/, '.$1')
+      return value
+    }
+  }
 }
 </script>
 <style lang='scss'>

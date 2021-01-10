@@ -1,9 +1,9 @@
 <template>
   <div class="navbox position-relative">
-    <router-link v-if="flag==='shop'" to="/robbbbuy/shop" class="logo-robbbbuy" id="logo">
+    <router-link v-if="flag==='shop'" to="/robbbbuy/shop" :class="['logo-robbbbuy', (!showMainNav && !showSubNav) && 'logo-hover']" id="logo">
       <img src="../../assets/robbbbuy.png"  alt="" :style="{opacity: showMainNav || showSubNav ? 0 : 1}" >
     </router-link>
-    <router-link v-else to="/" class="logo" id="logo">
+    <router-link v-else to="/" id="logo" :class="['logo', (!showMainNav && !showSubNav) && 'logo-hover']">
       <img src="../../assets/logo.png"  alt="" :style="{opacity: showMainNav || showSubNav ? 0 : 1}" >
     </router-link>
     <div class="nav-menu " >
@@ -22,9 +22,9 @@
               <li v-show="!showSubNav"><router-link to="/about" >{{$t('mainNav')[3]}}</router-link></li>
               <li v-show="!showSubNav"><router-link to="/contact" >{{$t('mainNav')[4]}}</router-link></li> -->
             </ul>
-            <div class="xxx">
-              <img @click="handleCloseNav" src="../../assets/x.png" class="float-right shoushi" id="xxx" >
-            </div>
+            <!--<div class="xxx">-->
+              <!--<img @click="handleCloseNav" src="../../assets/x.png" class="float-right shoushi" id="xxx" >-->
+            <!--</div>-->
           </div>
         </transition>
 
@@ -113,10 +113,15 @@ export default {
 
     },
     handleShowSubNav(pid) {
-      this.getNavs(pid).then(() => {
-        console.log('show sub nav')
-        this.showSubNav = true;
-      })
+      if (this.showSubNav) {
+        this.handleCloseNav()
+      } else {
+        this.getNavs(pid).then(() => {
+          console.log('show sub nav')
+          this.showSubNav = true;
+        })
+      }
+
     }
   }
 }
@@ -133,6 +138,15 @@ export default {
     opacity: 1;
     transition: all .5s;
     width: 100%;
+  }
+}
+
+.logo-hover {
+  &:hover {
+    img {
+      transition: all .01s;
+      opacity: .5 !important;
+    }
   }
 }
 
@@ -180,6 +194,11 @@ export default {
     display: flex;
     .nav-left {
       flex: 1 1 auto;
+      span {
+        &:hover {
+          opacity: .5;
+        }
+      }
     }
   }
 
