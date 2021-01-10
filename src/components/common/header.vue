@@ -22,9 +22,9 @@
               <li v-show="!showSubNav"><router-link to="/about" >{{$t('mainNav')[3]}}</router-link></li>
               <li v-show="!showSubNav"><router-link to="/contact" >{{$t('mainNav')[4]}}</router-link></li> -->
             </ul>
-            <div class="xxx">
-              <img @click="handleCloseNav" src="../../assets/x.png" class="float-right shoushi" id="xxx" >
-            </div>
+            <!--<div class="xxx">-->
+              <!--<img @click="handleCloseNav" src="../../assets/x.png" class="float-right shoushi" id="xxx" >-->
+            <!--</div>-->
           </div>
         </transition>
 
@@ -113,10 +113,15 @@ export default {
 
     },
     handleShowSubNav(pid) {
-      this.getNavs(pid).then(() => {
-        console.log('show sub nav')
-        this.showSubNav = true;
-      })
+      if (this.showSubNav) {
+        this.handleCloseNav()
+      } else {
+        this.getNavs(pid).then(() => {
+          console.log('show sub nav')
+          this.showSubNav = true;
+        })
+      }
+
     }
   }
 }

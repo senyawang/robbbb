@@ -221,6 +221,9 @@ export default {
   img {
     margin-top: 0;
   }
+  span {
+    font-size: 20px !important;
+  }
   .mr-4 {
     margin-right: 40px !important;
   }

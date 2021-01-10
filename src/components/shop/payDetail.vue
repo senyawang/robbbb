@@ -2,7 +2,7 @@
     <div class="d-flex justify-content-between">
         <div>
             <div class="d-flex justify-content-between pay1">
-                <div style="max-height: 392px;overflow: auto">
+                <div style="max-height: 340px;overflow: auto">
 
                     <div v-for="item in shopList" :key="item.id" class="d-flex item justify-content-between">
                         <img class="img" :src="item.pic | formatImg" alt="">
@@ -82,7 +82,8 @@ export default {
       centerDialogVisible: false,
       centerDialogVisible2: false,
       is_sync: 0,
-      resData: {}
+      resData: {},
+      totalPrice: 0,
     }
   },
   created () {
