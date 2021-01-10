@@ -87,35 +87,35 @@ export default {
               $('#bofangshipin').fadeIn().css('opacity', 1).css('z-index', 999)
               video.play()
 
-              const loading = this.$loading({
-                lock: true,
-                text: '视频加载中，请稍等...',
-                spinner: 'el-icon-loading',
-                background: 'rgba(0, 0, 0, 0.7)'
-              });
+              // const loading = this.$loading({
+              //   lock: true,
+              //   text: '视频加载中，请稍等...',
+              //   spinner: 'el-icon-loading',
+              //   background: 'rgba(0, 0, 0, 0.7)'
+              // });
 
-            video.onloadeddata = function() {
-              loading.close()
-            }
+            // video.onloadeddata = function() {
+            //   loading.close()
+            // }
 
-          video.addEventListener("playing", function() {
-            console.log("[Playing] loading of video");
-            loading.close()
-            if ( video.readyState == 4 ) {
-              console.log("[Finished] loading of video");
-            }
-          });
-          video.addEventListener("suspend", function(e) {
-            console.log("[Suspended] loading of video");
-            if ( video.readyState == 4 ) {
-              console.log("[Finished] loading of video");
-              loading.close()
-            }
-          });
+          // video.addEventListener("playing", function() {
+          //   console.log("[Playing] loading of video");
+          //   // loading.close()
+          //   if ( video.readyState == 4 ) {
+          //     console.log("[Finished] loading of video");
+          //   }
+          // });
+          // video.addEventListener("suspend", function(e) {
+          //   console.log("[Suspended] loading of video");
+          //   if ( video.readyState == 4 ) {
+          //     console.log("[Finished] loading of video");
+          //     // loading.close()
+          //   }
+          // });
 
-              video.addEventListener('canplaythrough', () => {
-                loading.close()
-              });
+              // video.addEventListener('canplaythrough', () => {
+              //   loading.close()
+              // });
 
 
           video.addEventListener('ended', () => {
