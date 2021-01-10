@@ -92,7 +92,7 @@ export default {
     }
   }
   .pro-total-num {
-    font-size: 40px;
+    font-size: 35px;
     line-height: 3;
   }
 }

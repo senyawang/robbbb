@@ -178,8 +178,8 @@ export default {
     }
   }
   .title {
-    font-size: 18px;
-    line-height: 1.8;
+    font-size: 28px;
+    line-height: 1.5;
     word-break: break-all;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -189,8 +189,8 @@ export default {
   }
 }
 .text {
-  font-size: 14px;
-  line-height: 2;
+  font-size: 18px;
+  line-height: 1.5;
   padding-left: 10px;
 }
 >>> .en {
@@ -209,6 +209,11 @@ export default {
 }
 .mt-33 {
   margin-top: 33px;
+}
+.fs-16 {
+  width: 7em !important;
+  height: 50px;
+  font-size: 20px;
 }
 .mt-43 {
   margin-top: 43px;

@@ -50,18 +50,16 @@ export default {
     }
     img {
       width: 100%;
-      &:hover {
-        opacity: .5;
-      }
+      /*&:hover {*/
+        /*opacity: .5;*/
+      /*}*/
     }
     h3 {
-      margin-left: 10%;
-      width: 90%;
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;
       margin-top: 10px;
-      font-size: 32px;
+      font-size: 28px;
       line-height: 1.5;
       text-align: right;
     }

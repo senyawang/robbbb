@@ -1,6 +1,9 @@
 @import './sass/reset.scss';
 @import './sass/var.scss';
 @import './sass/base.scss';
+input,textarea{
+  -webkit-appearance: none;
+}
 .main-body {
   padding: 18px;
 }
@@ -11,6 +14,11 @@
   text-align: center;
 }
 
+#app {
+  .el-dialog.full-width {
+      width: 100% !important;
+  }
+}
 .shoushi {
   cursor: pointer;
 }
@@ -42,6 +50,7 @@
   padding: 0 30px;
   .label {
     line-height: 2;
+    font-size: 24px;
   }
   .form-item {
     margin-bottom: 30px;
@@ -55,6 +64,7 @@
     border-radius: 0;
     border: 1px solid $black;
     box-shadow: none;
+    -webkit-appearance: none;
   }
 }
 
@@ -159,7 +169,7 @@ button:focus {
       height: 60px;
       line-height: 60px;
       padding: 0;
-      border: 1px solid #b2b2b2;
+      border: 1PX solid #b2b2b2;
       border-radius: 0;
       font-size: 36px;
 
@@ -168,8 +178,9 @@ button:focus {
     .el-icon-minus,
     .el-icon-plus{
       line-height: 56px;
-      font-size: 36px;
+      font-size: 30px;
       font-weight: 900;
+      vertical-align: 1px;
     }
 
     .el-input-number__decrease:hover:not(.is-disabled)~.el-input .el-input__inner:not(.is-disabled),

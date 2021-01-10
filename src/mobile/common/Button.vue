@@ -22,7 +22,8 @@ export default {
   background: $black;
   color: #fff;
   border: 0 none;
-  font-size: 28px;
+  font-weight: 400;
+  font-size: 24px;
   &:hover {
     background: rgba($color: $black, $alpha: .5);
   }

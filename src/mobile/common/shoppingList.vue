@@ -216,6 +216,7 @@ export default {
       line-height: 40px;
     }
     .img-box {
+      flex: 0 0 246px;
       width: 246px;
       height: 146px;
       margin-right: 32px;

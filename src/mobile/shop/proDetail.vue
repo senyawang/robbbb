@@ -1,6 +1,5 @@
 <template>
     <div class="detail">
-
       <div :class='["pro-list", {"full-screen": !showDesc}]'>
         <Title :title="langValue(resData, 'title')" align="center" />
           <van-swipe
@@ -40,7 +39,7 @@
         >
             <div class="text-center">{{$t('shoppingCart').text1}}</div>
             <span slot="footer" class="dialog-footer">
-              <Button @click="centerDialogVisible = false" class="red large">{{$t('buttons').continueBuy}}</Button>
+              <Button @click="centerDialogVisible = false" style="font-size: 12px" class="red large">{{$t('buttons').continueBuy}}</Button>
               <p style="margin-top: 20px;">
                 <Button type="ghost" class="large" @click="$router.push(`/robbbbuy/shop/cart`)">{{$t('buttons').goCart}}</Button>
               </p>

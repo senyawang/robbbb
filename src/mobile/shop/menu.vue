@@ -1,11 +1,15 @@
 <template>
   <div class="navbox">
-    <div style="font-weight: 700">{{$t('routes')[title]}}</div>
+    <div style="font-weight: 700">{{$t('routes')[title] || $t('routes').shop}}</div>
     <div v-show="!$t('routes')[title]" style="font-weight: 700">{{$t('routes').title}}</div>
 
     <div class="nav-menu">
       <div v-if="isLogin" class="nav-right jiantou">
-        <span>{{$t('shopTitle')[3]}}，</span><span @click="handleShowMainNav" class="user-name">{{userName}}</span>
+        <span>{{$t('shopTitle')[3]}}，</span>
+        <span
+          :style="{opacity: showMainNav ? 0.7 : 1}"
+          @click="handleShowMainNav"
+          class="user-name">{{userName}}</span>
       </div>
       <div v-else class="nav-right jiantou login">
         <span @click="handleShowLogin">{{$t('shopTitle')[1]}}</span>
@@ -93,9 +97,6 @@ export default {
 .user-name {
   color: $themeColor;
   cursor: pointer;
-  &:hover {
-    opacity: .7;
-  }
 }
 .red { color: $themeColor; }
 .navbox {
@@ -135,14 +136,15 @@ export default {
       .cart-num {
         position: absolute;
         left: 50%;
-        margin-left: 4em;
+        margin-left: 2em;
         display: inline-block;
         vertical-align: super;
         width: 32px;
         height: 32px;
+        overflow: hidden;
         line-height: 32px;
         text-align: center;
-        font-size: 12px;
+        font-size: 24px;
         border-radius: 50%;
         background: $themeColor;
         color: #fff;
@@ -151,7 +153,7 @@ export default {
   }
 .en {
   .cart-num {
-    margin-left: 8em !important;
+    margin-left: 5em !important;
   }
 }
 .login {
@@ -162,6 +164,7 @@ export default {
   position: relative;
   z-index: 1;
   font-size: 30px;
+  font-weight: 900;
   margin-top: 30px;
   img {
     /*height: 36px;*/

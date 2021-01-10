@@ -91,7 +91,6 @@ export default {
     font-size: 24px;
     line-height: 1.8;
     font-weight: 500;
-    padding-top: 40px;
     .submit {
           width: 200px;
           height: 50px;
@@ -102,6 +101,10 @@ export default {
             background: rgba($color: #000000, $alpha: .5);
           }
       }
+  h5 {
+    font-size: 20px;
+    text-align: left;
+  }
 
     .form-box {
       padding-top: 60px;
@@ -113,6 +116,7 @@ export default {
         border: 1px solid #000;
         border-radius: 0;
         box-sizing: border-box;
+        -webkit-appearance: none;
       }
       textarea {
         width: 100%;

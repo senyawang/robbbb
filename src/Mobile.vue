@@ -108,7 +108,7 @@ a:visited {
     min-width: 1%;
 }
 .err-info {
-  font-size: 32px;
+  font-size: 28px;
   word-break: break-word;
 }
 .mask-index {

@@ -36,6 +36,7 @@ export default {
 <style lang='scss' scoped>
 .about {
   min-height: 50vh;
+  overflow: hidden;
   // background: #f0f0f0;
 }
 </style>

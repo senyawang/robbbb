@@ -9,7 +9,7 @@
             <img v-if="showBtn" src="../../../../assets/play.png" alt="">
           </div>
         </template>
-        <iframe v-else width="100%" frameborder="0" :src="resData.video_link" allowFullScreen="true"></iframe>
+        <iframe v-else frameborder="0" style="width: 86vw; height: 48vw;" :src="resData.video_link" allowFullScreen="true"></iframe>
       </div>
 
       <div class="rob-text-area">
