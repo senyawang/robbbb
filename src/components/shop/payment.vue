@@ -37,15 +37,20 @@
         <Button class="sp" @click="bofang" id="zhifu"> {{$t('buttons').pay}} </Button>
     </div>
 
-
     <div id="bofangshipin" class="bg-white" style="">
         <div class="kuang left" id="left">
                 {{$t('other').thanks}}
             </div>
-        <div style="width: 1000px;height: 100%;display: flex; align-items: center;">
-              <video v-if="$i18n.locale === 'zh'" src="../../assets/video/ch.mp4" preload="metadata" muted autoplay id="video"></video>
-              <video v-else src="../../assets/video/en.mp4" preload="metadata" muted autoplay id="video"></video>
+        <div class="video" v-show="!playover" :style="{opacity: playover ? 0 : 1}">
+              <video v-if="$i18n.locale === 'en'" src="../../assets/video/end-en.mp4" preload="auto" id="video"></video>
+              <video v-else src="../../assets/video/end-zh.mp4" preload="auto" id="video"></video>
               <!--<video src="http://203.195.204.34/assets/media/ch.034c6c2.mp4" preload="metadata" muted autoplay id="video"></video>-->
+        </div>
+        <div class="video" v-show="showCao" :style="{opacity: showCaoOp ? 1 : 0}">
+          <img src="../../assets/cao.jpg" alt="" width="600" height="600">
+        </div>
+        <div class="video" v-show="showLogo" :style="{opacity: showLogoOp ? 1 : 0}">
+          <img src="../../assets/pc-end-logo.jpg" alt="">
         </div>
         <div class="kuang right" id="right">
             {{userName}}
@@ -53,96 +58,77 @@
         <div id="kaishi" @click="bofang"></div>
     </div>
 
-
 </div>
 </template>
 
 <script>
-import Button from "../common/Button.vue";
-import $ from 'jquery';
+import Button from '../common/Button.vue'
+import $ from 'jquery'
+
+const delay = t => new Promise((resolve) => setTimeout(resolve, t))
+
 export default {
   components: {
-    Button,
+    Button
   },
-  data(){
+  data () {
     return {
-      userName: window.sessionStorage.getItem('userName')
+      userName: window.sessionStorage.getItem('userName'),
+      playover: false,
+      showCao: false,
+      showCaoOp: false,
+      showLogo: false,
+      showLogoOp: false
     }
   },
   mounted () {
-    $(() => {
-      // $('#bofangshipin').hide()
-    })
 
   },
   methods: {
-    bofang(){
+    async bofang () {
+
+      $('#zhifu').animate({
+        opacity: 0
+      }, 1500)
+      await delay(1500)
+      $('#bofangshipin').fadeIn().css('opacity', 1).css('z-index', 999)
+      // await delay(1500)
       const video = document.querySelector('#video')
       video.play()
 
-      $('#zhifu').animate({
-                  opacity: 0
-              },1500)
-        setTimeout(()=>{
-              $('#bofangshipin').fadeIn().css('opacity', 1).css('z-index', 999)
-              video.play()
-
-              // const loading = this.$loading({
-              //   lock: true,
-              //   text: '视频加载中，请稍等...',
-              //   spinner: 'el-icon-loading',
-              //   background: 'rgba(0, 0, 0, 0.7)'
-              // });
-
-            // video.onloadeddata = function() {
-            //   loading.close()
-            // }
-
-          // video.addEventListener("playing", function() {
-          //   console.log("[Playing] loading of video");
-          //   // loading.close()
-          //   if ( video.readyState == 4 ) {
-          //     console.log("[Finished] loading of video");
-          //   }
-          // });
-          // video.addEventListener("suspend", function(e) {
-          //   console.log("[Suspended] loading of video");
-          //   if ( video.readyState == 4 ) {
-          //     console.log("[Finished] loading of video");
-          //     // loading.close()
-          //   }
-          // });
-
-              // video.addEventListener('canplaythrough', () => {
-              //   loading.close()
-              // });
-
-
-          video.addEventListener('ended', () => {
-                window.location.href = '/'
-              })
-              // setTimeout(()=>{
-              //     window.location.href='/'
-              // },57 * 1000)
-          },1500)
-
-          setTimeout(()=>{
-              $('#left').animate({
-                  marginLeft:'-280px'
-              },1500)
-              $('#right').animate({
-                  marginRight:'-342px'
-              },1500)
-          },50 * 1000)
-
-          setTimeout(()=>{
-              $('#left').animate({
-                  marginLeft:0
-              },1500)
-              $('#right').animate({
-                  marginRight:0
-              },1500)
-        },34 * 1000)
+      video.addEventListener('ended', async () => {
+        await delay(1500)
+        this.playover = true
+        await delay(200)
+        this.showCao = true
+        await delay(200)
+        this.showCaoOp = true
+        await delay(4000)
+        $('#left').animate({
+          marginLeft: 0
+        }, 1000)
+        $('#right').animate({
+          marginRight: 0
+        }, 1000)
+        await delay(4000)
+        $('#left').animate({
+          marginLeft: '-280px'
+        }, 1000)
+        $('#right').animate({
+          marginRight: '-342px'
+        }, 1000)
+        await delay(1000)
+        this.showCaoOp = false
+        await delay(3000)
+        this.showCao = false
+        this.showLogo = true
+        await delay(300)
+        this.showLogoOp = true
+        await delay(3000)
+        this.showLogoOp = false
+        await delay(3000)
+        this.$router.push('/?from=end')
+      })
     }
   }
 }
@@ -167,6 +153,12 @@ export default {
 }
 .videobox {
   width: 100%;
+}
+.video {
+  width: 1000px;height: 100%;display: flex; align-items: center;
+  opacity: 0;
+  justify-content: center;
+  transition: all 3s;
 }
 #video {
   width: 100%;

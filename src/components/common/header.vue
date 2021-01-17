@@ -298,7 +298,7 @@ export default {
 
 .slide-left-leave-to
 /* .slide-fade-leave-active for below version 2.1.8 */ {
-  transform: translateX(900px);
+  transform: translateX(-900px);
   opacity: 0;
 }
 
