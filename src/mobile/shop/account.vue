@@ -4,7 +4,7 @@
       <div @click="showMyProfile = true" class="shoushi">{{$t('account').myProfile}}</div>
       <div @click="showModifyPwd = true" class="shoushi">{{$t('account').modifyPwd}}</div>
       <div @click="goHistory" class="shoushi">{{$t('account').shopHistory}}</div>
-      <p class="text-center" style="padding-bottom: 20px">
+      <p class="text-center">
         <img :src="robbbuy[0]" class="tupiantihuan" alt="">
         <img :src="robbbuy[1]" class="tupiantihuan" alt="">
         <img :src="robbbuy[2]" class="tupiantihuan" alt="">

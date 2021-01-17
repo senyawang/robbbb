@@ -54,7 +54,9 @@ export default {
     }
   },
   watch: {
-    selected (val) {}
+    selected (val) {
+
+    }
   },
   created () {
     const localCart = JSON.parse(localStorage.getItem('CART')) || []
@@ -64,9 +66,9 @@ export default {
   mounted () {
     const localCart = JSON.parse(localStorage.getItem('CART')) || []
     this.cartLength = localCart.length
-    this.totalPrice = localCart.reduce((a, c) => {
-      return a + Number(c.price) * c.point
-    }, 0)
+    // this.totalPrice = localCart.reduce((a, c) => {
+    //   return a + Number(c.price) * c.point
+    // }, 0)
 
     window.addEventListener('scroll', this.handleScroll)
   },
@@ -91,12 +93,6 @@ export default {
     updatePrice (selected) {
       this.selected = selected
       const cartList = JSON.parse(localStorage.getItem('CART')) || []
-      const checkedCart = cartList.filter(item => selected.includes(item.id))
-      const totalPrice = checkedCart.filter(item => item.checked).reduce((a, c) => {
-        return a + c.price * c.point
-      }, 0)
-      console.log(totalPrice, checkedCart, selected)
-      this.totalPrice = totalPrice
       cartList.map(item => {
         if (selected.includes(item.id)) {
           item.checked = true
@@ -104,6 +100,14 @@ export default {
       })
 
       localStorage.setItem('CART', JSON.stringify(cartList))
+
+      const checkedCart = cartList.filter(item => selected.includes(item.id))
+      const totalPrice = checkedCart.filter(item => item.checked).reduce((a, c) => {
+        return a + c.price * c.point
+      }, 0)
+      console.log(totalPrice, checkedCart, selected)
+      this.totalPrice = totalPrice
+
     },
     delHandle (id) {
       const localCart = JSON.parse(localStorage.getItem('CART')) || []
@@ -113,7 +117,9 @@ export default {
       this.updatePrice(this.selected)
     },
     goToPay () {
-      this.$router.push('/robbbbuy/payDetail')
+      if(this.selected.length) {
+        this.$router.push('/robbbbuy/payDetail')
+      }
     }
   }
 }

@@ -50,9 +50,12 @@ export default {
 </script>
 <style lang='scss' scoped>
 .art-list {
-  padding: 17px;
+  padding: 17px 17px 0;
   .rob-photo {
     margin-bottom: 40px;
+    &:last-child {
+      margin-bottom: 0;
+    }
     a {
       display: block;
     }

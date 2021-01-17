@@ -147,6 +147,9 @@ export default {
       }
     }
   }
+  .side-content {
+    margin-bottom: 40px;
+  }
 </style>
 <style lang='scss'>
 .detail {
@@ -233,7 +236,6 @@ export default {
 }
 .side-content {
     height: 355px;
-    margin-bottom: 40px;
   overflow-y: auto;
   overflow-x: hidden;
     border: 1px solid #000000;

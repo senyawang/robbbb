@@ -235,6 +235,10 @@ export default {
   .swipe-cart {
     margin-bottom: 26px;
     border: 1px solid #ccc;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
     .van-swipe-cell__wrapper {
       display: flex;
       align-items: center;

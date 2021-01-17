@@ -34,6 +34,13 @@ export default {
       showBg: true
     }
   },
+  created () {
+    // const { from } = getLocationParams() || {}
+    const { from } = this.$route.query || {}
+    if (from === 'end') {
+      this.show = false
+    }
+  },
   mounted () {
 
   },

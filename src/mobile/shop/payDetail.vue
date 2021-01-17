@@ -1,5 +1,5 @@
 <template>
-    <div class="pt18" style="padding-bottom: 40px">
+    <div class="pt18">
         <div class="pay1">
 
             <div v-for="item in shopList" :key="item.id" class="d-flex">
