@@ -24,7 +24,7 @@
 
 <script>
 import Vue from 'vue'
-
+import { getLocationParams } from '../../utils/help.js';
 export default {
   name: 'Home',
   data () {
@@ -32,6 +32,13 @@ export default {
       showIndex: true,
       show: true,
       showBg: true
+    }
+  },
+  created () {
+    // const { from } = getLocationParams() || {}
+    const { from } = this.$route.query || {}
+    if (from === 'end') {
+      this.show = false
     }
   },
   mounted () {
