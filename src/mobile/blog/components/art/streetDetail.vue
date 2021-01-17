@@ -1,5 +1,5 @@
 <template>
-    <div class="detail">
+    <div class="detail main-body">
         <Title :title="langValue(resData, 'title')" align="center" />
 
       <div :class='["pro-list", {"full-screen": !showDesc}]'>
@@ -26,38 +26,29 @@
 </template>
 
 <script>
-import { ImagePreview } from 'vant';
-import Title from '../../../common/title';
+import { ImagePreview } from 'vant'
+import Title from '../../../common/title'
 export default {
   data () {
     return {
-        current: 1,
-        showDesc: true,
-        imgList: [
-          {
-            imgSrc: '/static/img/1.607ddd7.jpg',
-            title: '你是我的小苹果'
-          },
-          {
-            imgSrc: '/static/img/1.607ddd7.jpg',
-            title: '你是我的小苹果'
-          }
-        ],
-        content: '',
-        resData: {},
+      current: 1,
+      showDesc: true,
+      imgList: [],
+      content: '',
+      resData: {}
     }
   },
   components: {
-    Title,
+    Title
   },
   mounted () {
-    this.init();
+    this.init()
   },
   methods: {
-    slideChange(val){
-        this.current = val + 1;
+    slideChange (val) {
+      this.current = val + 1
     },
-    handleZoom(){
+    handleZoom () {
       // ImagePreview({
       //   images: ['https://img.yzcdn.cn/vant/apple-1.jpg'],
       //   showIndex:true,
@@ -69,12 +60,12 @@ export default {
       // ImagePreview(imgs)
       // this.showDesc = !this.showDesc;
     },
-    init(){
+    init () {
       this.ajaxPost('api/index/getProductDetail', {
-        id: this.$route.params.id,
+        id: this.$route.params.id
       }).then(res => {
         console.log(res.data.pic_list, 'daddd')
-        this.imgList = res.data.pic_list;
+        this.imgList = res.data.pic_list
         this.resData = res.data
         console.log(res.data)
       })
@@ -86,6 +77,7 @@ export default {
 .pro-list {
   position: relative;
   text-align: center;
+  padding-top: 17px;
   img {
     &:hover {
       cursor: zoom-in;

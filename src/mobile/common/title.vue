@@ -13,6 +13,7 @@ export default {
 <style lang='scss' scoped>
 .detail-title {
   overflow: hidden;
+  height: 1em;
   white-space: nowrap;
   text-overflow: ellipsis;
   margin-top: 60px;

@@ -1,5 +1,5 @@
 <template>
-    <div class="">
+    <div class="pt18" style="padding-bottom: 40px">
         <div class="pay1">
 
             <div v-for="item in shopList" :key="item.id" class="d-flex">
@@ -189,7 +189,7 @@ export default {
   }
 }
 .text {
-  font-size: 18px;
+  font-size: 16px;
   line-height: 1.5;
   padding-left: 10px;
 }

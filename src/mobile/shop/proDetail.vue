@@ -111,7 +111,7 @@ export default {
       console.log(this.resData)
         const { resData } = this;
         const product = {
-          checked: true,
+          checked: false,
           id: resData.id,
           title: resData.title,
           pic: resData.pic,
@@ -124,6 +124,7 @@ export default {
         newLocalCart.push(product)
         localStorage.setItem('CART', JSON.stringify(newLocalCart))
         this.centerDialogVisible = true;
+      EventBus.$emit('cartchange')
     },
     handleBuy(){
       const {isLogin} = this.globalData;
@@ -167,6 +168,7 @@ export default {
   h1 {
     text-align: left;
     font-size: 20px;
+    margin-top: 17px !important;
     margin-bottom: 20px;
   }
   img {
@@ -176,7 +178,7 @@ export default {
     }
   }
   .pro-total-num {
-    font-size: 40px;
+    font-size: 35px;
     line-height: 2.5;
   }
 }
@@ -212,6 +214,7 @@ export default {
     height: 86px;
     line-height: 86px;
     .button {
+      font-size: 30px;
       height: 86px;
     }
     &:last-child {

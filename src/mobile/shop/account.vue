@@ -190,7 +190,7 @@ export default {
 </script>
 <style lang='scss' scoped>
 .pt-60 {
-  padding-top: 40px;
+  padding-top: 10px;
 }
 .myAccount > div {
     height: 90px;
@@ -212,5 +212,7 @@ export default {
     width: 90%;
     margin-top: 70px;
 }
-
+.mbp {
+  font-size: 17px;
+}
 </style>

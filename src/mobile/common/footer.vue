@@ -11,7 +11,7 @@ export default {
 </script>
 <style lang='scss' scoped>
 .footer {
-  padding: 70px 20px;
+  padding: 90px 20px;
   text-align: center;
 }
 </style>

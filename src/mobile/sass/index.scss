@@ -5,13 +5,16 @@ input,textarea{
   -webkit-appearance: none;
 }
 .main-body {
-  padding: 18px;
+  padding: 18px !important;
+}
+.pt18 {
+  padding-top: 18px;
 }
 .text-right {
   text-align: right;
 }
 .text-center {
-  text-align: center;
+  text-align: center !important;
 }
 
 #app {
@@ -101,8 +104,8 @@ button:focus {
     .el-icon-close:before {
       content: '';
       display: inline-block;
-      width: 24px;
-      height: 20px;
+      width: 17px;
+      height: 16px;
       background: url("~@/assets/x.png");
       background-size: 100% 100%;
     }

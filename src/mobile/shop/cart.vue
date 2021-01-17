@@ -14,9 +14,9 @@
         <label for="all"></label>
       </div>
       <span style="padding-left: 5px">{{$t('other').selectAll}}</span>
-      <div class="text-right ui-flex-item theme-primary">
-        {{$t('shoppingCart').totalPrice}}：￥{{totalPrice | money}}
-        <Button style="min-width: 120px;width: auto; padding: 0 10px;" size="large" class="sp" @click="totalPrice > 0 ? goToPay() : ''">{{$t('shoppingCart').goPay}}</Button>
+      <div class="text-right ui-flex-item total-price">
+        {{$t('shoppingCart').totalPrice}}<span class="theme-primary"> ￥{{totalPrice | money}}</span>
+        <Button style="min-width: 120px;width: auto; padding: 0 10px; margin-left: 10px;" size="large" class="sp" @click="totalPrice > 0 ? goToPay() : ''">{{$t('shoppingCart').goPay}}</Button>
       </div>
     </div>
   </div>
@@ -56,12 +56,18 @@ export default {
   watch: {
     selected (val) {}
   },
+  created () {
+    const localCart = JSON.parse(localStorage.getItem('CART')) || []
+    localCart.forEach(item => item.checked = false)
+    localStorage.setItem('CART', JSON.stringify(localCart))
+  },
   mounted () {
     const localCart = JSON.parse(localStorage.getItem('CART')) || []
     this.cartLength = localCart.length
     this.totalPrice = localCart.reduce((a, c) => {
       return a + Number(c.price) * c.point
     }, 0)
+
     window.addEventListener('scroll', this.handleScroll)
   },
   destroy () {
@@ -113,6 +119,9 @@ export default {
 }
 </script>
 <style lang='scss' scoped>
+  .total-price {
+    font-size: 24px;
+  }
 .pay-button {
   position: fixed;
   left: 0;

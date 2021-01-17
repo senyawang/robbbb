@@ -165,7 +165,7 @@ export default {
   width: 100px;
   position: absolute;
   left: 0;
-  top: 14px;
+  top: 0;
   z-index: 10;
   img {
     opacity: 1;
@@ -177,7 +177,7 @@ export default {
 .logo-robbbbuy {
   width: 270px;
   position: absolute;
-  top: 42px;
+  top: 35px;
   left: 0;
   z-index: 3;
   img {
@@ -189,7 +189,7 @@ export default {
 
 .lang {
   float: left;
-  margin-top: 30px;
+  margin-top: 20px;
   font-size: 40px;
   font-weight: 700;
   line-height: 70px;

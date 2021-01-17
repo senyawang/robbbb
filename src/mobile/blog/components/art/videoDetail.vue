@@ -1,6 +1,5 @@
 <template>
     <div class="detail main-body">
-
       <Title :title="langValue(resData, 'title')" />
       <div :class='["pro-list"]'>
         <template v-if="video_url">
@@ -9,7 +8,7 @@
             <img v-if="showBtn" src="../../../../assets/play.png" alt="">
           </div>
         </template>
-        <iframe v-else frameborder="0" style="width: 86vw; height: 48vw;" :src="resData.video_link" allowFullScreen="true"></iframe>
+        <iframe v-else frameborder="0" style="width: 86vw; height: 47vw;" :src="resData.video_link" allowFullScreen="true"></iframe>
       </div>
 
       <div class="rob-text-area">

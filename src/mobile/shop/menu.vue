@@ -35,6 +35,7 @@
 </template>
 
 <script>
+import EventBus from '../../utils/eventBus'
 export default {
   name: 'Menu',
   props: ["title", "handleShowLogin", "handleShowRegister", "setLoginHandle"],
@@ -52,6 +53,11 @@ export default {
     this.init();
     const localCart = JSON.parse(localStorage.getItem("CART")) || []
     this.cartNum = localCart.length
+
+    EventBus.$on('cartchange', () => {
+      const localCart = JSON.parse(localStorage.getItem('CART')) || []
+      this.cartNum = localCart.length
+    })
   },
   methods: {
     init(){
@@ -101,7 +107,7 @@ export default {
 .red { color: $themeColor; }
 .navbox {
   position: relative;
-  padding-bottom: 20px;
+  padding-bottom: 44px;
   z-index: 9;
   line-height: 36px;
   font-size: 35px;

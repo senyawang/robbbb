@@ -182,9 +182,9 @@ export default {
       font-size: 18px;
       text-align: center;
     }
-    img:hover {
-      opacity: .5;
-    }
+    /*img:hover {*/
+      /*opacity: .5;*/
+    /*}*/
   .title {
     &:hover {
       opacity: .5;

@@ -9,7 +9,7 @@
         :disabled="type === 'history'"
       >
         <!--<span slot="left">选择</span>-->
-        <div class="ui-flex-box cart-item">
+        <div class="ui-flex-box cart-item" :class="selected.includes(item.id) ? 'checked' : ''">
           <div class="text-center mx-auto">
             <div v-if="type !== 'cart'">{{index+1}}</div>
             <div v-else class="mycheck text-center d-inline-block">
@@ -36,7 +36,7 @@
 
               <div class="ui-flex-item text-right">
                 <el-input-number v-if="type === 'cart'" step-strictly :disabled="type !== 'cart'" v-model="item.point" @change="(val) => handleChange(item.id, val)" :min="1" :max="3" ></el-input-number>
-                <span class="xiaoren" v-else><img src="../../assets/logo-index.png" width="40" alt=""> X {{item.point}}</span>
+                <span class="xiaoren" v-else><img src="../../assets/logo-index.png" width="40" alt=""> <span>X</span> {{item.point}}</span>
               </div>
             </div>
 
@@ -162,7 +162,7 @@ export default {
       var re = /(\d)(\d{3},)/
       while (re.test(value)) { value = value.replace(re, '$1,$2') }
       value = value.replace(/,(\d\d)$/, '.$1')
-      return value
+      return value.split('.')[0]
     }
   }
 }
@@ -171,12 +171,15 @@ export default {
 @import '../sass/var.scss';
 .shoppingCar {
     width: 100%;
-    margin-top: 11px;
+    margin-top: 18px;
     text-align: center;
     .cart-item {
       align-items: center;
       width: 100%;
         padding: 25px 15px;
+      &.checked {
+        background: #f7f7f7;
+      }
     }
     .mx-auto {
       font-size: 30px;
@@ -190,6 +193,7 @@ export default {
       transform-origin: right top;
     }
     .pro-des {
+      height: 164px;
       text-align: left;
       line-height: 30px;
     }
@@ -203,10 +207,10 @@ export default {
       -webkit-box-orient: vertical;
       font-size: 26px;
       height: 80px;
-      margin-bottom: 20px;
+      margin-bottom: 45px;
     }
     .price {
-      font-size: 28px;
+      font-size: 26px;
       align-items: center;
       line-height: 30px;
       height: 30px;
@@ -218,7 +222,7 @@ export default {
     .img-box {
       flex: 0 0 246px;
       width: 246px;
-      height: 146px;
+      height: 164px;
       margin-right: 32px;
       overflow: hidden;
       img {
@@ -250,6 +254,10 @@ export default {
 }
   .xiaoren {
     color: $themeColor;
+    font-size: 28px;
+    span {
+      font-size: 22px;
+    }
     img {
       display: inline-block;
       vertical-align: middle;

@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class="">
 <div class="pay-2">
         <div class="pay2">
             <div class="d-flex justify-content-between">
@@ -35,7 +35,7 @@
                 </div>
             </div>
         </div>
-        <div class="font-14 text-center pay-text" style="margin-top: 40px">
+        <div class="font-14 text-center pay-text" style="margin-top: 60px">
           <div><span class="c-red">*</span> {{$t('other').express}} </div>
           <div><span class="c-red">*</span> {{$t('other').expressTime}} </div>
           <div><span class="c-red">*</span> {{$t('other').markText}} </div>
@@ -151,6 +151,9 @@ export default {
     margin: 70px;
     align-items: center;
     font-size: 30px;
+    &:first-child {
+      margin-top: 18px;
+    }
   }
   img {
     height: 76px;
@@ -183,7 +186,7 @@ export default {
   line-height: 1.4;
 }
 .zf {
-  margin-top: 80px;
+  margin-top: 120px;
 }
 .videobox {
   width: 100%;

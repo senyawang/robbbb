@@ -13,26 +13,39 @@
 
 <script>
 export default {
-    name: 'Art',
-    props: ['detailName', 'actionUrl'],
-    data () {
-      return {
-        artList: [ ]
-      }
-    },
-    mounted () {
-      this.init();
-    },
-    methods: {
-      init(){
-        this.ajaxPost(this.actionUrl || 'api/index/getProductList', {
-          pid: this.$route.query.id,
-        }).then(res => {
-          this.artList = res.data;
-          console.log(res.data)
-        })
-      }
+  name: 'Art',
+  props: ['detailName', 'actionUrl'],
+  data () {
+    return {
+      artList: [ ]
     }
+  },
+  mounted () {
+    this.init()
+    // let move = null
+    // window.addEventListener('touchend touchstart touchmove', 'a', function (e) {
+    //   if (e.type === 'touchstart') {
+    //     move = null
+    //     e.tartget.className = e.tartget.className + ' active'
+    //   } else if (e.type === 'touchmove') {
+    //     if (move) return
+    //     move = true
+    //   } else {
+    //     if (move) return
+    //     $(this).removeClass('active')
+    //   }
+    // })
+  },
+  methods: {
+    init () {
+      this.ajaxPost(this.actionUrl || 'api/index/getProductList', {
+        pid: this.$route.query.id
+      }).then(res => {
+        this.artList = res.data
+        console.log(res.data)
+      })
+    }
+  }
 }
 </script>
 <style lang='scss' scoped>
@@ -50,9 +63,9 @@ export default {
     }
     img {
       width: 100%;
-      /*&:hover {*/
-        /*opacity: .5;*/
-      /*}*/
+      &:hover {
+        opacity: .5;
+      }
     }
     h3 {
       overflow: hidden;

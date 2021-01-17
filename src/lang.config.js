@@ -166,7 +166,7 @@ export default {
       btnNext: '下一步',
       totalPrice: '价格总计',
       edit: '编辑',
-      ask: '是否同步到我的资料？',
+      ask: '是否同步到我的资料 ?',
       yes: '是',
       no: '否',
       weixin: '微信支付',

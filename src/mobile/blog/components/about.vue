@@ -35,6 +35,7 @@ export default {
 </script>
 <style lang='scss' scoped>
 .about {
+  padding-top: 18px;
   min-height: 50vh;
   overflow: hidden;
   // background: #f0f0f0;

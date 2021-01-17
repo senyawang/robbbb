@@ -3,8 +3,8 @@
     <Title v-if="showTitle" :title="$t('mainNav')[4]" />
     <div class="contact">
           <div class="text-center">
-            <h5> {{$t('contact').text1}} </h5>
-            <h5 class="mt-12"> {{$t('contact').text2}} </h5>
+            <h5 style="font-size: 9px;"> {{$t('contact').text1}} </h5>
+            <h5 style="font-size: 9px;" class="mt-12"> {{$t('contact').text2}} </h5>
           </div>
 
           <div class=" form-box">
@@ -91,6 +91,7 @@ export default {
     font-size: 24px;
     line-height: 1.8;
     font-weight: 500;
+  padding-top: 17px;
     .submit {
           width: 200px;
           height: 50px;
@@ -101,13 +102,14 @@ export default {
             background: rgba($color: #000000, $alpha: .5);
           }
       }
-  h5 {
-    font-size: 20px;
-    text-align: left;
-  }
 
     .form-box {
-      padding-top: 60px;
+      padding-top: 50px;
+
+      h5 {
+        font-size: 20px;
+        text-align: left;
+      }
 
       input {
         width: 100%;

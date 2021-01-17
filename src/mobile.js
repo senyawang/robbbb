@@ -59,7 +59,7 @@ Vue.mixin({
       var re = /(\d)(\d{3},)/
       while (re.test(value)) { value = value.replace(re, '$1,$2') }
       value = value.replace(/,(\d\d)$/, '.$1')
-      return value
+      return value.split('.')[0]
     },
     lang (value) {
       const loc = i18n.locale
