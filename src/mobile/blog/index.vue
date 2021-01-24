@@ -31,7 +31,8 @@ export default {
     return {
       showIndex: true,
       show: true,
-      showBg: true
+      showBg: true,
+      onLoaded: false,
     }
   },
   created () {
@@ -42,10 +43,13 @@ export default {
     }
   },
   mounted () {
-
+    if (this.onLoaded) {
+      this.onloadImg()
+    }
   },
   methods: {
     onloadImg () {
+      this.onLoaded = true
       this.showIndex = false
       setTimeout(() => {
         this.showBg = false
