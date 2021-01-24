@@ -1,16 +1,16 @@
 <template>
     <div class="pt18">
         <div class="pay1">
-
-            <div v-for="item in shopList" :key="item.id" class="d-flex">
-                <img :src="item.pic | formatImg" alt="" width="120" height="80">
-                <div class="pl-2 f28 ui-flex-item ml-2"><div class="title">{{langValue(item, 'title')}}</div></div>
-                <div class="nnn text-right f28" style="line-height: 1.5;">
-                    <p class="m-0">￥{{item.price | money}}</p>
-                    <p class="c-red ">x{{item.point}}</p>
-                </div>
+            <div class="cart-box" style="height: 80px; overflow: auto">
+              <div v-for="item in shopList" :key="item.id" class="d-flex" >
+                  <img :src="item.pic | formatImg" alt="" width="120" height="80">
+                  <div class="pl-2 f28 ui-flex-item ml-2"><div class="title">{{langValue(item, 'title')}}</div></div>
+                  <div class="nnn text-right f28" style="line-height: 1.5;">
+                      <p class="m-0">￥{{item.price | money}}</p>
+                      <p class="c-red ">x{{item.point}}</p>
+                  </div>
+              </div>
             </div>
-
         </div>
         <h5 class="text-center mt-33 f28">{{$t('payDetail').totalPrice}}&nbsp;&nbsp;&nbsp;&nbsp; ￥{{totalPrice | money}}</h5>
         <div>
@@ -169,8 +169,11 @@ export default {
   font-size: 24px;
   padding: 0 70px;
 }
+.cart-box {
+  padding:0 20px;
+}
 .pay1 {
-  padding: 20px;
+  padding: 20px 0;
   border: 1px solid #000;
   .d-flex {
     &:not(:last-child) {

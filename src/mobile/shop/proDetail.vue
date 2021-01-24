@@ -217,7 +217,6 @@ export default {
     height: 86px;
     line-height: 86px;
     .button {
-      font-size: 30px;
       height: 86px;
     }
     &:last-child {

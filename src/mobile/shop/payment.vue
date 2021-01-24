@@ -57,7 +57,7 @@
         <img src="../../assets/cao.jpg" alt="">
       </div>
       <div class="video" v-show="showLogo" :style="{opacity: showLogoOp ? 1 : 0}">
-        <img src="../../assets/m-end-logo.jpg" alt="">
+        <img src="../../assets/m-end-logo.jpg" style="width: 75%;" alt="">
       </div>
         <div class="kuang right" id="right">
             {{userName}}
@@ -96,11 +96,12 @@ export default {
       $('#zhifu').animate({
         opacity: 0
       }, 1500)
-      // await delay(1500)
-      $('#bofangshipin').fadeIn().css('opacity', 1).css('z-index', 999)
-      // await delay(1500)
       const video = document.querySelector('#video')
       video.play()
+      await delay(1500)
+      $('#bofangshipin').fadeIn().css('opacity', 1).css('z-index', 999)
+      // await delay(1500)
+
 
       video.addEventListener('ended', async () => {
         await delay(1500)
@@ -109,19 +110,19 @@ export default {
         this.showCao = true
         await delay(200)
         this.showCaoOp = true
-        await delay(4000)
+        await delay(2000)
         $('#left').animate({
           marginLeft: 0
         }, 1000)
         $('#right').animate({
           marginRight: 0
         }, 1000)
-        await delay(4000)
+        await delay(6000)
         $('#left').animate({
-          marginLeft: '-280px'
+          marginLeft: '-380px'
         }, 1000)
         $('#right').animate({
-          marginRight: '-342px'
+          marginRight: '-442px'
         }, 1000)
         await delay(1000)
         this.showCaoOp = false
@@ -165,8 +166,8 @@ export default {
   z-index: -1;
   left: 0;
   top: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   overflow: hidden;
   display: flex;
   opacity: 0;
@@ -190,7 +191,7 @@ export default {
   width: 100%;
 }
 .video {
-  width: 1000px;height: 100%;display: flex; align-items: center;
+  width: 100%;height: 100%;display: flex; align-items: center;
   opacity: 0;
   justify-content: center;
   transition: all 3s;
@@ -216,7 +217,7 @@ export default {
     left: 0;
     top: 200px;
     border-right: 3px solid #000;
-    margin-left: -280px;
+    margin-left: -380px;
     text-align: right;
     padding-right: 49px;
     z-index: 1;
@@ -226,7 +227,7 @@ export default {
     top: auto;
     bottom: 200px;
     width: 342px;
-    margin-right: -342px;
+    margin-right: -442px;
     border-left: 3px solid #000;
     text-align: left;
     z-index: 1;

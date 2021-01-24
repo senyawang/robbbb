@@ -15,17 +15,21 @@ export default {
       actionUrl: 'api/shop/getShopList',
       showIndex: true,
       show: true,
-      showBg: true
+      showBg: true,
+      onLoaded: false,
     }
   },
   components: {
     Art
   },
   mounted () {
-
+    if (this.onLoaded) {
+      this.onload()
+    }
   },
   methods: {
     onloadImg () {
+      this.onLoaded = true
       this.showIndex = false
       setTimeout(() => {
         this.showBg = false

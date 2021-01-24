@@ -81,8 +81,8 @@ export default {
 }
   .mask-index {
     img {
-      width: 300px !important;
-      height: 300px;
+      width: 200px !important;
+      height: 200px;
     }
   }
 </style>

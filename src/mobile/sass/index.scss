@@ -5,7 +5,7 @@ input,textarea{
   -webkit-appearance: none;
 }
 .main-body {
-  padding: 18px !important;
+  padding: 18px 0 !important;
 }
 .pt18 {
   padding-top: 18px;
@@ -114,7 +114,7 @@ button:focus {
     }
     .el-dialog__headerbtn {
       right: 20px;
-      top: 20px;
+      top: 5px;
     }
     .el-dialog__body {
       font-size: 28px;

@@ -22,7 +22,11 @@
         <transition name="slide-fade">
           <div class="main-nav" ref="mainNav" v-if="showMainNav" >
             <ul class="nav-left" >
-              <li v-for="(item, index) in datas" :key="item.id" @click='index === 0 ? handleShowSubNav(item.id) : handleShowMainNav()' v-show="!(showSubNav && index > 0)">
+              <li
+                v-for="(item, index) in datas"
+                :key="item.id"
+                @click='index === 0 ? handleShowSubNav(item.id) : handleShowMainNav()'
+              >
                 <span v-if="index === 0" :style="{opacity: showSubNav ? '.5' : null, cursor: 'pointer'}">{{langValue(item, 'title')}}</span>
                 <router-link v-else-if="index === 2" :to="item.link_url" class="red">{{langValue(item, 'title')}}</router-link>
                 <router-link v-else :to="`${item.link_url}?id=${item.id}`" >{{langValue(item, 'title')}}</router-link>
@@ -31,7 +35,7 @@
           </div>
         </transition>
 
-        <transition name="fade">
+        <transition name="slide-fade">
           <div class="sub-nav" v-if="showSubNav">
             <ul class="nav-left" >
               <li v-for="subNav in navList" :key="subNav.id" @click="handleShowMainNav">
@@ -50,7 +54,7 @@
 <script>
 export default {
   name: 'Header',
-  props: ["type", "datas"],
+  props: ['type', 'datas'],
   data () {
     return {
       showMainNav: false,
@@ -60,57 +64,60 @@ export default {
     }
   },
   mounted () {
-    console.log( this.$i18n, this.type, this.$i18n.locale , '18n')
+    console.log(this.$i18n, this.type, this.$i18n.locale, '18n')
   },
   computed: {
-    flag(val){
-      return this.type;
+    flag (val) {
+      return this.type
     }
   },
   watch: {
-    datas(val){
-      if(val.length){
+    datas (val) {
+      if (val.length) {
         this.getNavs(val[0].id)
       }
     }
   },
   methods: {
-    handleLangValue() {
-      const loc = this.$i18n.locale;
+    handleLangValue () {
+      const loc = this.$i18n.locale
       this.$i18n.locale = loc === 'en' ? 'zh' : 'en'
-      window.sessionStorage.setItem("LOCALE", this.$i18n.locale)
+      window.sessionStorage.setItem('LOCALE', this.$i18n.locale)
     },
-    getNavs(pid){
-        if(this.navList.length) return Promise.resolve();
-        return this.ajaxPost('api/index/getNavChildList', {
-            pid
-        }).then(res => {
-          this.navList = res.data;
-          console.log(res, 'navList')
-        })
+    getNavs (pid) {
+      if (this.navList.length) return Promise.resolve()
+      return this.ajaxPost('api/index/getNavChildList', {
+        pid
+      }).then(res => {
+        this.navList = res.data
+        console.log(res, 'navList')
+      })
     },
-    handleShowMainNav() {
-      this.showSubNav = false;
-      this.showMainNav = this.showSubNav ? true : !this.showMainNav;
+    handleShowMainNav () {
+      this.showSubNav = false
+      this.showMainNav = this.showSubNav ? true : !this.showMainNav
     },
-    handleCloseNav() {
-      if(this.showSubNav) {
-          this.showSubNav = false;
-          const flag = this.showMainNav;
-          this.mainNavOpacity = 0;
-          setTimeout(() => {
-               this.mainNavOpacity = 1;
-          }, 800);
+    handleCloseNav () {
+      if (this.showSubNav) {
+        this.showSubNav = false
+        const flag = this.showMainNav
+        this.mainNavOpacity = 0
+        setTimeout(() => {
+          this.mainNavOpacity = 1
+        }, 800)
       } else {
-          this.showMainNav = false;
-          this.$refs.mainNav.removeAttribute('style');
+        this.showMainNav = false
+        this.$refs.mainNav.removeAttribute('style')
       }
-
     },
-    handleShowSubNav(pid) {
+    handleShowSubNav (pid) {
+      if (this.showSubNav) {
+        this.showSubNav = false;
+        return
+      }
       this.getNavs(pid).then(() => {
         console.log('show sub nav')
-        this.showSubNav = true;
+        this.showSubNav = true
       })
     }
   }
@@ -250,6 +257,7 @@ export default {
   .sub-nav {
     position: absolute;
     top: 70px;
+    z-index: 9;
     width: 100%;
     background: #fff;
     padding-bottom: 40px;
@@ -263,7 +271,6 @@ export default {
   overflow: hidden;
  }
 
-
 .slide-fade-enter-active {
   transition: all .8s ease;
 }
@@ -276,7 +283,6 @@ export default {
   opacity: 0;
 }
 
-
 .fade-enter-active {
   transition: all .8s ease;
 }
@@ -287,8 +293,6 @@ export default {
 /* .fade-leave-active for below version 2.1.8 */ {
   opacity: 0;
 }
-
-
 
 .slide-left-enter-active {
   transition: all .8s ease;

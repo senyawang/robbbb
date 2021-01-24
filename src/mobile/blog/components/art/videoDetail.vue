@@ -8,7 +8,7 @@
             <img v-if="showBtn" src="../../../../assets/play.png" alt="">
           </div>
         </template>
-        <iframe v-else frameborder="0" style="width: 86vw; height: 47vw;" :src="resData.video_link" allowFullScreen="true"></iframe>
+        <iframe ref="iframe" v-else frameborder="0" :style="{width: '100%', height: iframeH}" :src="resData.video_link" allowFullScreen="true"></iframe>
       </div>
 
       <div class="rob-text-area">
@@ -34,6 +34,10 @@ export default {
   },
   mounted () {
     this.init();
+    const w = this.$refs.iframe.offsetWidth;
+    const h = w / (1920 / 1080)
+    console.log(w, h, 'wh')
+    this.iframeH = h + 'px';
   },
   methods: {
      init(){
