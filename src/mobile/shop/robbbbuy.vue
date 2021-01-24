@@ -2,7 +2,7 @@
   <div>
     <Art :actionUrl='actionUrl' detailName="proDetail" />
     <div class="mask-index ui-flex-box items-center justify-center" v-if="show" :style="{opacity: showBg ? 1 : 0}">
-      <div class="ui-flex-item"><img @load.once="onloadImg" :style="{opacity: showIndex ? 1 : 0, width: '50%'}" src="../../assets/logo-robby-index.jpg" alt=""></div>
+      <div class="ui-flex-item"><img @load="onloadImg" :style="{opacity: showIndex ? 1 : 0, width: '50%'}" src="../../assets/logo-robby-index.jpg" alt=""></div>
     </div>
   </div>
 </template>
