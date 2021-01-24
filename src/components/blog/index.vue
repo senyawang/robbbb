@@ -16,7 +16,7 @@
     <!--<video @click="videoPlay" src="http://203.195.204.34/assets/media/video.a4e7419.mp4"  loop="loop" muted autoplay class="rob-video" id="videoDetail"></video>-->
 
     <div class="mask-index ui-flex-box items-center justify-center" v-if="show" :style="{opacity: showBg ? 1 : 0}">
-      <div class="ui-flex-item"><img @load.once="onloadImg" :style="{opacity: showIndex ? 1 : 0}" src="../../assets/logo-index.png" alt=""></div>
+      <div class="ui-flex-item"><img @load="onloadImg" :style="{opacity: showIndex ? 1 : 0}" src="../../assets/logo-index.png" alt=""></div>
     </div>
 
   </div>
@@ -31,7 +31,8 @@ export default {
     return {
       showIndex: true,
       show: true,
-      showBg: true
+      showBg: true,
+      onLoaded: false
     }
   },
   created () {
@@ -42,10 +43,13 @@ export default {
     }
   },
   mounted () {
-
+    if (this.onLoaded) {
+      this.onloadImg()
+    }
   },
   methods: {
     onloadImg () {
+      this.onLoaded = true
       this.showIndex = false
       setTimeout(() => {
         this.showBg = false

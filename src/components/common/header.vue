@@ -54,7 +54,7 @@
 <script>
 export default {
   name: 'Header',
-  props: ["type", "datas"],
+  props: ['type', 'datas'],
   data () {
     return {
       showMainNav: false,
@@ -64,64 +64,65 @@ export default {
     }
   },
   mounted () {
-    console.log( this.$i18n, this.type, this.$i18n.locale , '18n')
+    console.log(this.$i18n, this.type, this.$i18n.locale, '18n')
   },
   computed: {
-    flag(val){
-      return this.type;
+    flag (val) {
+      return this.type
     }
   },
   watch: {
-    datas(val){
-      if(val.length){
+    datas (val) {
+      if (val.length) {
         this.getNavs(val[0].id)
       }
     }
   },
   methods: {
-    handleLangValue() {
-      const loc = this.$i18n.locale;
+    handleLangValue () {
+      const loc = this.$i18n.locale
       const lang = loc === 'en' ? 'zh' : 'en'
       this.$i18n.locale = lang
-      window.sessionStorage.setItem("LOCALE", lang)
-},
-    getNavs(pid){
-        if(this.navList.length) return Promise.resolve();
-        return this.ajaxPost('api/index/getNavChildList', {
-            pid
-        }).then(res => {
-          this.navList = res.data;
-          console.log(res, 'navList')
-        })
+      window.sessionStorage.setItem('LOCALE', lang)
     },
-    handleShowMainNav() {
-      this.showSubNav = false;
-      this.showMainNav = this.showSubNav ? true : !this.showMainNav;
+    getNavs (pid) {
+      if (this.navList.length) return Promise.resolve()
+      return this.ajaxPost('api/index/getNavChildList', {
+        pid
+      }).then(res => {
+        this.navList = res.data
+        console.log(res, 'navList')
+      })
     },
-    handleCloseNav() {
-      if(this.showSubNav) {
-          this.showSubNav = false;
-          const flag = this.showMainNav;
-          this.mainNavOpacity = 0;
-          setTimeout(() => {
-               this.mainNavOpacity = 1;
-          }, 800);
-      } else {
-          this.showMainNav = false;
-          this.$refs.mainNav.removeAttribute('style');
+    handleShowMainNav () {
+      if (this.showSubNav) {
+        this.handleCloseNav()
+        return
       }
-
+      this.showMainNav = this.showSubNav ? true : !this.showMainNav
     },
-    handleShowSubNav(pid) {
+    handleCloseNav () {
+      if (this.showSubNav) {
+        this.showSubNav = false
+        const flag = this.showMainNav
+        this.mainNavOpacity = 0
+        setTimeout(() => {
+          this.mainNavOpacity = 1
+        }, 800)
+      } else {
+        this.showMainNav = false
+        this.$refs.mainNav.removeAttribute('style')
+      }
+    },
+    handleShowSubNav (pid) {
       if (this.showSubNav) {
         this.handleCloseNav()
       } else {
         this.getNavs(pid).then(() => {
           console.log('show sub nav')
-          this.showSubNav = true;
+          this.showSubNav = true
         })
       }
-
     }
   }
 }

@@ -90,11 +90,12 @@ export default {
       $('#zhifu').animate({
         opacity: 0
       }, 1500)
+      const video = document.querySelector('#video')
+      video.play()
       await delay(1500)
       $('#bofangshipin').fadeIn().css('opacity', 1).css('z-index', 999)
       // await delay(1500)
-      const video = document.querySelector('#video')
-      video.play()
+
 
       video.addEventListener('ended', async () => {
         await delay(1500)
@@ -103,14 +104,14 @@ export default {
         this.showCao = true
         await delay(200)
         this.showCaoOp = true
-        await delay(4000)
+        await delay(2000)
         $('#left').animate({
           marginLeft: 0
         }, 1000)
         $('#right').animate({
           marginRight: 0
         }, 1000)
-        await delay(4000)
+        await delay(6000)
         $('#left').animate({
           marginLeft: '-280px'
         }, 1000)
