@@ -19,7 +19,8 @@
       </div>
 
       <div v-if="isLogin" class="nav-right jiantou">
-        <span v-show="!showMainNav">{{$t('shopTitle')[3]}}，</span><span @click="handleShowMainNav" :class="['user-name', showMainNav && 'active']">{{userName}}</span>
+        <span :style="{opacity: showMainNav ? 0 : 1, transition: 'all .5s'}">{{$t('shopTitle')[3]}}，</span>
+        <span @click="handleShowMainNav" :class="['user-name', showMainNav && 'active']">{{userName}}</span>
       </div>
       <div v-else class="nav-right jiantou login">
         <span @click="handleShowLogin">{{$t('shopTitle')[1]}}</span>
@@ -152,7 +153,7 @@ export default {
 .nav-right {
   position: relative;
   z-index: 1;
-  width: 300px;
+  width: 200px;
   text-align: right;
   padding-left: 40px;
   background: #fff;
@@ -211,8 +212,8 @@ export default {
 }
 .slide-fade-enter, .slide-fade-leave-to
 /* .slide-fade-leave-active for below version 2.1.8 */ {
-  transform: translateX(500px);
-  opacity: 0;
+  transform: translateX(900px);
+  /*opacity: 0;*/
 }
 
 .slide-left-enter-active {
@@ -223,14 +224,14 @@ export default {
 }
 .slide-left-enter
 /* .slide-fade-leave-active for below version 2.1.8 */ {
-  transform: translateX(-500px);
-  opacity: 0;
+  transform: translateX(-900px);
+  /*opacity: 0;*/
 }
 
 .slide-left-leave-to
 /* .slide-fade-leave-active for below version 2.1.8 */ {
-  transform: translateX(500px);
-  opacity: 0;
+  transform: translateX(900px);
+  /*opacity: 0;*/
 }
 
 </style>

@@ -6,25 +6,22 @@
     <router-link v-else to="/" id="logo" :class="['logo', (!showMainNav && !showSubNav) && 'logo-hover']">
       <img src="../../assets/logo.png"  alt="" :style="{opacity: showMainNav || showSubNav ? 0 : 1}" >
     </router-link>
-    <div class="nav-menu " >
+    <div class="nav-menu" >
       <div class="navs">
         <transition name="slide-fade">
           <div class="main-nav" ref="mainNav" v-if="showMainNav" :style="{opacity: mainNavOpacity, transition: `all ${mainNavOpacity/2}s`}">
-            <ul class="nav-left" >
-              <li v-for="(item, index) in datas" :key="item.id" @click='index === 0 ? handleShowSubNav(item.id) : null' v-show="!(showSubNav && index > 0)">
+            <ul class="nav-left">
+              <li
+                v-for="(item, index) in datas"
+                :key="item.id"
+                @click='index === 0 ? handleShowSubNav(item.id) : null'
+                :style="{opacity: !(showSubNav && index > 0) ? 1 : 0}"
+              >
                 <span v-if="index === 0" :style="{opacity: showSubNav ? '.5' : null, cursor: 'pointer'}">{{langValue(item, 'title')}}</span>
                 <router-link v-else-if="index === 2" :to="item.link_url" class="red">{{langValue(item, 'title')}}</router-link>
                 <router-link v-else :to="`${item.link_url}?id=${item.id}`" >{{langValue(item, 'title')}}</router-link>
               </li>
-              <!-- <li @click="handleShowSubNav"><router-link to="" :style="{opacity: showSubNav ? '.5' : null}">{{datas[0].title}}</router-link></li>
-              <li v-show="!showSubNav"><router-link to="/exhibition" >{{$t('mainNav')[1]}}</router-link></li>
-              <li v-show="!showSubNav"><router-link to="/robbbbuy/shop" class="red">{{$t('mainNav')[2]}}</router-link></li>
-              <li v-show="!showSubNav"><router-link to="/about" >{{$t('mainNav')[3]}}</router-link></li>
-              <li v-show="!showSubNav"><router-link to="/contact" >{{$t('mainNav')[4]}}</router-link></li> -->
             </ul>
-            <!--<div class="xxx">-->
-              <!--<img @click="handleCloseNav" src="../../assets/x.png" class="float-right shoushi" id="xxx" >-->
-            <!--</div>-->
           </div>
         </transition>
 
@@ -34,10 +31,6 @@
               <li v-for="subNav in navList" :key="subNav.id">
                 <router-link class="nav-item" :to="`${subNav.link_url}?id=${subNav.id}`">{{langValue(subNav, 'title')}}</router-link>
               </li>
-              <!-- <li><router-link class="nav-item" to="/street">{{$t('subNav')[0]}}</router-link></li>
-              <li><router-link class="nav-item" to="/shelf">{{$t('subNav')[1]}}</router-link></li>
-              <li><router-link class="nav-item" to="/video">{{$t('subNav')[2]}}</router-link></li>
-              <li><router-link class="nav-item" to="/fun">{{$t('subNav')[3]}}</router-link></li> -->
             </ul>
           </div>
         </transition>
@@ -265,6 +258,7 @@ export default {
   margin: 0 10% 0 0;
   display: inline-block;
   font-size: 20px;
+  transition: all .5s;
   a {
     display: block;
     &:hover {

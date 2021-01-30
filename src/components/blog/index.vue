@@ -15,7 +15,7 @@
     <!--poster="../../assets/index.png"-->
     <!--<video @click="videoPlay" src="http://203.195.204.34/assets/media/video.a4e7419.mp4"  loop="loop" muted autoplay class="rob-video" id="videoDetail"></video>-->
 
-    <div class="mask-index ui-flex-box items-center justify-center" v-if="show" :style="{opacity: showBg ? 1 : 0}">
+    <div class="mask-index ui-flex-box items-center justify-center" v-show="show" :style="{opacity: showBg ? 1 : 0}">
       <div class="ui-flex-item"><img @load="onloadImg" :style="{opacity: showIndex ? 1 : 0}" src="../../assets/logo-index.png" alt=""></div>
     </div>
 
@@ -43,14 +43,13 @@ export default {
     }
   },
   mounted () {
-    if (this.onLoaded) {
-      this.onloadImg()
-    }
+
   },
   methods: {
     onloadImg () {
-      this.onLoaded = true
-      this.showIndex = false
+      setTimeout(() => {
+        this.showIndex = false
+      }, 200)
       setTimeout(() => {
         this.showBg = false
       }, 1500)
@@ -76,6 +75,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 .video {
+  height: 621px;
   margin-top: -20px;
 }
 .rob-video {
