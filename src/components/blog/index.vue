@@ -46,7 +46,9 @@ export default {
   },
   methods: {
     onloadImg () {
-      this.showIndex = false
+      setTimeout(() => {
+        this.showIndex = false
+      }, 200)
       setTimeout(() => {
         this.showBg = false
       }, 1500)
