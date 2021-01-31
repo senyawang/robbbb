@@ -6,7 +6,7 @@
                   <img src="../../assets/weixin.png" alt="">
                   <span style="margin-top: 0" class="ui-flex-item">{{$t('payDetail').weixin}}</span>
                   <div class="mycheck text-center d-inline-block mr-4">
-                      <input type="radio" value="1" id="checkbox1" name="pay">
+                      <input type="radio" value="1" id="checkbox1" v-model="pay" name="pay">
                       <label for="checkbox1"></label>
                   </div>
 
@@ -15,14 +15,14 @@
                 <img src="../../assets/alipay.png" alt="">
                 <span  style="margin-top: 0" class="ui-flex-item">{{$t('payDetail').alipay}}</span>
                 <div class="mycheck text-center d-inline-block mr-4">
-                  <input type="radio" value="2" id="checkbox2" name="pay">
+                  <input type="radio" value="2" id="checkbox2" v-model="pay" name="pay">
                   <label for="checkbox2"></label>
                 </div>
             </div>
             <div class="d-flex align-items-center">
                 <div class="ui-flex-item"><img src="../../assets/PayPal.png" alt=""></div>
                 <div class="mycheck text-center d-inline-block mr-4">
-                    <input type="radio" value="3" id="checkbox3" name="pay">
+                    <input type="radio" value="3" id="checkbox3" v-model="pay" name="pay">
                     <label for="checkbox3"></label>
                 </div>
             </div>
@@ -42,8 +42,8 @@
                 {{$t('other').thanks}}
             </div>
         <div class="video" v-show="!playover" :style="{opacity: playover ? 0 : 1}">
-              <video v-if="$i18n.locale === 'en'" src="../../assets/video/end-en.mp4" preload="auto" id="video"></video>
-              <video v-else src="../../assets/video/end-zh.mp4" preload="auto" id="video"></video>
+              <video v-if="$i18n.locale === 'en'" src="../../assets/video/end-en1s.mp4" preload="auto" id="video"></video>
+              <video v-else src="../../assets/video/end-zh1s.mp4" preload="auto" id="video"></video>
               <!--<video src="http://203.195.204.34/assets/media/ch.034c6c2.mp4" preload="metadata" muted autoplay id="video"></video>-->
         </div>
         <div class="video" v-show="showCao" :style="{opacity: showCaoOp ? 1 : 0}">
@@ -78,7 +78,8 @@ export default {
       showCao: false,
       showCaoOp: false,
       showLogo: false,
-      showLogoOp: false
+      showLogoOp: false,
+      pay: null,
     }
   },
   mounted () {
@@ -87,12 +88,14 @@ export default {
   methods: {
     async bofang () {
 
+      if(!this.pay) return
+
       $('#zhifu').animate({
         opacity: 0
       }, 1500)
-      await delay(1500)
       $('#bofangshipin').fadeIn().css('opacity', 1).css('z-index', 999)
       // await delay(1500)
+
       const video = document.querySelector('#video')
       video.play()
 
@@ -150,6 +153,7 @@ export default {
   align-items: center;
   background-size: 1368px;
   background-position: center;
+  transition: all 1.5s;
 }
 .videobox {
   width: 100%;

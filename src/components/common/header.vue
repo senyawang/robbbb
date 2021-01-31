@@ -6,25 +6,22 @@
     <router-link v-else to="/" id="logo" :class="['logo', (!showMainNav && !showSubNav) && 'logo-hover']">
       <img src="../../assets/logo.png"  alt="" :style="{opacity: showMainNav || showSubNav ? 0 : 1}" >
     </router-link>
-    <div class="nav-menu " >
+    <div class="nav-menu" >
       <div class="navs">
         <transition name="slide-fade">
           <div class="main-nav" ref="mainNav" v-if="showMainNav" :style="{opacity: mainNavOpacity, transition: `all ${mainNavOpacity/2}s`}">
-            <ul class="nav-left" >
-              <li v-for="(item, index) in datas" :key="item.id" @click='index === 0 ? handleShowSubNav(item.id) : null' v-show="!(showSubNav && index > 0)">
+            <ul class="nav-left">
+              <li
+                v-for="(item, index) in datas"
+                :key="item.id"
+                @click='index === 0 ? handleShowSubNav(item.id) : null'
+                :style="{opacity: !(showSubNav && index > 0) ? 1 : 0}"
+              >
                 <span v-if="index === 0" :style="{opacity: showSubNav ? '.5' : null, cursor: 'pointer'}">{{langValue(item, 'title')}}</span>
                 <router-link v-else-if="index === 2" :to="item.link_url" class="red">{{langValue(item, 'title')}}</router-link>
                 <router-link v-else :to="`${item.link_url}?id=${item.id}`" >{{langValue(item, 'title')}}</router-link>
               </li>
-              <!-- <li @click="handleShowSubNav"><router-link to="" :style="{opacity: showSubNav ? '.5' : null}">{{datas[0].title}}</router-link></li>
-              <li v-show="!showSubNav"><router-link to="/exhibition" >{{$t('mainNav')[1]}}</router-link></li>
-              <li v-show="!showSubNav"><router-link to="/robbbbuy/shop" class="red">{{$t('mainNav')[2]}}</router-link></li>
-              <li v-show="!showSubNav"><router-link to="/about" >{{$t('mainNav')[3]}}</router-link></li>
-              <li v-show="!showSubNav"><router-link to="/contact" >{{$t('mainNav')[4]}}</router-link></li> -->
             </ul>
-            <!--<div class="xxx">-->
-              <!--<img @click="handleCloseNav" src="../../assets/x.png" class="float-right shoushi" id="xxx" >-->
-            <!--</div>-->
           </div>
         </transition>
 
@@ -34,10 +31,6 @@
               <li v-for="subNav in navList" :key="subNav.id">
                 <router-link class="nav-item" :to="`${subNav.link_url}?id=${subNav.id}`">{{langValue(subNav, 'title')}}</router-link>
               </li>
-              <!-- <li><router-link class="nav-item" to="/street">{{$t('subNav')[0]}}</router-link></li>
-              <li><router-link class="nav-item" to="/shelf">{{$t('subNav')[1]}}</router-link></li>
-              <li><router-link class="nav-item" to="/video">{{$t('subNav')[2]}}</router-link></li>
-              <li><router-link class="nav-item" to="/fun">{{$t('subNav')[3]}}</router-link></li> -->
             </ul>
           </div>
         </transition>
@@ -54,7 +47,7 @@
 <script>
 export default {
   name: 'Header',
-  props: ["type", "datas"],
+  props: ['type', 'datas'],
   data () {
     return {
       showMainNav: false,
@@ -64,64 +57,65 @@ export default {
     }
   },
   mounted () {
-    console.log( this.$i18n, this.type, this.$i18n.locale , '18n')
+    console.log(this.$i18n, this.type, this.$i18n.locale, '18n')
   },
   computed: {
-    flag(val){
-      return this.type;
+    flag (val) {
+      return this.type
     }
   },
   watch: {
-    datas(val){
-      if(val.length){
+    datas (val) {
+      if (val.length) {
         this.getNavs(val[0].id)
       }
     }
   },
   methods: {
-    handleLangValue() {
-      const loc = this.$i18n.locale;
+    handleLangValue () {
+      const loc = this.$i18n.locale
       const lang = loc === 'en' ? 'zh' : 'en'
       this.$i18n.locale = lang
-      window.sessionStorage.setItem("LOCALE", lang)
-},
-    getNavs(pid){
-        if(this.navList.length) return Promise.resolve();
-        return this.ajaxPost('api/index/getNavChildList', {
-            pid
-        }).then(res => {
-          this.navList = res.data;
-          console.log(res, 'navList')
-        })
+      window.sessionStorage.setItem('LOCALE', lang)
     },
-    handleShowMainNav() {
-      this.showSubNav = false;
-      this.showMainNav = this.showSubNav ? true : !this.showMainNav;
+    getNavs (pid) {
+      if (this.navList.length) return Promise.resolve()
+      return this.ajaxPost('api/index/getNavChildList', {
+        pid
+      }).then(res => {
+        this.navList = res.data
+        console.log(res, 'navList')
+      })
     },
-    handleCloseNav() {
-      if(this.showSubNav) {
-          this.showSubNav = false;
-          const flag = this.showMainNav;
-          this.mainNavOpacity = 0;
-          setTimeout(() => {
-               this.mainNavOpacity = 1;
-          }, 800);
-      } else {
-          this.showMainNav = false;
-          this.$refs.mainNav.removeAttribute('style');
+    handleShowMainNav () {
+      if (this.showSubNav) {
+        this.handleCloseNav()
+        return
       }
-
+      this.showMainNav = this.showSubNav ? true : !this.showMainNav
     },
-    handleShowSubNav(pid) {
+    handleCloseNav () {
+      if (this.showSubNav) {
+        this.showSubNav = false
+        const flag = this.showMainNav
+        this.mainNavOpacity = 0
+        setTimeout(() => {
+          this.mainNavOpacity = 1
+        }, 800)
+      } else {
+        this.showMainNav = false
+        this.$refs.mainNav.removeAttribute('style')
+      }
+    },
+    handleShowSubNav (pid) {
       if (this.showSubNav) {
         this.handleCloseNav()
       } else {
         this.getNavs(pid).then(() => {
           console.log('show sub nav')
-          this.showSubNav = true;
+          this.showSubNav = true
         })
       }
-
     }
   }
 }
@@ -264,6 +258,7 @@ export default {
   margin: 0 10% 0 0;
   display: inline-block;
   font-size: 20px;
+  transition: all .5s;
   a {
     display: block;
     &:hover {
@@ -273,7 +268,7 @@ export default {
 }
 
 .slide-fade-enter-active {
-  transition: all .8s ease;
+  transition: all .5s ease;
 }
 .slide-fade-leave-active {
   transition: all .8s cubic-bezier(0.7, 0.9, 0.9, 0.9);
@@ -285,7 +280,7 @@ export default {
 }
 
 .slide-left-enter-active {
-  transition: all .8s ease;
+  transition: all .5s ease;
 }
 .slide-left-leave-active {
   transition: all .5s cubic-bezier(1.0, 0.7, 0.9, 0.6);

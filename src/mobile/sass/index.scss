@@ -5,7 +5,7 @@ input,textarea{
   -webkit-appearance: none;
 }
 .main-body {
-  padding: 18px 0 !important;
+  padding: 18px 0 0 !important;
 }
 .pt18 {
   padding-top: 18px;
@@ -71,6 +71,22 @@ input,textarea{
   }
 }
 
+@media screen and (-webkit-min-device-pixel-ratio: 2) {
+  .form-style {
+    .form-input {
+      border: 0.5PX solid $black !important;
+    }
+  }
+}
+
+@media screen and (-webkit-min-device-pixel-ratio: 3) {
+  .form-style {
+    .form-input {
+      border: 0.3333PX solid $black !important;
+    }
+  }
+}
+
 
 input:focus,
 input:active,
@@ -87,7 +103,7 @@ button:focus {
 }
 
 .dialog-footer {
-  margin-top: -10px;
+  margin-top: -20px;
   padding: 0 0 20px;
 }
 

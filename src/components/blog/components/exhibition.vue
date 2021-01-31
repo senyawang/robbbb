@@ -10,8 +10,8 @@
     >
         <div class="img-body">
             <!-- <img ref="img" :src="fullUrl" alt=""> -->
-            <video v-show="!playOver" preload="auto"  ref="video" muted="muted" src="/assets/exhibition.mp4" class="rob-video-detail" id="videoDetail"></video>
-            <div v-show="playOver" style="font-size: 28px;">{{$t('other').exhibition}}</div>
+            <video v-show="!playOver" :style="{opacity: !playOver ? 1 : 0, transition: 'all 1s'}" preload="auto"  ref="video" muted="muted" src="/assets/exhibition.mp4" class="rob-video-detail" id="videoDetail"></video>
+            <div v-show="playOver" :style="{opacity: showText ? 1 : 0, transition: 'all 1s'}" style="font-size: 28px;">{{$t('other').exhibition}}</div>
         </div>
     </el-dialog>
 
@@ -19,8 +19,9 @@
 </template>
 
 <script>
-import Title from '../../common/title';
-import Button from '../../common/Button';
+import Title from '../../common/title'
+import Button from '../../common/Button'
+const delay = t => new Promise((resolve) => setTimeout(resolve, t))
 export default {
   data () {
     return {
@@ -29,63 +30,62 @@ export default {
       imgs: [],
       timer: null,
       baseUrl: process.env.BASE_URL,
-      playOver: false
+      playOver: false,
+      showText: false,
     }
   },
   components: {
     Title,
-    Button,
+    Button
   },
   mounted () {
-
-
     this.$nextTick(() => {
-      const video = this.$refs.video;
-      video.play();
+      const video = this.$refs.video
+      video.play()
 
-      video.addEventListener('ended', () => {
-          video.style.opacity = 0;
-          this.playOver = true;
-          setTimeout(() => {
-            location.href = '/'
-          }, 1600);
+      video.addEventListener('ended', async () => {
+        video.style.opacity = 0
+        await delay(1000)
+        this.playOver = true
+        await delay(100)
+        this.showText = true
+        await delay(1600)
+        this.showText = false
+        await delay(1000)
+        location.href = '/'
       }, false)
-
     })
 
+    // let num = 0;
+    // this.timer = setInterval(() => {
+    //   num ++ ;
+    //   const nl = String(num).length;
+    //   const st = ['0', '00']
+    //   const number = nl > 2 ? num : st[3-nl] + num;
+    //   console.log(number, 'number');
 
-
-
-      // let num = 0;
-      // this.timer = setInterval(() => {
-      //   num ++ ;
-      //   const nl = String(num).length;
-      //   const st = ['0', '00']
-      //   const number = nl > 2 ? num : st[3-nl] + num;
-      //   console.log(number, 'number');
-
-      //   this.number = num;
-      //   // const url = `/static/exhibition/立体Tag 序列_00${number}.png`
-      //   // this.imgs.push(new Image(url))
-      //   // this.$refs.img.src = url;
-      //   if (num === 124) {
-      //       clearInterval(this.timer)
-      //   }
-      // }, 66);
+    //   this.number = num;
+    //   // const url = `/static/exhibition/立体Tag 序列_00${number}.png`
+    //   // this.imgs.push(new Image(url))
+    //   // this.$refs.img.src = url;
+    //   if (num === 124) {
+    //       clearInterval(this.timer)
+    //   }
+    // }, 66);
   },
 
   destroyed () {
     console.log(this.timer, 'this.timer')
-    clearInterval(this.timer);
+    clearInterval(this.timer)
   },
 
   computed: {
-    fullUrl: function(){ return `${this.baseUrl}/img/img%20(${this.number}).png` }
+    fullUrl: function () { return `${this.baseUrl}/img/img%20(${this.number}).png` }
   },
 
   methods: {
-    handleSubmit(){
-      this.centerDialogVisible = true;
+    handleSubmit () {
+      this.centerDialogVisible = true
     }
   }
 }

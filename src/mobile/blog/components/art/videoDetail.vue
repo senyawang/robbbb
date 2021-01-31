@@ -99,3 +99,9 @@ export default {
     overflow: scroll;
 }
 </style>
+<style scoped lang="scss">
+  .detail {
+    padding-left: 17px !important;
+    padding-right: 17px !important;
+  }
+</style>

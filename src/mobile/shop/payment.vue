@@ -9,7 +9,7 @@
                 </div>
 
                 <div class="mycheck">
-                  <input type="radio" value="1" id="checkbox1" name="pay">
+                  <input type="radio" value="1" id="checkbox1" v-model="pay">
                   <label for="checkbox1"></label>
                 </div>
             </div>
@@ -20,7 +20,7 @@
                 </div>
 
               <div class="mycheck">
-                  <input type="radio" value="2" id="checkbox2" name="pay">
+                  <input type="radio" value="2" id="checkbox2" v-model="pay">
                   <label for="checkbox2"></label>
               </div>
             </div>
@@ -30,7 +30,7 @@
                 </div>
 
                 <div class="mycheck">
-                    <input type="radio" value="3" id="checkbox3" name="pay">
+                    <input type="radio" value="3" id="checkbox3" v-model="pay">
                     <label for="checkbox3"></label>
                 </div>
             </div>
@@ -50,8 +50,8 @@
                 {{$t('other').thanks}}
             </div>
       <div class="video" v-show="!playover" :style="{opacity: playover ? 0 : 1}">
-          <video v-if="$i18n.locale === 'zh'" src="../../assets/video/end-zh.mp4" preload="auto" playsinline id="video"></video>
-          <video v-else src="../../assets/video/end-en.mp4" preload="auto" id="video" playsinline></video>
+          <video v-if="$i18n.locale === 'zh'" src="../../assets/video/end-zh1s.mp4" preload="auto" playsinline id="video"></video>
+          <video v-else src="../../assets/video/end-en1s.mp4" preload="auto" id="video" playsinline></video>
         </div>
       <div class="video" v-show="showCao" :style="{opacity: showCaoOp ? 1 : 0}">
         <img src="../../assets/cao.jpg" alt="">
@@ -84,7 +84,8 @@ export default {
       showCao: false,
       showCaoOp: false,
       showLogo: false,
-      showLogoOp: false
+      showLogoOp: false,
+      pay: null,
     }
   },
   mounted () {
@@ -93,6 +94,8 @@ export default {
   methods: {
     async bofang () {
 
+      if(!this.pay) return
+
       $('#zhifu').animate({
         opacity: 0
       }, 1500)
@@ -100,8 +103,6 @@ export default {
       video.play()
       await delay(1500)
       $('#bofangshipin').fadeIn().css('opacity', 1).css('z-index', 999)
-      // await delay(1500)
-
 
       video.addEventListener('ended', async () => {
         await delay(1500)
@@ -110,14 +111,14 @@ export default {
         this.showCao = true
         await delay(200)
         this.showCaoOp = true
-        await delay(2000)
+        await delay(4000)
         $('#left').animate({
           marginLeft: 0
         }, 1000)
         $('#right').animate({
           marginRight: 0
         }, 1000)
-        await delay(6000)
+        await delay(4000)
         $('#left').animate({
           marginLeft: '-380px'
         }, 1000)
@@ -215,7 +216,7 @@ export default {
 }
 .left{
     left: 0;
-    top: 200px;
+    top: 110px;
     border-right: 3px solid #000;
     margin-left: -380px;
     text-align: right;
@@ -225,7 +226,7 @@ export default {
 .right{
     right: 0;
     top: auto;
-    bottom: 200px;
+    bottom: 110px;
     width: 342px;
     margin-right: -442px;
     border-left: 3px solid #000;

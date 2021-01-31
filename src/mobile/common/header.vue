@@ -94,14 +94,23 @@ export default {
       })
     },
     handleShowMainNav () {
-      this.showSubNav = false
-      this.showMainNav = this.showSubNav ? true : !this.showMainNav
+      if (this.showSubNav) {
+        this.showSubNav = false
+        this.mainNavOpacity = 0
+        console.log(this.showMainNav, 'showMainnav')
+        setTimeout(() => {
+          this.mainNavOpacity = 1
+        }, 800)
+      } else {
+        this.showSubNav = false
+        this.showMainNav = this.showSubNav ? true : !this.showMainNav
+      }
     },
     handleCloseNav () {
       if (this.showSubNav) {
         this.showSubNav = false
-        const flag = this.showMainNav
         this.mainNavOpacity = 0
+        console.log(this.showMainNav, 'showMainnav')
         setTimeout(() => {
           this.mainNavOpacity = 1
         }, 800)

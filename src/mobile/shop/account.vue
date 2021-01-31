@@ -34,7 +34,7 @@
                   <input type="text" class="form-input" v-model="address">
               </div>
               <p class="mbp"><span class="c-red">*</span>{{$t('payDetail').text3}}</p>
-              <p class="mbp"><span class="c-red">*</span>{{$t('payDetail').text2}}</p>
+              <p class="mbp mb30"><span class="c-red">*</span>{{$t('payDetail').text2}}</p>
           </div>
 
           <template v-slot:footer>
@@ -213,6 +213,9 @@ export default {
     margin-top: 70px;
 }
 .mbp {
-  font-size: 17px;
+  font-size: 16px;
 }
+  .mb30 {
+    margin-bottom: 30px;
+  }
 </style>

@@ -9,9 +9,19 @@
         :modal="false"
     >
         <div class="img-body">
-            <div v-show="showText" class="text">{{$t('other').exhibition}}</div>
-            <!-- <img ref="img" :src="fullUrl" alt=""> -->
-            <video preload="auto" ref="video" src="../../../assets/exhibition.mp4" playsinline muted class="rob-video-detail" id="videoDetail"></video>
+            <div
+              v-show="playOver"
+              :style="{opacity: showText ? 1 : 0, transition: 'all 1s'}"
+              class="text">{{$t('other').exhibition}}</div>
+            <video
+              v-show="!playOver"
+              :style="{opacity: !playOver ? 1 : 0, transition: 'all 1s'}"
+              preload="auto"
+              ref="video"
+              src="../../../assets/exhibition.mp4"
+              playsinline muted
+              class="rob-video-detail"
+              id="videoDetail"></video>
         </div>
     </el-dialog>
 
@@ -21,6 +31,7 @@
 <script>
 import Title from '../../common/title'
 import Button from '../../common/Button'
+const delay = t => new Promise((resolve) => setTimeout(resolve, t))
 export default {
   data () {
     return {
@@ -29,7 +40,8 @@ export default {
       imgs: [],
       timer: null,
       baseUrl: process.env.BASE_URL,
-      showText: false
+      playOver: false,
+      showText: false,
     }
   },
   components: {
@@ -41,15 +53,16 @@ export default {
       const video = this.$refs.video
       video.play()
 
-      video.addEventListener('ended', () => {
+      video.addEventListener('ended', async () => {
         video.style.opacity = 0
-        setTimeout(() => {
-          video.style.display = 'none'
-          this.showText = true
-        }, 600)
-        setTimeout(() => {
-          location.href = '/m'
-        }, 2000)
+        await delay(1000)
+        this.playOver = true
+        await delay(100)
+        this.showText = true
+        await delay(1600)
+        this.showText = false
+        await delay(1000)
+        location.href = '/'
       }, false)
     })
 
