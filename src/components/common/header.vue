@@ -268,7 +268,7 @@ export default {
 }
 
 .slide-fade-enter-active {
-  transition: all .8s ease;
+  transition: all .5s ease;
 }
 .slide-fade-leave-active {
   transition: all .8s cubic-bezier(0.7, 0.9, 0.9, 0.9);
@@ -280,7 +280,7 @@ export default {
 }
 
 .slide-left-enter-active {
-  transition: all .8s ease;
+  transition: all .5s ease;
 }
 .slide-left-leave-active {
   transition: all .5s cubic-bezier(1.0, 0.7, 0.9, 0.6);
