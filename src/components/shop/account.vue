@@ -9,7 +9,7 @@
           <div @click="showModifyPwd = true" class="shoushi">{{$t('account').modifyPwd}}</div>
           <img :src="robbbuy[1]" class="tupiantihuan" alt="">
       </div>
-      <div class="ui-flex-box justify-content-between">
+      <div class="ui-flex-box justify-content-between" style="marginBottom: 0">
           <div @click="goHistory" class="shoushi">{{$t('account').shopHistory}}</div>
           <img :src="robbbuy[2]" class="tupiantihuan" alt="">
       </div>

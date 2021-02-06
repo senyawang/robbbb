@@ -8,7 +8,7 @@
         detailName="proDetail" />
     <div class="text-right pay-button">
       <p>{{$t('shoppingCart').totalPrice}}：￥{{totalPrice | money}}</p>
-      <p><Button size="large" class="sp" @click="totalPrice > 0 ? goToPay() : ''">{{$t('shoppingCart').goPay}}</Button></p>
+      <p style="margin-bottom: 0;"><Button size="large" class="sp" @click="totalPrice > 0 ? goToPay() : ''">{{$t('shoppingCart').goPay}}</Button></p>
     </div>
   </div>
 </template>

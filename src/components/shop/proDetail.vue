@@ -1,7 +1,7 @@
 <template>
-    <div class="detail prodetail ui-flex-box">
+    <div class="detail prodetail" style="overflow: hidden">
 
-      <div :class='["pro-list", "ui-flex-item", {"full-screen": !showDesc}]'>
+      <div :class='["pro-list", {"full-screen": !showDesc}]' style="float: left">
         <Title :title="langValue(resData, 'title')" align="center" v-if="!showDesc" />
         <h1 v-if="showDesc" class="title">{{langValue(resData, 'title')}}</h1>
         <button @click="$refs.carouse.prev()" type="button" class="el-carousel__arrow el-carousel__arrow--left"><i class="el-icon-arrow-left"></i></button>
@@ -21,7 +21,7 @@
           <div class="pro-total-num">{{`${current}/${imgList.length}`}}</div>
       </div>
 
-      <div class="rob-text-area" v-show="showDesc">
+      <div class="rob-text-area" v-show="showDesc" style="float: right">
           <div class="side-content" v-html="langValue(resData, 'content')">
           </div>
           <div class="text-right">
@@ -157,8 +157,8 @@ export default {
 .prodetail {
   .pro-list {
   position: relative;
-  width: 800px;
-  padding: 0 50px 20px;
+  width: 730px;
+  padding: 0 50px 0px;
   text-align: center;
   .pro-item {
     box-sizing: border-box;
@@ -171,6 +171,7 @@ export default {
     font-size: 20px;
     line-height: 1;
     height: 22px;
+    font-weight: 500;
     text-overflow: ellipsis;
     white-space: nowrap;
     margin-bottom: 20px;
@@ -237,8 +238,7 @@ export default {
   }
 }
 .rob-text-area {
-    width: 370px;
-    margin-left: 37px;
+    width: 330px;
     .text-right {
       margin-top: 20px;
       text-align: right;

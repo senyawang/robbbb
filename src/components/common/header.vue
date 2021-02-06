@@ -171,7 +171,7 @@ export default {
 .red { color: $themeColor; }
 .navbox {
   position: relative;
-  padding: 80px 0 60px 0;
+  padding: 80px 0 70px 0;
   height: 40px;
   z-index: 9;
   line-height: 36px;

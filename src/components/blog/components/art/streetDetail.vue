@@ -1,7 +1,7 @@
 <template>
-    <div class="detail main-body ui-flex-box stdetail">
+    <div class="detail main-body stdetail">
 
-      <div :class='["pro-list", "ui-flex-item", {"full-screen": !showDesc}]'>
+      <div :class='["pro-list", {"full-screen": !showDesc}]'>
         <Title :title="langValue(resData, 'title')" align="center" v-if="!showDesc" />
         <button @click="$refs.carouse.prev()" type="button" class="el-carousel__arrow el-carousel__arrow--left"><i class="el-icon-arrow-left"></i></button>
         <button @click="$refs.carouse.next()" type="button" class="el-carousel__arrow el-carousel__arrow--right"><i class="el-icon-arrow-right"></i></button>
@@ -71,10 +71,12 @@ export default {
 <style lang='scss'>
 
 .stdetail {
+  overflow: hidden;
   .pro-list {
     position: relative;
-    width: 800px;
-    padding: 80px 100px 20px;
+    float: left;
+    width: 730px;
+    padding: 86px 110px 0px;
     text-align: center;
     img {
       &:hover {
@@ -116,12 +118,11 @@ export default {
     }
   }
   .rob-text-area {
-    flex: 0 0 330px;
+    float: right;
     width: 330px;
-    margin-left: 37px;
   }
   .side-content {
-    height: 445px;
+    height: 450px;
     overflow-y: auto;
     overflow-x: hidden;
     border: 1px solid #000;
@@ -132,6 +133,7 @@ export default {
     right: 0;
     width: 42px;
     height: 66px;
+    margin-top: 22px;
     background-color: transparent;
     background: url('../../../../assets/right.png') no-repeat;
     background-position: left top;

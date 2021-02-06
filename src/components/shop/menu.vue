@@ -1,5 +1,5 @@
 <template>
-  <div class="navbox ui-flex-box" style="margin-bottom: 15px;">
+  <div class="navbox ui-flex-box" style="margin-bottom: 22px;">
     <div class="menu-title" :style="{opacity: showMainNav ? 0 : 1, transition: 'all .5s', float: 'left'}">{{$t('routes')[title]}}</div>
     <div class="nav-menu ui-flex-item">
       <div class="navs">
@@ -107,14 +107,14 @@ export default {
 }
 .menu-title {
   position: absolute;
+  font-weight: 500;
 }
 .red { color: $themeColor; }
 .navbox {
   position: relative;
-  padding-bottom: 10px;
-  height: 40px;
+  height: 22px;
   z-index: 9;
-  line-height: 36px;
+  line-height: 22px;
   font-size: 20px;
 }
 .nav-menu {

@@ -39,6 +39,7 @@ export default {
 .art-list {
   display: flex;
   flex-wrap: wrap;
+  margin-bottom: -40px;
   // justify-content: space-between;
   .rob-photo {
     flex: 0 0 33.33333%;
