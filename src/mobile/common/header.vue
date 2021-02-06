@@ -25,7 +25,7 @@
               <li
                 v-for="(item, index) in datas"
                 :key="item.id"
-                @click='index === 0 ? handleShowSubNav(item.id) : handleShowMainNav()'
+                @click='index === 0 ? handleShowSubNav(item.id) : handleCloseNav()'
               >
                 <span v-if="index === 0" :style="{opacity: showSubNav ? '.5' : null, cursor: 'pointer'}">{{langValue(item, 'title')}}</span>
                 <router-link v-else-if="index === 2" :to="item.link_url" class="red">{{langValue(item, 'title')}}</router-link>
@@ -38,7 +38,7 @@
         <transition name="slide-fade">
           <div class="sub-nav" v-if="showSubNav">
             <ul class="nav-left" >
-              <li v-for="subNav in navList" :key="subNav.id" @click="handleShowMainNav">
+              <li v-for="subNav in navList" :key="subNav.id" @click="handleCloseNav">
                 <router-link class="nav-item" :to="`${subNav.link_url}?id=${subNav.id}`">{{langValue(subNav, 'title')}}</router-link>
               </li>
             </ul>
@@ -112,7 +112,8 @@ export default {
         this.mainNavOpacity = 0
         console.log(this.showMainNav, 'showMainnav')
         setTimeout(() => {
-          this.mainNavOpacity = 1
+          this.showMainNav = false
+          this.$refs.mainNav.removeAttribute('style')
         }, 800)
       } else {
         this.showMainNav = false

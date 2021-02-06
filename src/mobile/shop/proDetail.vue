@@ -171,7 +171,7 @@ export default {
   h1 {
     text-align: left;
     font-size: 20px;
-    margin-top: 17px !important;
+    margin-top: 0 !important;
     margin-bottom: 20px;
   }
   img {

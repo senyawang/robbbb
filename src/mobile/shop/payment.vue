@@ -42,7 +42,7 @@
         </div>
     </div>
     <div class="text-center zf">
-        <Button class="ssssss" @click="bofang" id="zhifu"> {{$t('buttons').pay}} </Button>
+        <Button class="sp" @click="bofang" id="zhifu"> {{$t('buttons').pay}} </Button>
     </div>
 
     <div id="bofangshipin" class="bg-white" style="">

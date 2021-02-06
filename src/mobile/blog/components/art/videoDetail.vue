@@ -63,8 +63,7 @@ export default {
 <style lang='scss' scoped>
 .pro-list {
   position: relative;
-  margin: 80px 0 20px;
-  padding: 0;
+  padding-top: 17px;
   text-align: center;
   &:hover {
     .btn-play {

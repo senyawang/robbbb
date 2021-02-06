@@ -62,7 +62,7 @@ export default {
         await delay(1600)
         this.showText = false
         await delay(1000)
-        location.href = '/m'
+        this.$router.push('/?from=end')
       }, false)
     })
 
