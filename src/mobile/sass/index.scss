@@ -100,7 +100,7 @@ button:focus {
 }
 
 .dialog-logo {
-  padding: 40px 0 0;
+  padding: 50px 0 0;
   img {
     width: 350px;
   }
@@ -108,7 +108,7 @@ button:focus {
 
 .dialog-footer {
   margin-top: -20px;
-  padding: 0 0 30px;
+  padding: 0 0 20px;
 }
 
 #app {
@@ -312,10 +312,16 @@ button:focus {
   }
 }
 
-
 @media screen and (min-width: 750px) {
   .el-dialog__headerbtn {
     right: 20px;
     top: 18px !important;
+  }
+  .dialog-logo {
+    padding: 40px 0 0 !important;
+  }
+
+  .dialog-footer {
+    padding: 0 0 30px !important;
   }
 }
