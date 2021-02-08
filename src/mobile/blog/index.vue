@@ -1,6 +1,6 @@
 <template>
   <div class="video">
-    <img src="../../assets/android-index.jpg" alt="" v-if="isAndroid">
+    <img src="../../assets/android-index.png" alt="" v-if="isAndroid">
     <video
       v-else
       @click="videoPlay"

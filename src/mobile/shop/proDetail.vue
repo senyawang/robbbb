@@ -238,7 +238,15 @@ export default {
     height: 355px;
   overflow-y: auto;
   overflow-x: hidden;
-    border: .8PX solid #000000;
+    border: .8PX solid #ccc;
+}
+
+@media screen and (min-width: 750px) {
+  .dialog-footer {
+    .button {
+      font-size: 24px !important;
+    }
+  }
 }
 
 </style>

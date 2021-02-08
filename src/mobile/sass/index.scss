@@ -1,6 +1,6 @@
-@import './sass/reset.scss';
-@import './sass/var.scss';
-@import './sass/base.scss';
+@import './reset.scss';
+@import './var.scss';
+@import './base.scss';
 html,body, #app {
   max-width: 750PX;
   margin: 0 auto;
@@ -69,7 +69,7 @@ input,textarea{
     line-height: 1;
     padding: 10px;
     border-radius: 0;
-    border: 0.8PX solid $black !important;
+    border: 0.8PX solid $gray !important;
     box-shadow: none;
     -webkit-appearance: none;
   }
@@ -78,7 +78,7 @@ input,textarea{
 @media screen and (-webkit-min-device-pixel-ratio: 2) {
   .form-style {
     .form-input {
-      border: 0.8PX solid $black !important;
+      border: 0.8PX solid $gray !important;
     }
   }
 }
@@ -86,7 +86,7 @@ input,textarea{
 @media screen and (-webkit-min-device-pixel-ratio: 3) {
   .form-style {
     .form-input {
-      border: .3333PX solid $black !important;
+      border: .3333PX solid $gray !important;
     }
   }
 }

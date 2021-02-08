@@ -174,7 +174,7 @@ export default {
 }
 .pay1 {
   padding: 20px 0;
-  border: .8PX solid #000;
+  border: .8PX solid #ccc;
   .d-flex {
     &:not(:last-child) {
       margin-bottom: 20px;
@@ -221,4 +221,5 @@ export default {
 .mt-43 {
   margin-top: 43px;
 }
+
 </style>

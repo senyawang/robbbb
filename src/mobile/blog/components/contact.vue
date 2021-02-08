@@ -91,7 +91,7 @@ export default {
     font-size: 24px;
     line-height: 1.8;
     font-weight: 500;
-  padding-top: 17px;
+    padding-top: 17px;
     .submit {
           width: 200px;
           height: 50px;
@@ -115,7 +115,7 @@ export default {
         width: 100%;
         height: 60px;
         padding: 10px;
-        border: .8PX solid #000;
+        border: .8PX solid #ccc;
         border-radius: 0;
         box-sizing: border-box;
         -webkit-appearance: none;
@@ -125,7 +125,7 @@ export default {
         height: 290px;
         padding: 10px;
         border-radius: 0;
-        border: .8PX solid #000;
+        border: .8PX solid #ccc;
         resize: none;
         box-sizing: border-box;
       }
@@ -148,14 +148,17 @@ export default {
     font-size: 14px !important;
   }
   .form-box {
+    h5 {
+      margin-bottom: 1px;
+    }
     input {
       transform: matrix3d();
       box-sizing: content-box !important;
-      border:.5px solid #000 !important;
+      border:.5px solid #ccc !important;
     }
     textarea {
       box-sizing: content-box !important;
-      border: .8px solid #000 !important;
+      border: .8px solid #ccc !important;
     }
   }
 }

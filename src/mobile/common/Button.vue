@@ -15,7 +15,7 @@ export default {
 }
 </script>
 <style lang='scss' scoped>
-@import '../../sass/var.scss';
+@import '../sass/var.scss';
 .button {
   width: 195px;
   height: 60px;
@@ -47,7 +47,7 @@ export default {
   &.ghost {
     background: #fff;
     color: $black;
-    border: 0.8PX solid $black;
+    border: 0.8PX solid $gray;
     &:hover {
       border-color: rgba($color: $black, $alpha: .5)
     }

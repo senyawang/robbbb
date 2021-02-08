@@ -116,7 +116,7 @@ export default {
 .side-content {
     height: 460px;
     overflow: scroll;
-    border: .8PX solid #000;
+    border: .8PX solid #ccc;
 }
 
 .el-carousel__arrow--right,

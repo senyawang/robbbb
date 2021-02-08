@@ -140,4 +140,9 @@ export default {
   font-size: 28px;
   background: #fff;
 }
+  @media screen and (min-width: 750px) {
+    .button{
+      min-width: 200px !important;
+    }
+  }
 </style>
