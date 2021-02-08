@@ -115,7 +115,7 @@ export default {
         width: 100%;
         height: 60px;
         padding: 10px;
-        border: 1px solid #000;
+        border: .8PX solid #000;
         border-radius: 0;
         box-sizing: border-box;
         -webkit-appearance: none;
@@ -125,7 +125,7 @@ export default {
         height: 290px;
         padding: 10px;
         border-radius: 0;
-        border: 1px solid #000;
+        border: .8PX solid #000;
         resize: none;
         box-sizing: border-box;
       }
@@ -155,7 +155,7 @@ export default {
     }
     textarea {
       box-sizing: content-box !important;
-      border: .5px solid #000 !important;
+      border: .8px solid #000 !important;
     }
   }
 }

@@ -78,7 +78,7 @@ input,textarea{
 @media screen and (-webkit-min-device-pixel-ratio: 2) {
   .form-style {
     .form-input {
-      border: 0.5PX solid $black !important;
+      border: 0.8PX solid $black !important;
     }
   }
 }
@@ -116,7 +116,7 @@ button:focus {
     min-width: 60%;
     width: auto !important;
     box-shadow: none;
-    border: 1px solid $black;
+    border: .8PX solid $black;
     border-radius: 0;
     &.no-border {
       border: 0 none;

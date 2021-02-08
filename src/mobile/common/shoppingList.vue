@@ -234,7 +234,7 @@ export default {
 .shopping-list {
   .swipe-cart {
     margin-bottom: 26px;
-    border: 1px solid #ccc;
+    border: .8PX solid #ccc;
 
     &:last-child {
       margin-bottom: 0;

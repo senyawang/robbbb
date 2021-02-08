@@ -238,7 +238,7 @@ export default {
     height: 355px;
   overflow-y: auto;
   overflow-x: hidden;
-    border: 1px solid #000000;
+    border: .8PX solid #000000;
 }
 
 </style>
