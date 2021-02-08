@@ -1,7 +1,7 @@
 <template>
     <div class="detail main-body">
       <Title :title="langValue(resData, 'title')" />
-      <div :class='["pro-list"]'>
+      <div :class='["pro-list"]' style="padding-top: 0">
         <template v-if="video_url">
           <video ref="video" :src="video_url" loop @click="videoPlay" class="rob-video-detail" id="videoDetail"></video>
           <div class="btn-play" id="dabofang" @click="videoPlay">

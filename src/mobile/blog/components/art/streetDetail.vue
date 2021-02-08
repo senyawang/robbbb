@@ -2,7 +2,7 @@
     <div class="detail main-body">
         <Title :title="langValue(resData, 'title')" align="center" />
 
-      <div :class='["pro-list", {"full-screen": !showDesc}]'>
+      <div :class='["pro-list", {"full-screen": !showDesc}]' style="padding-top: 0">
           <van-swipe
             @change="slideChange"
           >
