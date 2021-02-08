@@ -47,7 +47,7 @@ export default {
   &.ghost {
     background: #fff;
     color: $black;
-    border: 1px solid $black;
+    border: 0.5PX solid $black;
     &:hover {
       border-color: rgba($color: $black, $alpha: .5)
     }

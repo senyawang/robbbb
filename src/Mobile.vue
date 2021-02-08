@@ -16,7 +16,13 @@
         :modal="false"
         :close-on-click-modal="false"
     >
-        <div class="text-center err-info">{{errMsg}}</div>
+      <div class="text-center err-info" ref="scrollBox">
+        <!--<van-notice-bar background="#fff" color="#333">-->
+          <!--{{errMsg}}-->
+        <!--</van-notice-bar>-->
+        <div ref="scrollContent" class="err-cont">{{errMsg}}</div>
+
+      </div>
         <span slot="footer" class="dialog-footer">
           <Button @click="centerDialogVisible = false" class="red" size="large">{{$i18n.locale === 'zh' ? '确定' : 'OK'}}</Button>
         </span>
@@ -26,9 +32,9 @@
 </template>
 
 <script>
-import Header from './mobile/common/header.vue';
-import Footer from './mobile/common/footer';
-import Button from './mobile/common/Button';
+import Header from './mobile/common/header.vue'
+import Footer from './mobile/common/footer'
+import Button from './mobile/common/Button'
 
 export default {
   name: 'App',
@@ -41,7 +47,7 @@ export default {
     return {
       navList: [],
       errMsg: '',
-      centerDialogVisible: false,
+      centerDialogVisible: false
       // headerType: this.$route.fullPath.startsWith('/robbbbuy') ? 'shop' : '',
     }
   },
@@ -49,25 +55,41 @@ export default {
     showFooter () {
       return this.$route.name !== 'cart'
     },
-    headerType(){
-      return this.$route.fullPath.startsWith('/robbbbuy') ? 'shop' : '';
-    },
+    headerType () {
+      return this.$route.fullPath.startsWith('/robbbbuy') ? 'shop' : ''
+    }
   },
   mounted () {
     const lang = window.sessionStorage.getItem('LOCALE')
     this.$i18n.locale = lang || 'zh'
-    this.getNavs();
+    this.getNavs()
     this.$Event.$on('ERROR', (val) => {
-      this.centerDialogVisible = true;
-      this.errMsg = val;
+      this.centerDialogVisible = true
+      this.errMsg = val
     })
   },
-  methods: {
-    getNavs(){
-        this.ajaxPost('api/index/getNavList', {}).then(res => {
-          this.navList = res.data;
-        })
+  watch: {
+    centerDialogVisible (val) {
+      if (val) {
+        this.scroll()
+      }
     }
+  },
+  methods: {
+    getNavs () {
+      this.ajaxPost('api/index/getNavList', {}).then(res => {
+        this.navList = res.data
+      })
+    },
+    scroll (str) {
+      const scrollBox = this.$refs.scrollBox
+      const scrollContent = this.$refs.scrollContent
+      const diff = scrollBox.offsetWidth - scrollContent.offsetWidth
+      if (diff < 0) {
+        scrollContent.style.marginLeft = diff
+      }
+    }
+
   }
 }
 </script>
@@ -108,8 +130,22 @@ a:visited {
     min-width: 1%;
 }
 .err-info {
-  font-size: 28px;
-  word-break: break-word;
+  position: relative;
+  /*width: 50vw;*/
+  margin: 0 auto;
+  overflow: hidden;
+  font-size: 26px;
+  .err-cont {
+    /*position: absolute;*/
+    line-height: 1.2;
+    white-space: nowrap;
+    transition: all 1s;
+  }
+}
+.en {
+  .err-info {
+    font-size: 26px;
+  }
 }
 .mask-index {
   position: fixed;
@@ -128,5 +164,8 @@ a:visited {
     width: 150px;
     transition: all 1.5s;
   }
+}
+.van-notice-bar__wrap {
+  justify-content: center;
 }
 </style>

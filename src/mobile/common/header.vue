@@ -142,11 +142,11 @@ export default {
 }
 
 .hamburger .line{
-  width: 70px;
-  height: 9px;
+  width: 35PX;
+  height: 5PX;
   background-color: #000;
   display: block;
-  margin: 9px auto;
+  margin: 5PX auto;
   -webkit-transition: all 0.3s ease-in-out;
   -o-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
@@ -163,18 +163,18 @@ export default {
 }
 
 #hamburger-1.is-active .line:nth-child(1){
-  -webkit-transform: translateY(18px) rotate(45deg);
-  -ms-transform: translateY(18px) rotate(45deg);
-  -o-transform: translateY(18px) rotate(45deg);
-  transform: translateY(18px) rotate(45deg);
+  -webkit-transform: translateY(10PX) rotate(45deg);
+  -ms-transform: translateY(10PX) rotate(45deg);
+  -o-transform: translateY(10PX) rotate(45deg);
+  transform: translateY(10PX) rotate(45deg);
   opacity: .5;
 }
 
 #hamburger-1.is-active .line:nth-child(3){
-  -webkit-transform: translateY(-18px) rotate(-45deg);
-  -ms-transform: translateY(-18px) rotate(-45deg);
-  -o-transform: translateY(-18px) rotate(-45deg);
-  transform: translateY(-18px) rotate(-45deg);
+  -webkit-transform: translateY(-10PX) rotate(-45deg);
+  -ms-transform: translateY(-10PX) rotate(-45deg);
+  -o-transform: translateY(-10PX) rotate(-45deg);
+  transform: translateY(-10PX) rotate(-45deg);
   opacity: .5;
 }
 

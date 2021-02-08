@@ -1,6 +1,8 @@
 <template>
   <div class="video">
+    <img src="../../assets/android-index.jpg" alt="" v-if="isAndroid">
     <video
+      v-else
       @click="videoPlay"
       src="../../assets/video.mp4"
       loop="loop"
@@ -42,7 +44,8 @@ export default {
     return {
       showIndex: true,
       show: true,
-      showBg: true
+      showBg: true,
+      isAndroid: false,
     }
   },
   created () {
@@ -51,6 +54,11 @@ export default {
     if (from === 'end') {
       this.show = false
     }
+
+    let u = navigator.userAgent;
+    let isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1;   //判断是否是 android终端
+    // let isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);     //判断是否是 iOS终端
+    this.isAndroid = isAndroid
   },
   mounted () {
 

@@ -1,6 +1,10 @@
 @import './sass/reset.scss';
 @import './sass/var.scss';
 @import './sass/base.scss';
+html,body, #app {
+  max-width: 750PX;
+  margin: 0 auto;
+}
 input,textarea{
   -webkit-appearance: none;
 }
@@ -65,7 +69,7 @@ input,textarea{
     line-height: 1;
     padding: 10px;
     border-radius: 0;
-    border: 1px solid $black;
+    border: 0.8PX solid $black !important;
     box-shadow: none;
     -webkit-appearance: none;
   }
@@ -82,7 +86,7 @@ input,textarea{
 @media screen and (-webkit-min-device-pixel-ratio: 3) {
   .form-style {
     .form-input {
-      border: 0.3333PX solid $black !important;
+      border: .3333PX solid $black !important;
     }
   }
 }
@@ -96,7 +100,7 @@ button:focus {
 }
 
 .dialog-logo {
-  padding: 50px 0 0;
+  padding: 40px 0 0;
   img {
     width: 350px;
   }
@@ -104,7 +108,7 @@ button:focus {
 
 .dialog-footer {
   margin-top: -20px;
-  padding: 0 0 20px;
+  padding: 0 0 30px;
 }
 
 #app {
@@ -305,5 +309,13 @@ button:focus {
   .mycheck input[type=radio]:hover + label:after {
     opacity: 1;
     background: #f6625e;
+  }
+}
+
+
+@media screen and (min-width: 750px) {
+  .el-dialog__headerbtn {
+    right: 20px;
+    top: 18px !important;
   }
 }

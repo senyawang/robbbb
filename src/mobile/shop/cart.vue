@@ -15,7 +15,7 @@
       </div>
       <span style="padding-left: 5px">{{$t('other').selectAll}}</span>
       <div class="text-right ui-flex-item total-price">
-        {{$t('shoppingCart').totalPrice}}<span class="theme-primary"> ￥{{totalPrice | money}}</span>
+        <span style="padding-top: 1px">{{$t('shoppingCart').totalPrice}}<span class="theme-primary"> ￥{{totalPrice | money}}</span></span>
         <Button style="min-width: 120px;width: auto; padding: 0 10px; margin-left: 10px;" size="large" class="sp" @click="totalPrice > 0 ? goToPay() : ''">{{$t('shoppingCart').goPay}}</Button>
       </div>
     </div>
@@ -126,6 +126,7 @@ export default {
 </script>
 <style lang='scss' scoped>
   .total-price {
+    padding-top: 1PX;
     font-size: 24px;
   }
 .pay-button {

@@ -9,7 +9,7 @@ import routes from './router-mobile.js'
 import store from './vuex/store.js'
 import App from './Mobile.vue'
 import messages from './lang.config.js';
-import { Swipe, SwipeItem, SwipeCell } from 'vant';
+import { Swipe, SwipeItem, SwipeCell, NoticeBar } from 'vant';
 
 import 'element-ui/lib/theme-chalk/index.css';
 
@@ -21,6 +21,7 @@ Vue.prototype.axios = axios
 
 
 Vue.use(Swipe);
+Vue.use(NoticeBar);
 Vue.use(SwipeItem);
 Vue.use(SwipeCell);
 

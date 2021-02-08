@@ -49,7 +49,12 @@
         <div class="kuang left" id="left">
                 {{$t('other').thanks}}
             </div>
-      <div class="video" v-show="!playover" :style="{opacity: playover ? 0 : 1}">
+
+      <div v-if="isAndroid" v-show="!playover">
+        <img v-if="$i18n.locale === 'zh'" src="../../assets/android-end-zh.jpg" alt="" :style="{opacity: showImg ? 1 : 0}">
+        <img v-else src="../../assets/android-end-en.jpg" alt="" :style="{opacity: showImg ? 1 : 0}">
+      </div>
+      <div v-else class="video" v-show="!playover" :style="{opacity: playover ? 0 : 1}">
           <video v-if="$i18n.locale === 'zh'" src="../../assets/video/end-zh1s.mp4" preload="auto" playsinline id="video"></video>
           <video v-else src="../../assets/video/end-en1s.mp4" preload="auto" id="video" playsinline></video>
         </div>
@@ -57,7 +62,7 @@
         <img src="../../assets/cao.jpg" alt="">
       </div>
       <div class="video" v-show="showLogo" :style="{opacity: showLogoOp ? 1 : 0}">
-        <img src="../../assets/m-end-logo.jpg" style="width: 75%;" alt="">
+        <img src="../../assets/m-end-logo.jpg" style="width: 65%;" alt="">
       </div>
         <div class="kuang right" id="right">
             {{userName}}
@@ -86,12 +91,50 @@ export default {
       showLogo: false,
       showLogoOp: false,
       pay: null,
+      isAndroid: false,
+      showImg: false,
     }
   },
   mounted () {
-
+    let u = navigator.userAgent;
+    let isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1;   //判断是否是 android终端
+    // let isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);     //判断是否是 iOS终端
+    this.isAndroid = isAndroid
   },
   methods: {
+    async playend () {
+      await delay(1500)
+      this.playover = true
+      await delay(200)
+      this.showCao = true
+      await delay(200)
+      this.showCaoOp = true
+      await delay(4000)
+      $('#left').animate({
+        marginLeft: 0
+      }, 1000)
+      $('#right').animate({
+        marginRight: 0
+      }, 1000)
+      await delay(4000)
+      $('#left').animate({
+        marginLeft: '-380px'
+      }, 1000)
+      $('#right').animate({
+        marginRight: '-442px'
+      }, 1000)
+      await delay(1000)
+      this.showCaoOp = false
+      await delay(3000)
+      this.showCao = false
+      this.showLogo = true
+      await delay(300)
+      this.showLogoOp = true
+      await delay(3000)
+      this.showLogoOp = false
+      await delay(3000)
+      this.$router.push('/?from=end')
+    },
     async bofang () {
 
       if(!this.pay) return
@@ -100,43 +143,23 @@ export default {
         opacity: 0
       }, 1500)
       const video = document.querySelector('#video')
-      video.play()
-      await delay(1500)
-      $('#bofangshipin').fadeIn().css('opacity', 1).css('z-index', 999)
-
-      video.addEventListener('ended', async () => {
+      if (!this.isAndroid) {
+        video.play()
         await delay(1500)
-        this.playover = true
-        await delay(200)
-        this.showCao = true
-        await delay(200)
-        this.showCaoOp = true
-        await delay(4000)
-        $('#left').animate({
-          marginLeft: 0
-        }, 1000)
-        $('#right').animate({
-          marginRight: 0
-        }, 1000)
-        await delay(4000)
-        $('#left').animate({
-          marginLeft: '-380px'
-        }, 1000)
-        $('#right').animate({
-          marginRight: '-442px'
-        }, 1000)
-        await delay(1000)
-        this.showCaoOp = false
+        $('#bofangshipin').fadeIn().css('opacity', 1).css('z-index', 999)
+
+        video.addEventListener('ended', async () => {
+          this.playend()
+        })
+      } else {
+        await delay(1500)
+        $('#bofangshipin').fadeIn().css('opacity', 1).css('z-index', 999)
+        await delay(1500)
+        this.showImg = true
         await delay(3000)
-        this.showCao = false
-        this.showLogo = true
-        await delay(300)
-        this.showLogoOp = true
-        await delay(3000)
-        this.showLogoOp = false
-        await delay(3000)
-        this.$router.push('/?from=end')
-      })
+        this.showImg = false
+        this.playend()
+      }
     }
   }
 }
@@ -178,6 +201,9 @@ export default {
   background-size: 1368px;
   background-position: center;
   transition: all 1s;
+  img {
+    transition: all 1s;
+  }
 }
 .pay-text {
   & > div {

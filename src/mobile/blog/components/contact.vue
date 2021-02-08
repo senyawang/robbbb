@@ -2,7 +2,7 @@
 <div :class="showTitle ? 'main-body' : ''">
     <Title v-if="showTitle" :title="$t('mainNav')[4]" />
     <div class="contact">
-          <div class="text-center">
+          <div class="text-center ipadstyle">
             <h5 style="font-size: 9px;"> {{$t('contact').text1}} </h5>
             <h5 style="font-size: 9px;" class="mt-12"> {{$t('contact').text2}} </h5>
           </div>
@@ -137,5 +137,26 @@ export default {
     .mt-2 {
       margin-top: 40px;
     }
+}
+@media screen and (min-width: 750px) {
+  .button {
+    width: 224px !important;
+    height: 64px !important;
+    /*font-size: 12px !important;*/
+  }
+  .ipadstyle h5{
+    font-size: 14px !important;
+  }
+  .form-box {
+    input {
+      transform: matrix3d();
+      box-sizing: content-box !important;
+      border:.5px solid #000 !important;
+    }
+    textarea {
+      box-sizing: content-box !important;
+      border: .5px solid #000 !important;
+    }
+  }
 }
 </style>
