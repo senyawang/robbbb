@@ -4,10 +4,29 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <title>robbbb</title>
-    <link rel="prefetch" as="video" href="/assets/media/video.mp4" type="video/mp4" crossorigin="anonymous">
-    <link rel="prefetch" as="video" href="/assets/exhibition.mp4" type="video/mp4" crossorigin="anonymous">
-    <link rel="prefetch" as="video" href="/assets/media/ch.mp4" type="video/mp4" crossorigin="anonymous">
-    <link rel="prefetch" as="video" href="/assets/media/en.mp4" type="video/mp4" crossorigin="anonymous">
+    <link rel='shortcut icon' href='/static/favicon.ico'>
+    <script>
+      function IsMobile () {
+        const  sUserAgent = navigator.userAgent.toLowerCase();
+        const  bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
+        const  bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";
+        const  bIsMidp = sUserAgent.match(/midp/i) == "midp";
+        const  bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";
+        const  bIsUc = sUserAgent.match(/ucweb/i) == "ucweb";
+        const  bIsAndroid = sUserAgent.match(/android/i) == "android";
+        const  bIsCE = sUserAgent.match(/windows ce/i) == "windows ce";
+        const  bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
+        if (bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM) {
+          //移动站
+          return true;
+        } else {
+          //PC站
+          return false;
+        }
+      }
+
+      if(IsMobile()) window.location.href = '/m/'
+    </script>
   </head>
   <body>
     <div id="app"></div>
