@@ -7,6 +7,27 @@
     <link rel='shortcut icon' href='/m/static/favicon.ico'>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
 <script>
+  function IsMobile () {
+    const  sUserAgent = navigator.userAgent.toLowerCase();
+    const  bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
+    const  bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";
+    const  bIsMidp = sUserAgent.match(/midp/i) == "midp";
+    const  bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";
+    const  bIsUc = sUserAgent.match(/ucweb/i) == "ucweb";
+    const  bIsAndroid = sUserAgent.match(/android/i) == "android";
+    const  bIsCE = sUserAgent.match(/windows ce/i) == "windows ce";
+    const  bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
+    if (bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM) {
+      //移动站
+      return true;
+    } else {
+      //PC站
+      return false;
+    }
+  }
+
+  if(!IsMobile()) window.location.href = '/'
+
   !function (e, t) { function n() { t.body ? t.body.style.fontSize = 12 * o + "px" : t.addEventListener("DOMContentLoaded", n) } function d() { var e = (i.clientWidth > 640 ? 640 : i.clientWidth) / 10; i.style.fontSize = e + "px" } var i = t.documentElement, o = e.devicePixelRatio || 1; if (n(), d(), e.addEventListener("resize", d), e.addEventListener("pageshow", function (e) { e.persisted && d() }), o >= 2) { var a = t.createElement("body"), s = t.createElement("div"); s.style.border = ".5px solid transparent", a.appendChild(s), i.appendChild(a), 1 === s.offsetHeight && i.classList.add("hairlines"), i.removeChild(a) } }(window, document);
 </script>
 <title>ROBBBB</title>

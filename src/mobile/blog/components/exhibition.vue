@@ -14,6 +14,7 @@
               :style="{opacity: showText ? 1 : 0, transition: 'all 1s'}"
               class="text">{{$t('other').exhibition}}</div>
             <video
+              v-if="!isAndroid"
               v-show="!playOver"
               :style="{opacity: !playOver ? 1 : 0, transition: 'all 1s'}"
               preload="auto"
@@ -42,13 +43,30 @@ export default {
       baseUrl: process.env.BASE_URL,
       playOver: false,
       showText: false,
+      isAndroid: false
     }
   },
   components: {
     Title,
     Button
   },
-  mounted () {
+  async mounted () {
+
+    let u = navigator.userAgent;
+    let isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1;   //判断是否是 android终端
+    // let isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);     //判断是否是 iOS终端
+    this.isAndroid = isAndroid
+
+    if (isAndroid) {
+      this.playOver = true
+      this.showText = true
+      await delay(1600)
+      this.showText = false
+      await delay(1000)
+      this.$router.push('/')
+      return
+    }
+
     this.$nextTick(() => {
       const video = this.$refs.video
       video.play()
