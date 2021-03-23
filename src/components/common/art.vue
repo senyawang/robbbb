@@ -71,11 +71,10 @@ export default {
   max-height: 800px;
   overflow-y: auto;
   margin-bottom: -40px;
-  // justify-content: space-between;
+  justify-content: space-between;
   .rob-photo {
-    flex: 0 0 33.33333%;
-    max-width: 33.33333%;
-    padding-right: 2.3333%;
+    display: inline-block;
+    width: 341px;
     margin-bottom: 40px;
     line-height: 1.5;
 
@@ -87,7 +86,7 @@ export default {
     }
     .img-wrapper {
       width: 100%;
-      height: 227px;
+      height: 228px;
       overflow: hidden;
     }
     img {
