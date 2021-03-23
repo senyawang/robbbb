@@ -26,7 +26,7 @@
         <img
           @load="onloadImg"
           :style="{opacity: showIndex ? 1 : 0}"
-          src="http://203.195.204.34/m/static/img/logo-index.036ad47.png"
+          src="../../assets/logo-index.png"
           alt=""
         />
       </div>

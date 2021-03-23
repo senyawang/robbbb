@@ -1,12 +1,19 @@
 <template>
     <div class="art-box">
       <div class="art-list">
-          <div class="rob-photo" v-for="(item, index) in artList" :key="index">
+          <van-list
+            v-model="loading"
+            :finished="finished"
+            @load="init"
+          >
+            <div class="rob-photo" v-for="(item, index) in artList" :key="index">
               <router-link :to="{ name: detailName, params: { id: item.id }}">
-                  <div class="img-wrapper"><img :src="item.pic | formatImg" alt=""></div>
-                  <h3 class="text-right">{{langValue(item, 'title')}}</h3>
+                <div class="img-wrapper"><img :src="item.pic | formatImg" alt=""></div>
+                <h3 class="text-right">{{langValue(item, 'title')}}</h3>
               </router-link>
-          </div>
+            </div>
+          </van-list>
+
       </div>
     </div>
 </template>
@@ -17,11 +24,15 @@ export default {
   props: ['detailName', 'actionUrl'],
   data () {
     return {
+      page: 1,
+      pageSize: 15,
+      loading: false,
+      finished: false,
       artList: [ ]
     }
   },
   mounted () {
-    this.init()
+    // this.init()
     // let move = null
     // window.addEventListener('touchend touchstart touchmove', 'a', function (e) {
     //   if (e.type === 'touchstart') {
@@ -38,11 +49,25 @@ export default {
   },
   methods: {
     init () {
+      console.log(this.finished, 'this.finished')
+      if (this.finished) return
+      this.loading = true
       this.ajaxPost(this.actionUrl || 'api/index/getProductList', {
+        page: this.page,
+        pageSize: this.pageSize,
         pid: this.$route.query.id
       }).then(res => {
-        this.artList = res.data
-        console.log(res.data)
+        this.loading = false
+        this.artList = [...this.artList, ...res.data]
+        const pages = Math.ceil(Number(res.count) / this.pageSize)
+        console.log(pages, this.page, 'pages', res.count)
+        if ( pages > this.page) {
+          this.page = this.page + 1
+        } else {
+          this.finished = true
+        }
+      }).catch(err => {
+        this.loading = false
       })
     }
   }

@@ -9,7 +9,7 @@ import routes from './router-mobile.js'
 import store from './vuex/store.js'
 import App from './Mobile.vue'
 import messages from './lang.config.js';
-import { Swipe, SwipeItem, SwipeCell, NoticeBar } from 'vant';
+import { Swipe, SwipeItem, SwipeCell, NoticeBar, list } from 'vant';
 
 import 'element-ui/lib/theme-chalk/index.css';
 
@@ -24,6 +24,7 @@ Vue.use(Swipe);
 Vue.use(NoticeBar);
 Vue.use(SwipeItem);
 Vue.use(SwipeCell);
+Vue.use(list);
 
 
 // 通过选项创建 VueI18n 实例
@@ -32,7 +33,7 @@ const i18n = new VueI18n({
   messages // 设置地区信息
 })
 
-const host = process.env.NODE_ENV === 'production' ? location.host : '203.195.204.34'
+const host = process.env.NODE_ENV === 'production' ? location.host : 'www.robbbb.com'
 
 axios.defaults.baseURL = process.env.NODE_ENV === 'production' ? `http://${host}` : '/apis'
 // axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
