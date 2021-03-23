@@ -1,7 +1,12 @@
 <template>
     <div class="art-box">
-      <div class="art-list">
-          <div class="rob-photo" v-for="(item, index) in artList" v-infinite-scroll="init" :key="index">
+      <div class="art-list"
+           v-infinite-scroll="init"
+           infinite-scroll-delay="500"
+           infinite-scroll-distance="300"
+           infinite-scroll-immediate="false"
+      >
+          <div class="rob-photo" v-for="(item, index) in artList" :key="index">
               <router-link :to="{ name: detailName, params: { id: item.id }}">
                   <div class="img-wrapper"><img :src="item.pic | formatImg" alt=""></div>
                   <h3 class="text-right">{{langValue(item, 'title')}}</h3>
@@ -17,6 +22,8 @@ export default {
     props: ['detailName', 'actionUrl'],
     data () {
       return {
+        page: 1,
+        pageSize: 15,
         artList: [ ]
       }
     },
@@ -24,14 +31,36 @@ export default {
       this.init();
     },
     methods: {
-      init(){
+      init () {
+        console.log(this.finished, 'this.finished')
+        if (this.finished) return
+        this.loading = true
         this.ajaxPost(this.actionUrl || 'api/index/getProductList', {
-          pid: this.$route.query.id,
+          page: this.page,
+          pageSize: this.pageSize,
+          pid: this.$route.query.id
         }).then(res => {
-          this.artList = res.data;
-          console.log(res.data)
+          this.loading = false
+          this.artList = [...this.artList, ...res.data]
+          const pages = Math.ceil(Number(res.count) / this.pageSize)
+          console.log(pages, this.page, 'pages', res.count)
+          if ( pages > this.page) {
+            this.page = this.page + 1
+          } else {
+            this.finished = true
+          }
+        }).catch(err => {
+          this.loading = false
         })
       }
+      // init(){
+      //   this.ajaxPost(this.actionUrl || 'api/index/getProductList', {
+      //     pid: this.$route.query.id,
+      //   }).then(res => {
+      //     this.artList = res.data;
+      //     console.log(res.data)
+      //   })
+      // }
     }
 }
 </script>
@@ -39,6 +68,8 @@ export default {
 .art-list {
   display: flex;
   flex-wrap: wrap;
+  max-height: 800px;
+  overflow-y: auto;
   margin-bottom: -40px;
   // justify-content: space-between;
   .rob-photo {

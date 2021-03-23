@@ -23,7 +23,7 @@ const i18n = new VueI18n({
   messages // 设置地区信息
 })
 
-const host = process.env.NODE_ENV === 'production' ? location.host : '203.195.204.34'
+const host = process.env.NODE_ENV === 'production' ? location.host : 'www.robbbb.com'
 
 axios.defaults.baseURL = process.env.NODE_ENV === 'production' ? `http://${host}` : '/apis'
 // axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
