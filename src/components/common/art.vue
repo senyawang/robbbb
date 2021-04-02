@@ -66,19 +66,20 @@ export default {
 </script>
 <style lang='scss' scoped>
 .art-list {
-  display: flex;
-  flex-wrap: wrap;
+  // display: flex;
+  // flex-wrap: wrap;
   max-height: 800px;
   overflow-y: auto;
   margin-bottom: -40px;
-  justify-content: space-between;
+  // justify-content: space-between;
   .rob-photo {
     display: inline-block;
     width: 341px;
     margin-bottom: 40px;
     line-height: 1.5;
-
+    margin-right: 38px;
     &:nth-child(3n) {
+      margin-right: 0;
       padding-right: 0;
     }
     a {
