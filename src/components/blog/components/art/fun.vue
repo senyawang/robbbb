@@ -1,7 +1,7 @@
 <template>
   <div class="main-body">
     <Title :title="$t('subNav')[3]" />
-    <Art :actionUrl='actionUrl' detailName="videoDetail"/>
+    <Art :actionUrl='actionUrl' detailName='videoDetail' />
   </div>
 </template>
 

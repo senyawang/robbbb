@@ -36,7 +36,7 @@ export default {
 .pay-button {
   padding-top: 30px;
   font-size: 18px;
-  & /deep/ p {
+  & >>> p {
     margin-bottom: 15px;
   }
 }

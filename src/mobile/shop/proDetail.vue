@@ -154,10 +154,10 @@ export default {
 <style lang='scss'>
 .detail {
   padding: 0 16px;
-  /deep/ .el-dialog__header {
+  >>> .el-dialog__header {
     padding: 0;
   }
-  /deep/ .el-dialog__body {
+  >>> .el-dialog__body {
     padding: 30px;
   }
 }
