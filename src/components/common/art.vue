@@ -1,11 +1,6 @@
 <template>
     <div class="art-box">
-      <div class="art-list"
-           v-infinite-scroll="init"
-           infinite-scroll-delay="500"
-           infinite-scroll-distance="300"
-           infinite-scroll-immediate="false"
-      >
+      <div class="art-list" >
           <div class="rob-photo" v-for="(item, index) in artList" :key="index">
               <router-link :to="{ name: detailName, params: { id: item.id }}">
                   <div class="img-wrapper"><img :src="item.pic | formatImg" alt=""></div>
@@ -13,6 +8,10 @@
               </router-link>
           </div>
       </div>
+      <scroll-loader :loader-method="init" :loader-enable="!finished">
+        <div></div>
+      </scroll-loader>
+      <div class="text-center" v-if="!finished">loading</div>
     </div>
 </template>
 
@@ -24,12 +23,14 @@ export default {
       return {
         page: 1,
         pageSize: 15,
-        artList: [ ]
+        artList: [ ],
+        finished: false,
       }
     },
     mounted () {
-      this.init();
+      // this.init();
     },
+    watch: {},
     methods: {
       init () {
         console.log(this.finished, 'this.finished')
@@ -44,10 +45,11 @@ export default {
           this.artList = [...this.artList, ...res.data]
           const pages = Math.ceil(Number(res.count) / this.pageSize)
           console.log(pages, this.page, 'pages', res.count)
-          if ( pages > this.page) {
-            this.page = this.page + 1
-          } else {
+          if ( pages <= this.page) {
+            console.log('22222true over')
             this.finished = true
+          } else {
+            this.page++
           }
         }).catch(err => {
           this.loading = false
@@ -68,8 +70,8 @@ export default {
 .art-list {
   // display: flex;
   // flex-wrap: wrap;
-  max-height: 800px;
-  overflow-y: auto;
+  // max-height: 800px;
+  // overflow-y: auto;
   margin-bottom: -40px;
   // justify-content: space-between;
   .rob-photo {

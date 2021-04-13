@@ -25,6 +25,10 @@
         }
       }
 
+      if (window.location.protocol !== 'https:') {
+        window.location.href = 'https://www.robbbb.com/'
+      }
+
       if(IsMobile()) window.location.href = '/m/'
     </script>
   </head>

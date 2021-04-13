@@ -5,6 +5,7 @@ import VueI18n from 'vue-i18n'
 import ElementUI from 'element-ui'
 import qs from 'qs'
 import $ from 'jquery'
+import ScrollLoader from 'vue-scroll-loader'
 import routes from './router.js'
 import store from './vuex/store.js'
 import App from './App.vue'
@@ -14,6 +15,7 @@ Vue.use(ElementUI)
 Vue.use(VueRouter)
 Vue.use(store)
 Vue.use(VueI18n)
+Vue.use(ScrollLoader)
 
 Vue.prototype.axios = axios
 
@@ -23,9 +25,9 @@ const i18n = new VueI18n({
   messages // 设置地区信息
 })
 
-const host = process.env.NODE_ENV === 'production' ? location.host : 'www.robbbb.com'
+const host = 'www.robbbb.com'
 
-axios.defaults.baseURL = process.env.NODE_ENV === 'production' ? `http://${host}` : '/apis'
+axios.defaults.baseURL = process.env.NODE_ENV === 'production' ? `https://${host}` : '/apis'
 // axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
 let route = new VueRouter({ mode: 'hash', routes: routes })
@@ -58,7 +60,7 @@ Vue.mixin({
       return loc === 'zh' ? value : `en_${value}`
     },
     formatImg (val) {
-      return `http://${host}${val}`
+      return `https://${host}${val}`
     }
   },
   // provide: () => {
