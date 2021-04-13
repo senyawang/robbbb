@@ -33,7 +33,7 @@ const i18n = new VueI18n({
   messages // 设置地区信息
 })
 
-const host = process.env.NODE_ENV === 'production' ? location.host : 'www.robbbb.com'
+const host = 'www.robbbb.com'
 
 axios.defaults.baseURL = process.env.NODE_ENV === 'production' ? `https://${host}` : '/apis'
 // axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
@@ -68,7 +68,7 @@ Vue.mixin({
       return loc === 'zh' ? value : `en_${value}`
     },
     formatImg (val) {
-      return `http://${host}${val}`
+      return `https://${host}${val}`
     }
   },
   // provide: () => {
